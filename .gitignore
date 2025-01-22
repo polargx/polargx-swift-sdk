@@ -1,0 +1,10 @@
+.DS_Store
+
+# Xcode
+#*.pbxuser
+#xcuserdata
+*.xccheckout
+*.xcuserdatad*
+
+#CocoaPods
+Pods
