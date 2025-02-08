@@ -3,12 +3,12 @@
 import Foundation
 
 class ReleaseConfigutation {
-    class var Server: String { "https://????" }
+    class var Server: String { "https://jw4xix6q44.execute-api.us-east-1.amazonaws.com/prod" }
 }
 
 #if DEBUG
 class Configuration: ReleaseConfigutation {
-    override class var Server: String { "http://52.70.12.200:1323/api" }
+    override class var Server: String { "https://jw4xix6q44.execute-api.us-east-1.amazonaws.com/dev" }
 }
 #else
 typealias Configuration = ReleaseConfigutation

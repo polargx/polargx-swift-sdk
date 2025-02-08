@@ -2,8 +2,12 @@ import Foundation
 
 private func Log(_ sf: @autoclosure () -> String) {
     if LinkAttributionApp.isLoggingEnabled {
-        print("[LinkAttribution/APP] \(sf())")
+        print("[LinkAttribution/Debug] \(sf())")
     }
+}
+
+private func RLog(_ sf: @autoclosure () -> String) {
+    print("[LinkAttribution] \(sf())")
 }
 
 public class LinkAttributionApp {
@@ -23,49 +27,38 @@ public class LinkAttributionApp {
     
     private func startInitializingApp() {
         apiService.defaultHeaders = [
-            "app-id": appId,
-            "api-key": apiKey
+            "x-api-key": apiKey
         ]
-       
         
         Task {
-            let clientActivityCreate = await ClientActivityCreateModel(
-                appIdentifier: Bundle.main.bundleIdentifier ?? "",
-                appVersion: Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String ?? "",
-                sdkVersion: Bundle(for: Self.self).object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String ?? "",
-                deviceModel: SystemInfo.deviceModel,
-                screenSize: .init(
-                    width: Int(SystemInfo.screenSize.width),
-                    height: Int(SystemInfo.screenSize.height),
-                    resolution: "\(SystemInfo.screenScale)"
-                )
+            let launchEvent = TrackEventModel(
+                organizationUnid: appId,
+                eventName: "app_launch",
+                timestamp: Date().timeIntervalSince1970,
+                data: [:]
             )
             
-            var clientActivity: ClientActivityModel!
             var initializazingError: Error? = nil
             repeat {
                 do {
-                    let activityOrNil = try await apiService.request(
-                        method: .POST,
-                        path: "/v1/m/client-activities",
-                        headers: [:],
-                        queries: [:],
-                        body: clientActivityCreate,
-                        result: ClientActivityModel.self
-                    )
+                    try await apiService.trackEvent(launchEvent)
                     try Task.checkCancellation()
-                    guard let activity = activityOrNil else{
-                        throw Errors.with(message: "Can't create client session: nil response")
-                    }
-                    
-                    clientActivity = activity
                     initializazingError = nil
                     
                     Log("startInitializingApp: successful ✅")
                     
-                }catch let error {
-                    Log("startInitializingApp: failed ⛔️ \(error)")
+                }catch let error where error is URLError {
+                    Log("startInitializingApp: failed ⛔️ + retry 🔁 \(error)")
                     initializazingError = error
+                    try? await Task.sleep(nanoseconds: 1_000_0000_000)
+                    
+                }catch let error {
+                    Log("startInitializingApp: failed ⛔️ + stop ⛔️ \(error)")
+                    initializazingError = nil
+                    
+                    if error.apiError?.httpStatus == 403 {
+                        RLog("⛔️⛔️⛔️ INVALID appId or apiKey! ⛔️⛔️⛔️")
+                    }
                 }
             }while initializazingError != nil
         }

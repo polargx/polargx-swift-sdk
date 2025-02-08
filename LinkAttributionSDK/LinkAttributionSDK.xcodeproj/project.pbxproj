@@ -14,8 +14,10 @@
 		609EDDBC2D3DFFAA00EFDAFE /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609EDDBB2D3DFFA500EFDAFE /* Errors.swift */; };
 		609EDDD02D3E0AB500EFDAFE /* LinkAttributionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609EDDCF2D3E0AAB00EFDAFE /* LinkAttributionApp.swift */; };
 		609EDDD22D3E0D7F00EFDAFE /* SystemInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609EDDD12D3E0D7500EFDAFE /* SystemInfo.swift */; };
-		609EDDEA2D3F9DA100EFDAFE /* ClientActivityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609EDDE92D3F9D8B00EFDAFE /* ClientActivityModel.swift */; };
 		609EDDEE2D3FA62300EFDAFE /* APIResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609EDDED2D3FA61E00EFDAFE /* APIResponseModel.swift */; };
+		60B90C3E2D57B28500CE90F0 /* APIService+More.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B90C3D2D57B26500CE90F0 /* APIService+More.swift */; };
+		60B90C402D57B2FA00CE90F0 /* TrackEventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B90C3F2D57B2D800CE90F0 /* TrackEventModel.swift */; };
+		60B90C422D57B9BA00CE90F0 /* EmptyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B90C412D57B9B600CE90F0 /* EmptyModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,8 +29,10 @@
 		609EDDBB2D3DFFA500EFDAFE /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		609EDDCF2D3E0AAB00EFDAFE /* LinkAttributionApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkAttributionApp.swift; sourceTree = "<group>"; };
 		609EDDD12D3E0D7500EFDAFE /* SystemInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemInfo.swift; sourceTree = "<group>"; };
-		609EDDE92D3F9D8B00EFDAFE /* ClientActivityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientActivityModel.swift; sourceTree = "<group>"; };
 		609EDDED2D3FA61E00EFDAFE /* APIResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponseModel.swift; sourceTree = "<group>"; };
+		60B90C3D2D57B26500CE90F0 /* APIService+More.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "APIService+More.swift"; sourceTree = "<group>"; };
+		60B90C3F2D57B2D800CE90F0 /* TrackEventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackEventModel.swift; sourceTree = "<group>"; };
+		60B90C412D57B9B600CE90F0 /* EmptyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +97,7 @@
 				609EDDD12D3E0D7500EFDAFE /* SystemInfo.swift */,
 				609EDDBB2D3DFFA500EFDAFE /* Errors.swift */,
 				609EDDB52D3DFD5F00EFDAFE /* APIService.swift */,
+				60B90C3D2D57B26500CE90F0 /* APIService+More.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -100,8 +105,9 @@
 		609EDDBE2D3E06CA00EFDAFE /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				60B90C3F2D57B2D800CE90F0 /* TrackEventModel.swift */,
 				609EDDED2D3FA61E00EFDAFE /* APIResponseModel.swift */,
-				609EDDE92D3F9D8B00EFDAFE /* ClientActivityModel.swift */,
+				60B90C412D57B9B600CE90F0 /* EmptyModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -190,12 +196,14 @@
 			files = (
 				609EDDBC2D3DFFAA00EFDAFE /* Errors.swift in Sources */,
 				609EDDB82D3DFD5F00EFDAFE /* Configuration.swift in Sources */,
-				609EDDEA2D3F9DA100EFDAFE /* ClientActivityModel.swift in Sources */,
+				60B90C3E2D57B28500CE90F0 /* APIService+More.swift in Sources */,
 				609EDDEE2D3FA62300EFDAFE /* APIResponseModel.swift in Sources */,
 				609EDDB92D3DFD5F00EFDAFE /* LinkAttributionSDK.docc in Sources */,
 				609EDDD02D3E0AB500EFDAFE /* LinkAttributionApp.swift in Sources */,
 				609EDDD22D3E0D7F00EFDAFE /* SystemInfo.swift in Sources */,
+				60B90C402D57B2FA00CE90F0 /* TrackEventModel.swift in Sources */,
 				609EDDBA2D3DFD5F00EFDAFE /* APIService.swift in Sources */,
+				60B90C422D57B9BA00CE90F0 /* EmptyModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
