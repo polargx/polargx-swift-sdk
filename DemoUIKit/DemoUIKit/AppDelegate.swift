@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        LinkAttributionApp.initialize(appId: "fded934e-3993-418e-977f-6d0fe09863ca", apiKey: "16fea45828e4f0cb500d5434c6020632423750e8")
+        LinkAttributionApp.initialize(appId: "b5bb8eda-d060-4208-9173-2c772d517db7", apiKey: "Zr0f2JdHFx5WwDoKdUdDV7eQiJq9JOsu6wfDegkv")
         
         return true
     }

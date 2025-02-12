@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		609C336B2D5C9DAD00EA570D /* TrackingEventQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609C336A2D5C9DAD00EA570D /* TrackingEventQueue.swift */; };
+		609C336D2D5CB15200EA570D /* FileStorageURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609C336C2D5CB14F00EA570D /* FileStorageURL.swift */; };
 		609EDDB72D3DFD5F00EFDAFE /* LinkAttributionSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 609EDDB32D3DFD5F00EFDAFE /* LinkAttributionSDK.h */; };
 		609EDDB82D3DFD5F00EFDAFE /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609EDDB22D3DFD5F00EFDAFE /* Configuration.swift */; };
 		609EDDB92D3DFD5F00EFDAFE /* LinkAttributionSDK.docc in Sources */ = {isa = PBXBuildFile; fileRef = 609EDDB42D3DFD5F00EFDAFE /* LinkAttributionSDK.docc */; };
@@ -21,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		609C336A2D5C9DAD00EA570D /* TrackingEventQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingEventQueue.swift; sourceTree = "<group>"; };
+		609C336C2D5CB14F00EA570D /* FileStorageURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStorageURL.swift; sourceTree = "<group>"; };
 		609EDD112D3DF2E600EFDAFE /* LinkAttributionSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LinkAttributionSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		609EDDB22D3DFD5F00EFDAFE /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		609EDDB32D3DFD5F00EFDAFE /* LinkAttributionSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LinkAttributionSDK.h; sourceTree = "<group>"; };
@@ -81,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				609EDDCF2D3E0AAB00EFDAFE /* LinkAttributionApp.swift */,
+				609C336A2D5C9DAD00EA570D /* TrackingEventQueue.swift */,
 				609EDDB22D3DFD5F00EFDAFE /* Configuration.swift */,
 				609EDDBD2D3E06B400EFDAFE /* Helpers */,
 				609EDDBE2D3E06CA00EFDAFE /* Models */,
@@ -94,6 +99,7 @@
 		609EDDBD2D3E06B400EFDAFE /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				609C336C2D5CB14F00EA570D /* FileStorageURL.swift */,
 				609EDDD12D3E0D7500EFDAFE /* SystemInfo.swift */,
 				609EDDBB2D3DFFA500EFDAFE /* Errors.swift */,
 				609EDDB52D3DFD5F00EFDAFE /* APIService.swift */,
@@ -201,6 +207,8 @@
 				609EDDB92D3DFD5F00EFDAFE /* LinkAttributionSDK.docc in Sources */,
 				609EDDD02D3E0AB500EFDAFE /* LinkAttributionApp.swift in Sources */,
 				609EDDD22D3E0D7F00EFDAFE /* SystemInfo.swift in Sources */,
+				609C336D2D5CB15200EA570D /* FileStorageURL.swift in Sources */,
+				609C336B2D5C9DAD00EA570D /* TrackingEventQueue.swift in Sources */,
 				60B90C402D57B2FA00CE90F0 /* TrackEventModel.swift in Sources */,
 				609EDDBA2D3DFD5F00EFDAFE /* APIService.swift in Sources */,
 				60B90C422D57B9BA00CE90F0 /* EmptyModel.swift in Sources */,
