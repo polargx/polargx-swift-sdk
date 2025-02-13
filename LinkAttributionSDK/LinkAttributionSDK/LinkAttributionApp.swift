@@ -40,7 +40,7 @@ public class LinkAttributionApp {
             let launchEvent = TrackEventModel(
                 organizationUnid: appId,
                 eventName: "app_launch",
-                timestamp: date.timeIntervalSince1970,
+                eventTime: date,
                 data: [:]
             )
             
@@ -78,7 +78,7 @@ public class LinkAttributionApp {
         await trackingEventQueue.push(TrackEventModel(
             organizationUnid: self.appId,
             eventName: name,
-            timestamp: date.timeIntervalSince1970,
+            eventTime: date,
             data: attributes
         ))
         await startTrackingQueueIfNeeded()

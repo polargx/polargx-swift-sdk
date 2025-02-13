@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6044A66F2D5D922F00423C38 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6044A66E2D5D922B00423C38 /* Formatter.swift */; };
 		609C336B2D5C9DAD00EA570D /* TrackingEventQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609C336A2D5C9DAD00EA570D /* TrackingEventQueue.swift */; };
 		609C336D2D5CB15200EA570D /* FileStorageURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609C336C2D5CB14F00EA570D /* FileStorageURL.swift */; };
 		609EDDB72D3DFD5F00EFDAFE /* LinkAttributionSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 609EDDB32D3DFD5F00EFDAFE /* LinkAttributionSDK.h */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6044A66E2D5D922B00423C38 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		609C336A2D5C9DAD00EA570D /* TrackingEventQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingEventQueue.swift; sourceTree = "<group>"; };
 		609C336C2D5CB14F00EA570D /* FileStorageURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStorageURL.swift; sourceTree = "<group>"; };
 		609EDD112D3DF2E600EFDAFE /* LinkAttributionSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LinkAttributionSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -99,6 +101,7 @@
 		609EDDBD2D3E06B400EFDAFE /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				6044A66E2D5D922B00423C38 /* Formatter.swift */,
 				609C336C2D5CB14F00EA570D /* FileStorageURL.swift */,
 				609EDDD12D3E0D7500EFDAFE /* SystemInfo.swift */,
 				609EDDBB2D3DFFA500EFDAFE /* Errors.swift */,
@@ -201,6 +204,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				609EDDBC2D3DFFAA00EFDAFE /* Errors.swift in Sources */,
+				6044A66F2D5D922F00423C38 /* Formatter.swift in Sources */,
 				609EDDB82D3DFD5F00EFDAFE /* Configuration.swift in Sources */,
 				60B90C3E2D57B28500CE90F0 /* APIService+More.swift in Sources */,
 				609EDDEE2D3FA62300EFDAFE /* APIResponseModel.swift in Sources */,
