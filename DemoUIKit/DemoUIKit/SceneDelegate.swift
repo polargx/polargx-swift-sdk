@@ -21,6 +21,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             _ = LinkAttributionApp.shared.continueUserActivity(userActivity)
         }
         
+        if let url = connectionOptions.urlContexts.first?.url {
+            _ = LinkAttributionApp.shared.openUrl(url)
+        }
+        
         guard let _ = (scene as? UIWindowScene) else { return }
     }
 
@@ -55,6 +59,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
         _ = LinkAttributionApp.shared.continueUserActivity(userActivity)
+    }
+    
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        if let url = URLContexts.first?.url {
+            _ = LinkAttributionApp.shared.openUrl(url)
+        }
     }
 }
 

@@ -128,7 +128,7 @@ public class LinkAttributionApp {
         nc.addObserver(forName: UIApplication.willTerminateNotification, object: nil, queue: queue, using: track)
     }
     
-    private func handleOpenningURL(_ openningURL: URL) async throws {
+    private func handleOpenningURL(_ openningURL: URL) async {
         guard let domain = openningURL.host?.components(separatedBy: ".").first else {
             return
         }
@@ -144,10 +144,14 @@ public class LinkAttributionApp {
                 trackClick: domain, slug: slug, clickTime: clickTime, deviceData: [:], additionalData: [:])
             )
             
-            onLinkClickHandler(openningURL, linkData?.data?.content ?? [:], nil)
+            DispatchQueue.main.async {
+                self.onLinkClickHandler(openningURL, linkData?.data?.content ?? [:], nil)
+            }
             
         }catch let error {
-            onLinkClickHandler(nil, nil, error)
+            DispatchQueue.main.async {
+                self.onLinkClickHandler(nil, nil, error)
+            }
         }
     }
 }
@@ -176,9 +180,7 @@ public extension LinkAttributionApp {
         switch activity.activityType {
         case NSUserActivityTypeBrowsingWeb:
             if let url = activity.webpageURL {
-                Task {
-                    try await handleOpenningURL(url)
-                }
+                Task { await handleOpenningURL(url) }
                 return true
             }
             
@@ -187,5 +189,10 @@ public extension LinkAttributionApp {
         }
         
         return false
+    }
+    
+    func openUrl(_ url: URL) -> Bool {
+        Task { await handleOpenningURL(url) }
+        return true
     }
 }
