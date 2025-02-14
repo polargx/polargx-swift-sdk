@@ -19,3 +19,13 @@ struct LinkClickModel: Codable {
         self.additionalData = additionalData
     }
 }
+
+struct LinkClickResponseModel: Codable {
+    let linkClick: LinkClickResultModel?
+}
+
+struct LinkClickResultModel: Codable {
+    let sdkUsed: Bool
+    let unid: String
+    let url: String
+}

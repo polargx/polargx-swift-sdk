@@ -133,12 +133,16 @@ public class LinkAttributionApp {
         
         do {
             let linkData = try await apiService.getLinkData(domain: subDomain, slug: slug)
-            try await apiService.trackLinkClick(LinkClickModel(
+            let linkClickResult = try await apiService.trackLinkClick(LinkClickModel(
                 trackClick: subDomain, slug: slug, clickTime: clickTime, deviceData: [:], additionalData: [:])
             )
             
-            DispatchQueue.main.async {
+            DispatchQueue.main.sync {
                 self.onLinkClickHandler(openningURL, linkData?.data?.content ?? [:], nil)
+            }
+            
+            if let linkClickResult = linkClickResult {
+                _ = try await apiService.updateLinkClick(clickUnid: linkClickResult.unid, sdkUsed: true)
             }
             
         }catch let error {

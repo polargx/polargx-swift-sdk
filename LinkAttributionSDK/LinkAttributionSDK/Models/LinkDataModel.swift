@@ -1,7 +1,7 @@
 import Foundation
 
 struct LinkDataResponseModel: Decodable {
-    let appLinkData: LinkDataModel
+    let sdkLinkData: LinkDataModel
 }
 
 struct LinkDataModel: Decodable {
