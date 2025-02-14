@@ -10,6 +10,28 @@ struct Formatter {
         dateFormatter.timeZone = timeZone;
         return dateFormatter;
     }
+    
+    static func validateSupportingURL(_ url: URL) -> (subDomain: String, slug: String)? {
+        let supportDomains = Configuration.SupportedBaseDomains
+        
+        let pathComponents = url.path.split(separator: "/").filter({ !$0.isEmpty })
+        guard pathComponents.count < 2 else {
+            return nil
+        }
+        let slug = pathComponents.first ?? ""
+        
+        let host = url.host ?? ""
+        for supportDomain in supportDomains {
+            if host.hasSuffix("." + supportDomain) {
+                let subDomain = host[..<host.index(host.endIndex, offsetBy: -supportDomain.count - 1)]
+                if !subDomain.isEmpty {
+                    return (String(subDomain), String(slug))
+                }
+            }
+        }
+        
+        return nil
+    }
 }
 
 extension Locale {

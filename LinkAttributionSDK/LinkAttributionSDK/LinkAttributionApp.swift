@@ -128,20 +128,13 @@ public class LinkAttributionApp {
         nc.addObserver(forName: UIApplication.willTerminateNotification, object: nil, queue: queue, using: track)
     }
     
-    private func handleOpenningURL(_ openningURL: URL) async {
-        guard let domain = openningURL.host?.components(separatedBy: ".").first else {
-            return
-        }
-        
-        var slug = openningURL.path
-        slug.removeFirst()
-        
+    private func handleOpenningURL(_ openningURL: URL, subDomain: String, slug: String) async {
         let clickTime = Date()
         
         do {
-            let linkData = try await apiService.getLinkData(domain: domain, slug: slug)
+            let linkData = try await apiService.getLinkData(domain: subDomain, slug: slug)
             try await apiService.trackLinkClick(LinkClickModel(
-                trackClick: domain, slug: slug, clickTime: clickTime, deviceData: [:], additionalData: [:])
+                trackClick: subDomain, slug: slug, clickTime: clickTime, deviceData: [:], additionalData: [:])
             )
             
             DispatchQueue.main.async {
@@ -150,7 +143,7 @@ public class LinkAttributionApp {
             
         }catch let error {
             DispatchQueue.main.async {
-                self.onLinkClickHandler(nil, nil, error)
+                self.onLinkClickHandler(openningURL, nil, error)
             }
         }
     }
@@ -164,7 +157,7 @@ public extension LinkAttributionApp {
         return instance
     }
         
-    typealias OnLinkClickHandler = (_ link: URL?, _ data: [String: Any]?, _ error: Error?) -> Void
+    typealias OnLinkClickHandler = (_ link: URL, _ data: [String: Any]?, _ error: Error?) -> Void
     static func initialize(appId: String, apiKey: String, onLinkClickHandler: @escaping OnLinkClickHandler)  {
         _shared = LinkAttributionApp(appId: appId, apiKey: apiKey, onLinkClickHandler: onLinkClickHandler)
     }
@@ -179,8 +172,8 @@ public extension LinkAttributionApp {
     func continueUserActivity(_ activity: NSUserActivity) -> Bool {
         switch activity.activityType {
         case NSUserActivityTypeBrowsingWeb:
-            if let url = activity.webpageURL {
-                Task { await handleOpenningURL(url) }
+            if let url = activity.webpageURL, let (subDomain, slug) = Formatter.validateSupportingURL(url) {
+                Task { await handleOpenningURL(url, subDomain: subDomain, slug: slug) }
                 return true
             }
             
@@ -192,7 +185,17 @@ public extension LinkAttributionApp {
     }
     
     func openUrl(_ url: URL) -> Bool {
-        Task { await handleOpenningURL(url) }
+        guard let (subDomain, slug) = Formatter.validateSupportingURL(url) else {
+            return false
+        }
+        
+        var urlComponents = URLComponents.init(url: url, resolvingAgainstBaseURL: false)
+        urlComponents?.scheme = "https"
+        guard let httpsUrl = urlComponents?.url else {
+            return false
+        }
+        
+        Task { await handleOpenningURL(httpsUrl, subDomain: subDomain, slug: slug) }
         return true
     }
 }
