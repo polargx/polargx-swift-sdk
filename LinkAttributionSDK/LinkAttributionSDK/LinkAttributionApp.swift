@@ -14,6 +14,7 @@ private func RLog(_ sf: @autoclosure () -> String) {
 public class LinkAttributionApp {
     private let appId: String
     private let apiKey: String
+    private let onLinkClickHandler: OnLinkClickHandler
     
     public static var isLoggingEnabled = true
     
@@ -21,9 +22,10 @@ public class LinkAttributionApp {
     
     var apiService = APIService(server: Configuration.Server)
     
-    private init(appId: String, apiKey: String) {
+    private init(appId: String, apiKey: String, onLinkClickHandler: @escaping OnLinkClickHandler) {
         self.appId = appId
         self.apiKey = apiKey
+        self.onLinkClickHandler = onLinkClickHandler
         
         self.startInitializingApp()
     }
@@ -50,9 +52,7 @@ public class LinkAttributionApp {
                     try await apiService.trackEvent(launchEvent)
                     try Task.checkCancellation()
                     initializazingError = nil
-                    
-                    Log("Initializing - successful ✅")
-                    
+                                        
                 }catch let error where error is URLError {
                     Log("Initializing - failed ⛔️ + retrying 🔁: \(error)")
                     initializazingError = error
@@ -96,7 +96,6 @@ public class LinkAttributionApp {
                 while let event = await trackingEventQueue.willPop() {
                     try await apiService.trackEvent(event)
                     await trackingEventQueue.pop()
-                    Log("Tracking - successful ✅")
                 }
                 
             }catch let error {
@@ -128,6 +127,29 @@ public class LinkAttributionApp {
         nc.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: queue, using: track)
         nc.addObserver(forName: UIApplication.willTerminateNotification, object: nil, queue: queue, using: track)
     }
+    
+    private func handleOpenningURL(_ openningURL: URL) async throws {
+        guard let domain = openningURL.host?.components(separatedBy: ".").first else {
+            return
+        }
+        
+        var slug = openningURL.path
+        slug.removeFirst()
+        
+        let clickTime = Date()
+        
+        do {
+            let linkData = try await apiService.getLinkData(domain: domain, slug: slug)
+            try await apiService.trackLinkClick(LinkClickModel(
+                trackClick: domain, slug: slug, clickTime: clickTime, deviceData: [:], additionalData: [:])
+            )
+            
+            onLinkClickHandler(openningURL, linkData?.data?.content ?? [:], nil)
+            
+        }catch let error {
+            onLinkClickHandler(nil, nil, error)
+        }
+    }
 }
 
 //Access
@@ -137,8 +159,10 @@ public extension LinkAttributionApp {
         guard let instance = _shared else { fatalError("LinkAttributionApp hasn't been initialized!") }
         return instance
     }
-    static func initialize(appId: String, apiKey: String)  {
-        _shared = LinkAttributionApp(appId: appId, apiKey: apiKey)
+        
+    typealias OnLinkClickHandler = (_ link: URL?, _ data: [String: Any]?, _ error: Error?) -> Void
+    static func initialize(appId: String, apiKey: String, onLinkClickHandler: @escaping OnLinkClickHandler)  {
+        _shared = LinkAttributionApp(appId: appId, apiKey: apiKey, onLinkClickHandler: onLinkClickHandler)
     }
     
     func trackEvent(name: String, attributes: [String: String]) {
@@ -146,5 +170,22 @@ public extension LinkAttributionApp {
         Task {
             await trackEvent(name: name, date: date, attributes: attributes)
         }
+    }
+    
+    func continueUserActivity(_ activity: NSUserActivity) -> Bool {
+        switch activity.activityType {
+        case NSUserActivityTypeBrowsingWeb:
+            if let url = activity.webpageURL {
+                Task {
+                    try await handleOpenningURL(url)
+                }
+                return true
+            }
+            
+        default:
+            assertionFailure("\(activity.activityType) ???")
+        }
+        
+        return false
     }
 }

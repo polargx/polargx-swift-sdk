@@ -1,6 +1,6 @@
 import Foundation
 
-private let ErrorDomain = "LinkAttributionSDKErrorDomain"
+private let ErrorDomain = "\(Configuration.Brand)SDKErrorDomain"
 
 
 extension Error {
@@ -10,7 +10,7 @@ extension Error {
     }
     
     var apiError: APIErrorResponse? {
-        userInfo["APIError"] as? APIErrorResponse
+        userInfo["\(Configuration.Brand)APIError"] as? APIErrorResponse
     }
 }
 
@@ -26,10 +26,10 @@ struct Errors {
     static func apiError(_ error: APIErrorResponse) -> Error {
         return NSError(
             domain: ErrorDomain,
-            code: 0,
+            code: error.code,
             userInfo: [
                 NSLocalizedDescriptionKey: error.message,
-                "APIError": error
+                "\(Configuration.Brand)APIError": error
             ]
         ) as Error
     }

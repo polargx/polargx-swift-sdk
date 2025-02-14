@@ -16,7 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        LinkAttributionApp.initialize(appId: "b5bb8eda-d060-4208-9173-2c772d517db7", apiKey: "Zr0f2JdHFx5WwDoKdUdDV7eQiJq9JOsu6wfDegkv")
+        LinkAttributionApp.initialize(appId: "b5bb8eda-d060-4208-9173-2c772d517db7", apiKey: "Zr0f2JdHFx5WwDoKdUdDV7eQiJq9JOsu6wfDegkv") { link, data, error in
+            print("\n[DEMO] detect clicked: \(link), data: \(data), error: \(error)\n")
+        }
         
         return true
     }
@@ -36,5 +38,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([any UIUserActivityRestoring]?) -> Void) -> Bool {
+        return LinkAttributionApp.shared.continueUserActivity(userActivity)
+    }
 }
 
