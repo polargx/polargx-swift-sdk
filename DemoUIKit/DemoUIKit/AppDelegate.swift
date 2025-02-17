@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import LinkAttributionSDK
+import LinkAttribution
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {

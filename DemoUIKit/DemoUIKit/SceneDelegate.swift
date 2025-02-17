@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import LinkAttributionSDK
+import LinkAttribution
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 

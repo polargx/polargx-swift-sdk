@@ -61,7 +61,8 @@
 		609EDD072D3DF2E600EFDAFE = {
 			isa = PBXGroup;
 			children = (
-				609EDDB62D3DFD5F00EFDAFE /* LinkAttributionSDK */,
+				60B678EB2D62EE2200AD8942 /* Classes */,
+				609EDDB12D3DFD5F00EFDAFE /* Resources */,
 				609EDD5E2D3DF61200EFDAFE /* Configs */,
 				609EDD122D3DF2E600EFDAFE /* Products */,
 			);
@@ -89,21 +90,6 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		609EDDB62D3DFD5F00EFDAFE /* LinkAttributionSDK */ = {
-			isa = PBXGroup;
-			children = (
-				609EDDCF2D3E0AAB00EFDAFE /* LinkAttributionApp.swift */,
-				609C336A2D5C9DAD00EA570D /* TrackingEventQueue.swift */,
-				609EDDB22D3DFD5F00EFDAFE /* Configuration.swift */,
-				609EDDBD2D3E06B400EFDAFE /* Helpers */,
-				609EDDBE2D3E06CA00EFDAFE /* Models */,
-				609EDDB32D3DFD5F00EFDAFE /* LinkAttributionSDK.h */,
-				609EDDB42D3DFD5F00EFDAFE /* LinkAttributionSDK.docc */,
-				609EDDB12D3DFD5F00EFDAFE /* Resources */,
-			);
-			path = LinkAttributionSDK;
-			sourceTree = "<group>";
-		};
 		609EDDBD2D3E06B400EFDAFE /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -128,6 +114,20 @@
 				60B90C412D57B9B600CE90F0 /* EmptyModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		60B678EB2D62EE2200AD8942 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				609EDDCF2D3E0AAB00EFDAFE /* LinkAttributionApp.swift */,
+				609C336A2D5C9DAD00EA570D /* TrackingEventQueue.swift */,
+				609EDDB22D3DFD5F00EFDAFE /* Configuration.swift */,
+				609EDDBD2D3E06B400EFDAFE /* Helpers */,
+				609EDDBE2D3E06CA00EFDAFE /* Models */,
+				609EDDB32D3DFD5F00EFDAFE /* LinkAttributionSDK.h */,
+				609EDDB42D3DFD5F00EFDAFE /* LinkAttributionSDK.docc */,
+			);
+			path = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -1,0 +1,16 @@
+PODS:
+  - LinkAttribution (0.1.0)
+
+DEPENDENCIES:
+  - LinkAttribution (from `../`)
+
+EXTERNAL SOURCES:
+  LinkAttribution:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  LinkAttribution: 8818ffaf3d5fbe69f7aa6b95e0624038ac541459
+
+PODFILE CHECKSUM: 91dace5914e58a2a1b70e1c8ebeb7f5eeabebe1c
+
+COCOAPODS: 1.16.2

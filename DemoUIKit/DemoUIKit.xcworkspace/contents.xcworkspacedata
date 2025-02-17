@@ -2,9 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:DemoUIKit/DemoUIKit.xcodeproj">
+      location = "group:DemoUIKit.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:LinkAttributionSDK/LinkAttributionSDK.xcodeproj">
+      location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>
