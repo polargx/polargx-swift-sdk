@@ -128,21 +128,24 @@ public class LinkAttributionApp {
         nc.addObserver(forName: UIApplication.willTerminateNotification, object: nil, queue: queue, using: track)
     }
     
-    private func handleOpenningURL(_ openningURL: URL, subDomain: String, slug: String) async {
+    private func handleOpenningURL(_ openningURL: URL, subDomain: String, slug: String, clickUnid: String?) async {
         let clickTime = Date()
         
         do {
             let linkData = try await apiService.getLinkData(domain: subDomain, slug: slug)
-            let linkClickResult = try await apiService.trackLinkClick(LinkClickModel(
-                trackClick: subDomain, slug: slug, clickTime: clickTime, deviceData: [:], additionalData: [:])
-            )
+            var clickId = clickUnid;
+            if clickId == nil {
+                clickId = try await apiService.trackLinkClick(LinkClickModel(
+                   trackClick: subDomain, slug: slug, clickTime: clickTime, deviceData: [:], additionalData: [:])
+               )?.unid
+            }
             
             DispatchQueue.main.sync {
                 self.onLinkClickHandler(openningURL, linkData?.data?.content ?? [:], nil)
             }
             
-            if let linkClickResult = linkClickResult {
-                _ = try await apiService.updateLinkClick(clickUnid: linkClickResult.unid, sdkUsed: true)
+            if let clickId = clickId {
+                _ = try await apiService.updateLinkClick(clickUnid: clickId, sdkUsed: true)
             }
             
         }catch let error {
@@ -177,7 +180,7 @@ public extension LinkAttributionApp {
         switch activity.activityType {
         case NSUserActivityTypeBrowsingWeb:
             if let url = activity.webpageURL, let (subDomain, slug) = Formatter.validateSupportingURL(url) {
-                Task { await handleOpenningURL(url, subDomain: subDomain, slug: slug) }
+                Task { await handleOpenningURL(url, subDomain: subDomain, slug: slug, clickUnid: nil) }
                 return true
             }
             
@@ -195,11 +198,13 @@ public extension LinkAttributionApp {
         
         var urlComponents = URLComponents.init(url: url, resolvingAgainstBaseURL: false)
         urlComponents?.scheme = "https"
+        let clickId = urlComponents?.queryItems?.first(where: { $0.name == "__clid" })?.value
+        urlComponents?.queryItems = nil
         guard let httpsUrl = urlComponents?.url else {
             return false
         }
         
-        Task { await handleOpenningURL(httpsUrl, subDomain: subDomain, slug: slug) }
+        Task { await handleOpenningURL(httpsUrl, subDomain: subDomain, slug: slug, clickUnid: clickId) }
         return true
     }
 }
