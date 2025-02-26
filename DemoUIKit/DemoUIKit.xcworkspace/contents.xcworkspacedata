@@ -5,6 +5,9 @@
       location = "group:DemoUIKit.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Pods/Pods.xcodeproj">
+      location = "container:../PolarGX-SDK/PolarGX.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "container:../PolarGX.podspec">
    </FileRef>
 </Workspace>

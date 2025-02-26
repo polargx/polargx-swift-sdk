@@ -3,7 +3,7 @@ import Foundation
 actor TrackingEventQueue {
     private var fileUrl: URL
     private var events: [TrackEventModel]
-    private(set) var trackingQueueIsRunning: Bool? = false
+    private(set) var trackingQueueIsRunning: Bool? = nil
     
     private lazy var encoder = JSONEncoder()
     

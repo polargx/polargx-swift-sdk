@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import LinkAttribution
+import PolarGX
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -18,11 +18,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         if let userActivity = connectionOptions.userActivities.first {
-            _ = LinkAttributionApp.shared.continueUserActivity(userActivity)
+            _ = PolarApp.shared.continueUserActivity(userActivity)
         }
         
         if let url = connectionOptions.urlContexts.first?.url {
-            _ = LinkAttributionApp.shared.openUrl(url)
+            _ = PolarApp.shared.openUrl(url)
         }
         
         guard let _ = (scene as? UIWindowScene) else { return }
@@ -58,12 +58,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
-        _ = LinkAttributionApp.shared.continueUserActivity(userActivity)
+        _ = PolarApp.shared.continueUserActivity(userActivity)
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         if let url = URLContexts.first?.url {
-            _ = LinkAttributionApp.shared.openUrl(url)
+            _ = PolarApp.shared.openUrl(url)
         }
     }
 }

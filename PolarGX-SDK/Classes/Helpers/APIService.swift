@@ -98,7 +98,7 @@ class APIService {
     }
     
     private func logSuccess(request: URLRequest, response: URLResponse, responseData: Data?) {
-        if LinkAttributionApp.isLoggingEnabled {
+        if PolarApp.isLoggingEnabled {
             lazy var method = request.httpMethod ?? ""
             lazy var path = (request.url?.absoluteString).flatMap({ $0[$0.index($0.startIndex, offsetBy: server.count)...] }) ?? ""
             lazy var statusCode = (response as? HTTPURLResponse)?.statusCode ?? -1
@@ -109,7 +109,7 @@ class APIService {
     }
     
     private func logFailure(request: URLRequest, response: URLResponse, responseData: Data?) {
-        if LinkAttributionApp.isLoggingEnabled {
+        if PolarApp.isLoggingEnabled {
             lazy var method = request.httpMethod ?? ""
             lazy var server = (request.url?.absoluteString) ?? "<<none>>"
             lazy var statusCode = (response as? HTTPURLResponse)?.statusCode ?? -1

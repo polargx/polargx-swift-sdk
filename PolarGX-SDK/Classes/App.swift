@@ -2,16 +2,16 @@ import Foundation
 import UIKit
 
 private func Log(_ sf: @autoclosure () -> String) {
-    if LinkAttributionApp.isLoggingEnabled {
-        print("[LinkAttribution/Debug] \(sf())")
+    if PolarApp.isLoggingEnabled {
+        print("[\(Configuration.Brand)/Debug] \(sf())")
     }
 }
 
 private func RLog(_ sf: @autoclosure () -> String) {
-    print("[LinkAttribution] \(sf())")
+    print("[\(Configuration.Brand)] \(sf())")
 }
 
-public class LinkAttributionApp {
+public class PolarApp {
     private let appId: String
     private let apiKey: String
     private let onLinkClickHandler: OnLinkClickHandler
@@ -68,6 +68,7 @@ public class LinkAttributionApp {
                 }
             }while initializazingError != nil
             
+            await trackingEventQueue.setTrackingQueueIsRunning(false)
             await startTrackingQueueIfNeeded()
         }
         
@@ -157,16 +158,16 @@ public class LinkAttributionApp {
 }
 
 //Access
-public extension LinkAttributionApp {
-    private static var _shared: LinkAttributionApp?
-    static var shared: LinkAttributionApp! {
-        guard let instance = _shared else { fatalError("LinkAttributionApp hasn't been initialized!") }
+public extension PolarApp {
+    private static var _shared: PolarApp?
+    static var shared: PolarApp! {
+        guard let instance = _shared else { fatalError("PolarApp hasn't been initialized!") }
         return instance
     }
         
     typealias OnLinkClickHandler = (_ link: URL, _ data: [String: Any]?, _ error: Error?) -> Void
     static func initialize(appId: String, apiKey: String, onLinkClickHandler: @escaping OnLinkClickHandler)  {
-        _shared = LinkAttributionApp(appId: appId, apiKey: apiKey, onLinkClickHandler: onLinkClickHandler)
+        _shared = PolarApp(appId: appId, apiKey: apiKey, onLinkClickHandler: onLinkClickHandler)
     }
     
     func trackEvent(name: String, attributes: [String: String]) {

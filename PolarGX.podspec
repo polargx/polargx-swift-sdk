@@ -1,10 +1,10 @@
 Pod::Spec.new do |spec|
-  spec.name             = "LinkAttribution"
+  spec.name             = "PolarGX"
   spec.version          = "0.1.0"
-  spec.summary          = "LinkAttribution"
-  spec.description      = "LinkAttribution"
+  spec.summary          = "PolarGX"
+  spec.description      = "PolarGX SDK"
 
-  spec.homepage         = "https://github.com/infinitech-dev/LinkAttribution-SwiftSDK"
+  spec.homepage         = "https://www.polargx.com"
 
   spec.license          = "MIT"
   spec.author           = { "Bohemian Innovation LLC" => "ift@bohemian.cc" }
@@ -14,7 +14,7 @@ Pod::Spec.new do |spec|
   
   spec.source           = { :git => "git@github.com:infinitech-dev/LinkAttribution-SwiftSDK.git", :tag => "#{spec.version}" }
 
-  spec.source_files     = 'LinkAttributionSDK/Classes/**/*'
-  spec.resources        = 'LinkAttributionSDK/Resources/**/*'
+  spec.source_files     = 'PolarGX/Classes/**/*'
+  spec.resources        = 'PolarGX/Resources/**/*'
 
 end

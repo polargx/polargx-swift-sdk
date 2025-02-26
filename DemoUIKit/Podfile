@@ -4,7 +4,7 @@ target 'DemoUIKit' do
   use_frameworks!
 
   # source 'git@github.com:infinitech-dev/LinkAttribution-SwiftSDK.git'
-  pod 'LinkAttribution', :path => '../' do |p|
+  pod 'PolarGX', :path => '../' do |p|
     p.build_settings['CODE_SIGNING_ALLOWED'] = 'NO'
   end
 
