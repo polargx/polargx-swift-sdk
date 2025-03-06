@@ -55,6 +55,7 @@ public class PolarApp: NSObject {
                 do {
                     try await apiService.trackEvent(launchEvent)
                     try Task.checkCancellation()
+                    Log("Initializing - successful ✅ with \(Configuration.Env.name) enviroment")
                     initializazingError = nil
                                         
                 }catch let error where error is URLError {
