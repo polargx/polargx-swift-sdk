@@ -18,10 +18,11 @@ public class PolarApp: NSObject {
     private let onLinkClickHandler: OnLinkClickHandler
     
     public static var isLoggingEnabled = true
+    public static var isDevelopmentEnabled = false //for Polar team only
     
     private var trackingEventQueue: TrackingEventQueue!
     
-    var apiService = APIService(server: Configuration.Server)
+    lazy var apiService = APIService(server: Configuration.Env.server)
     
     private init(appId: String, apiKey: String, onLinkClickHandler: @escaping OnLinkClickHandler) {
         self.appId = appId

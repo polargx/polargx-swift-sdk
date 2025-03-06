@@ -2,17 +2,22 @@
 
 import Foundation
 
-class ReleaseConfigutation {
-    static let Brand = "Polar"
-    class var Server: String { "https://lydxigat68.execute-api.us-east-1.amazonaws.com/prod" }
-    class var SupportedBaseDomains: [String] { ["gxlnk.com"] }
+protocol EnvConfigrationDescribe {
+    var server: String { get }
+    var supportedBaseDomains: [String] { get }
 }
 
-#if POLAR_DEV
-class Configuration: ReleaseConfigutation {
-    override class var Server: String { "https://lydxigat68.execute-api.us-east-1.amazonaws.com/dev" }
-    override class var SupportedBaseDomains: [String] { ["makelabs.ai"] }
+struct ProdEnvConfigutation: EnvConfigrationDescribe {
+    var server: String { "https://lydxigat68.execute-api.us-east-1.amazonaws.com/prod" }
+    var supportedBaseDomains: [String] { ["gxlnk.com"] }
 }
-#else
-typealias Configuration = ReleaseConfigutation
-#endif
+
+class DevEnvConfigutation: EnvConfigrationDescribe {
+    var server: String { "https://lydxigat68.execute-api.us-east-1.amazonaws.com/dev" }
+    var supportedBaseDomains: [String] { ["makelabs.ai"] }
+}
+
+struct Configuration {
+    static let Brand = "Polar"
+    static let Env: EnvConfigrationDescribe = PolarApp.isDevelopmentEnabled ? DevEnvConfigutation() : ProdEnvConfigutation()
+}

@@ -12,7 +12,7 @@ struct Formatter {
     }
     
     static func validateSupportingURL(_ url: URL) -> (subDomain: String, slug: String)? {
-        let supportDomains = Configuration.SupportedBaseDomains
+        let supportDomains = Configuration.Env.supportedBaseDomains
         
         let pathComponents = url.path.split(separator: "/").filter({ !$0.isEmpty })
         guard pathComponents.count < 2 else {
