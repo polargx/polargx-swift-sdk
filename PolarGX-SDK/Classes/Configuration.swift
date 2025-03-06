@@ -8,11 +8,11 @@ class ReleaseConfigutation {
     class var SupportedBaseDomains: [String] { ["gxlnk.com"] }
 }
 
-//#if DEBUG
+#if POLAR_DEV
 class Configuration: ReleaseConfigutation {
     override class var Server: String { "https://lydxigat68.execute-api.us-east-1.amazonaws.com/dev" }
     override class var SupportedBaseDomains: [String] { ["makelabs.ai"] }
 }
-//#else
-//typealias Configuration = ReleaseConfigutation
-//#endif
+#else
+typealias Configuration = ReleaseConfigutation
+#endif

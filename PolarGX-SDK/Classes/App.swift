@@ -11,7 +11,8 @@ private func RLog(_ sf: @autoclosure () -> String) {
     print("[\(Configuration.Brand)] \(sf())")
 }
 
-public class PolarApp {
+@objc
+public class PolarApp: NSObject {
     private let appId: String
     private let apiKey: String
     private let onLinkClickHandler: OnLinkClickHandler
@@ -26,6 +27,8 @@ public class PolarApp {
         self.appId = appId
         self.apiKey = apiKey
         self.onLinkClickHandler = onLinkClickHandler
+        
+        super.init()
         
         self.startInitializingApp()
     }
@@ -160,24 +163,25 @@ public class PolarApp {
 //Access
 public extension PolarApp {
     private static var _shared: PolarApp?
-    static var shared: PolarApp! {
+    @objc static var shared: PolarApp! {
         guard let instance = _shared else { fatalError("PolarApp hasn't been initialized!") }
         return instance
     }
         
     typealias OnLinkClickHandler = (_ link: URL, _ data: [String: Any]?, _ error: Error?) -> Void
-    static func initialize(appId: String, apiKey: String, onLinkClickHandler: @escaping OnLinkClickHandler)  {
+    @objc static func initialize(appId: String, apiKey: String, onLinkClickHandler: @escaping OnLinkClickHandler)  {
         _shared = PolarApp(appId: appId, apiKey: apiKey, onLinkClickHandler: onLinkClickHandler)
     }
     
-    func trackEvent(name: String, attributes: [String: String]) {
+    @objc func trackEvent(name: String, attributes: [String: String]) {
         let date = Date()
         Task {
             await trackEvent(name: name, date: date, attributes: attributes)
         }
     }
     
-    func continueUserActivity(_ activity: NSUserActivity) -> Bool {
+    @discardableResult
+    @objc func continueUserActivity(_ activity: NSUserActivity) -> Bool {
         switch activity.activityType {
         case NSUserActivityTypeBrowsingWeb:
             if let url = activity.webpageURL, let (subDomain, slug) = Formatter.validateSupportingURL(url) {
@@ -192,7 +196,8 @@ public extension PolarApp {
         return false
     }
     
-    func openUrl(_ url: URL) -> Bool {
+    @discardableResult
+    @objc func openUrl(_ url: URL) -> Bool {
         guard let (subDomain, slug) = Formatter.validateSupportingURL(url) else {
             return false
         }

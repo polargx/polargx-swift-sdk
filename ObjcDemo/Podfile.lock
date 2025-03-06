@@ -1,0 +1,16 @@
+PODS:
+  - PolarGX (0.1.0)
+
+DEPENDENCIES:
+  - PolarGX (from `../`)
+
+EXTERNAL SOURCES:
+  PolarGX:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  PolarGX: e0e07f97fed91963f93eda9f50b69d18ef91fcfa
+
+PODFILE CHECKSUM: a50038eb5b41bb5e799081e511d00b9f2b357f94
+
+COCOAPODS: 1.16.2

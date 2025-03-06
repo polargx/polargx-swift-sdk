@@ -14,7 +14,7 @@ Pod::Spec.new do |spec|
   
   spec.source           = { :git => "git@github.com:infinitech-dev/LinkAttribution-SwiftSDK.git", :tag => "#{spec.version}" }
 
-  spec.source_files     = 'PolarGX/Classes/**/*'
-  spec.resources        = 'PolarGX/Resources/**/*'
+  spec.source_files     = 'PolarGX-SDK/Classes/**/*'
+  spec.resources        = 'PolarGX-SDK/Resources/**/*'
 
 end
