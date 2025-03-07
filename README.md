@@ -50,7 +50,7 @@
       //Your existing code
 
       Add: Initialize Polar app
-      PolarApp.initialize(appId: "b5bb8eda-d060-4208-9173-2c772d517db7", apiKey: "Zr0f2JdHFx5WwDoKdUdDV7eQiJq9JOsu6wfDegkv") { link, data, error in
+      PolarApp.initialize(appId: YOUR_APP_ID, apiKey: YOUR_API_KEY) { link, data, error in
           print("\n[POLAR] detect link clicked: \(link), data: \(data), error: \(error)\n")
           //Handle link clicked. This callback will be called in the main queue.
       }
