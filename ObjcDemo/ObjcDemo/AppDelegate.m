@@ -6,7 +6,7 @@
 //
 
 #import "AppDelegate.h"
-#import "PolarGX/PolarGX.h"
+@import PolarGX;
 
 @interface AppDelegate ()
 

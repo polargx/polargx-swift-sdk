@@ -10,7 +10,7 @@ target 'ObjcDemo' do
 #    p.build_settings['CODE_SIGNING_ALLOWED'] = 'NO'
 #  end
 
-#  pod 'PolarGX', :git => 'git@github.com:infinitech-dev/LinkAttribution-SwiftSDK.git', :branch => 'main'
+  pod 'PolarGX', :git => 'git@github.com:infinitech-dev/LinkAttribution-SwiftSDK.git', :branch => 'main'
 
 
 end
