@@ -1,6 +1,6 @@
 import Foundation
 
-public struct FileStorageURL{
+struct FileStorageURL{
     public let url: URL;
     
     public init(URL theURL: URL) {

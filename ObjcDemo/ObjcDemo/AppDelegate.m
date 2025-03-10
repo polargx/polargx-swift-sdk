@@ -6,7 +6,7 @@
 //
 
 #import "AppDelegate.h"
-#import <PolarGX/PolarGX-Swift.h>
+#import "PolarGX/PolarGX.h"
 
 @interface AppDelegate ()
 
@@ -18,7 +18,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    [PolarApp initializeWithAppId:@"appid" apiKey:@"api key" onLinkClickHandler:^(NSURL * _Nonnull url, NSDictionary<NSString *,id> * _Nullable attributes, NSError * _Nullable error) {
+    PolarApp.isDevelopmentEnabled = true;
+    PolarApp.isLoggingEnabled = true;
+    [PolarApp initializeWithAppId:@"ad71f83f-4bc3-447a-94c8-d78c3ec8cce2" apiKey:@"XRMKcQBoHk6U9IZgsgjL56nDxCLzNYYak9pxweI3" onLinkClickHandler:^(NSURL * _Nonnull url, NSDictionary<NSString *,id> * _Nullable attributes, NSError * _Nullable error) {
         NSLog(@"[DEMO] detect clicked: %@, data: %@, error: %@\n", url, attributes, error);
 
     }];

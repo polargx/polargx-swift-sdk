@@ -8,11 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		2E1303F3361AE3C434429832 /* Pods_ObjcDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D6B6C339C69593488C784CB /* Pods_ObjcDemo.framework */; };
+		602CEE462D7EA927004AE748 /* PolarGX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 602CEE3D2D7E9FA7004AE748 /* PolarGX.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1D6B6C339C69593488C784CB /* Pods_ObjcDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ObjcDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A7D93840B2E69E3D2EB2F81 /* Pods-ObjcDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ObjcDemo.release.xcconfig"; path = "Target Support Files/Pods-ObjcDemo/Pods-ObjcDemo.release.xcconfig"; sourceTree = "<group>"; };
+		602CEE3D2D7E9FA7004AE748 /* PolarGX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = PolarGX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		609A84E72D6F21EA006415E1 /* ObjcDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ObjcDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E131F3C97EE8C9F0F221B33 /* Pods-ObjcDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ObjcDemo.debug.xcconfig"; path = "Target Support Files/Pods-ObjcDemo/Pods-ObjcDemo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -43,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				602CEE462D7EA927004AE748 /* PolarGX.framework in Frameworks */,
 				2E1303F3361AE3C434429832 /* Pods_ObjcDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -71,6 +74,7 @@
 		6995FE5A00150D45326F2C8F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				602CEE3D2D7E9FA7004AE748 /* PolarGX.framework */,
 				1D6B6C339C69593488C784CB /* Pods_ObjcDemo.framework */,
 			);
 			name = Frameworks;
@@ -96,7 +100,6 @@
 				609A84E32D6F21EA006415E1 /* Sources */,
 				609A84E42D6F21EA006415E1 /* Frameworks */,
 				609A84E52D6F21EA006415E1 /* Resources */,
-				1FAFCE50087271D3B6A92EA6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -154,23 +157,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1FAFCE50087271D3B6A92EA6 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ObjcDemo/Pods-ObjcDemo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ObjcDemo/Pods-ObjcDemo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ObjcDemo/Pods-ObjcDemo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		F4967B6ED80C4B13071322EE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

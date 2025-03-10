@@ -11,7 +11,7 @@
 		6044A66F2D5D922F00423C38 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6044A66E2D5D922B00423C38 /* Formatter.swift */; };
 		609C336B2D5C9DAD00EA570D /* TrackingEventQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609C336A2D5C9DAD00EA570D /* TrackingEventQueue.swift */; };
 		609C336D2D5CB15200EA570D /* FileStorageURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609C336C2D5CB14F00EA570D /* FileStorageURL.swift */; };
-		609EDDB72D3DFD5F00EFDAFE /* PolarGX.h in Headers */ = {isa = PBXBuildFile; fileRef = 609EDDB32D3DFD5F00EFDAFE /* PolarGX.h */; };
+		609EDDB72D3DFD5F00EFDAFE /* PolarGX.h in Headers */ = {isa = PBXBuildFile; fileRef = 609EDDB32D3DFD5F00EFDAFE /* PolarGX.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		609EDDB82D3DFD5F00EFDAFE /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609EDDB22D3DFD5F00EFDAFE /* Configuration.swift */; };
 		609EDDB92D3DFD5F00EFDAFE /* PolarGX.docc in Sources */ = {isa = PBXBuildFile; fileRef = 609EDDB42D3DFD5F00EFDAFE /* PolarGX.docc */; };
 		609EDDBA2D3DFD5F00EFDAFE /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609EDDB52D3DFD5F00EFDAFE /* APIService.swift */; };
@@ -270,7 +270,9 @@
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited) POLAR_DEV";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_UPCOMING_FEATURE_IMPORT_OBJC_FORWARD_DECLS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,7";
 				XROS_DEPLOYMENT_TARGET = 1.3;
@@ -312,7 +314,9 @@
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_INSTALL_OBJC_HEADER = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_UPCOMING_FEATURE_IMPORT_OBJC_FORWARD_DECLS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,7";
 				XROS_DEPLOYMENT_TARGET = 1.3;

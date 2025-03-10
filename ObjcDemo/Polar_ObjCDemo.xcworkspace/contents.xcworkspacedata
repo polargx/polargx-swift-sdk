@@ -10,4 +10,7 @@
    <FileRef
       location = "container:../PolarGX.podspec">
    </FileRef>
+   <FileRef
+      location = "container:../PolarGX-SDK/PolarGX.xcodeproj">
+   </FileRef>
 </Workspace>

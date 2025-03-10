@@ -17,12 +17,13 @@ public class PolarApp: NSObject {
     private let apiKey: String
     private let onLinkClickHandler: OnLinkClickHandler
     
-    public static var isLoggingEnabled = true
-    public static var isDevelopmentEnabled = false //for Polar team only
+    @objc public static var isLoggingEnabled = true
+    @objc public static var isDevelopmentEnabled = false //for Polar team only
     
     private var trackingEventQueue: TrackingEventQueue!
     
     lazy var apiService = APIService(server: Configuration.Env.server)
+    lazy var appDirectory = FileStorageURL.sdkDirectory.appendingSubDirectory(appId)
     
     private init(appId: String, apiKey: String, onLinkClickHandler: @escaping OnLinkClickHandler) {
         self.appId = appId
@@ -35,7 +36,9 @@ public class PolarApp: NSObject {
     }
     
     private func startInitializingApp() {
-        trackingEventQueue = TrackingEventQueue(fileUrl: FileStorageURL.sdkDirectory.file(name: "tracking.json"))
+        let trackingEventStorageUrl = appDirectory.file(name: "tracking.json")
+        trackingEventQueue = TrackingEventQueue(fileUrl: trackingEventStorageUrl)
+        Log("Unsent tracking events stored in `\(trackingEventStorageUrl.absoluteString)`")
 
         apiService.defaultHeaders = [
             "x-api-key": apiKey

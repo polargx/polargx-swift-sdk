@@ -6,7 +6,7 @@
 //
 
 #import "SceneDelegate.h"
-#import <PolarGX/PolarGX-Swift.h>
+@import PolarGX;
 
 @interface SceneDelegate ()
 
