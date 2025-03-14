@@ -1,25 +1,28 @@
-Pod::Spec.new do |spec|
-    spec.name                   = "PolarGX"
-    spec.version                = "0.1.0"
-    spec.summary                = "PolarGX"
-    spec.description            = "PolarGX SDK"
+Pod::Spec.new do |s|
+      s.name                = "PolarGX"
+      s.module_name         = "PolarGX"
+      s.version             = "0.1.0"
+      s.summary             = "PolarGX"
 
-    spec.homepage               = "https://www.polargx.com"
+      s.description         = <<-DESC
+                            PolarGX SDK
+                            DESC
 
-    spec.license                = "MIT"
-    spec.author                 = { "Bohemian Innovation LLC" => "ift@bohemian.cc" }
+      s.homepage            = "https://www.polargx.com"
+      s.license             = "MIT"
+      s.author              = { "Bohemian Innovation LLC" => "ift@bohemian.cc" }
 
-    spec.ios.deployment_target  = "15.0"
-    spec.swift_version          = '5.0'
-  
-    spec.source                 = { :git => "git@github.com:infinitech-dev/LinkAttribution-SwiftSDK.git", :tag => "#{spec.version}" }
+      s.platform            = :ios, "15.0"
+      s.source              = { :git => "git@github.com:infinitech-dev/LinkAttribution-SwiftSDK.git", :tag => s.version }
+      s.source_files        = "PolarGX-SDK/Classes/**/*.{h,m,swift}"
+      
+      s.pod_target_xcconfig = {
+            'SWIFT_VERSION' => '5.3'
+      }
 
-    spec.source_files           = 'PolarGX-SDK/Classes/**/*'
-    spec.public_header_files    = 'PolarGX-SDK/**/*.h'
-    spec.resources              = 'PolarGX-SDK/Resources/**/*'
+      s.swift_version       = '5.3'
 
-    spec.pod_target_xcconfig    = {
-        'BUILD_LIBRARY_FOR_DISTRIBUTION' => 'YES',
-        'SWIFT_INSTALL_OBJC_HEADER' => 'YES'
-    }
+      s.resource_bundles    = {'Resources' => 'PolarGX-SDK/Resources/**/*.{storyboard,xib,xcassets,xcdatamodeld}' }
+
+      s.header_dir          = 'PolarGX'
 end

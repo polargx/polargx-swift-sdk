@@ -63,7 +63,6 @@
 			children = (
 				60B678EB2D62EE2200AD8942 /* Classes */,
 				609EDDB12D3DFD5F00EFDAFE /* Resources */,
-				609EDD5E2D3DF61200EFDAFE /* Configs */,
 				609EDD122D3DF2E600EFDAFE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -74,13 +73,6 @@
 				609EDD112D3DF2E600EFDAFE /* PolarGX.framework */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		609EDD5E2D3DF61200EFDAFE /* Configs */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Configs;
 			sourceTree = "<group>";
 		};
 		609EDDB12D3DFD5F00EFDAFE /* Resources */ = {

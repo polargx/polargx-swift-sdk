@@ -2,21 +2,15 @@ PODS:
   - PolarGX (0.1.0)
 
 DEPENDENCIES:
-  - "PolarGX (from `git@github.com:infinitech-dev/LinkAttribution-SwiftSDK.git`, branch `main`)"
+  - PolarGX (from `../`)
 
 EXTERNAL SOURCES:
   PolarGX:
-    :branch: main
-    :git: "git@github.com:infinitech-dev/LinkAttribution-SwiftSDK.git"
-
-CHECKOUT OPTIONS:
-  PolarGX:
-    :commit: 5a0326bf26b83042153660a0f0b4ad3543051bd1
-    :git: "git@github.com:infinitech-dev/LinkAttribution-SwiftSDK.git"
+    :path: "../"
 
 SPEC CHECKSUMS:
-  PolarGX: e0e07f97fed91963f93eda9f50b69d18ef91fcfa
+  PolarGX: 345cff894a002929447e54f6e322be8e0adf80fa
 
-PODFILE CHECKSUM: 750988d3e8edfce4f3d36e0bfac4cd3e5f680380
+PODFILE CHECKSUM: 67827dd53e94da970836222e39595afe65f263eb
 
 COCOAPODS: 1.16.2
