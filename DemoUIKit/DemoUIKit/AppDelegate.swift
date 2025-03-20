@@ -18,9 +18,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         PolarApp.isDevelopmentEnabled = true;
         PolarApp.isLoggingEnabled = true;
-        PolarApp.initialize(appId: "ad71f83f-4bc3-447a-94c8-d78c3ec8cce2", apiKey: "XRMKcQBoHk6U9IZgsgjL56nDxCLzNYYak9pxweI3") { link, data, error in
+        PolarApp.initialize(appId: "e1a3cb25-839e-4deb-95b0-2fb8ebd79461", apiKey: "5NYxdL88goaBw7qEw6oBu5YADSTOyG5E8oncu48J") { link, data, error in
             print("\n[DEMO] detect clicked: \(link), data: \(data), error: \(error)\n")
         }
+        
+        PolarApp.shared.updateUser(userID: "dl1@infinitech.dev", attributes: ["name": "dl1"])
         
         return true
     }

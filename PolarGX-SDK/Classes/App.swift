@@ -1,15 +1,6 @@
 import Foundation
 import UIKit
 
-private func Log(_ sf: @autoclosure () -> String) {
-    if PolarApp.isLoggingEnabled {
-        print("[\(Configuration.Brand)/Debug] \(sf())")
-    }
-}
-
-private func RLog(_ sf: @autoclosure () -> String) {
-    print("[\(Configuration.Brand)] \(sf())")
-}
 
 @objc
 public class PolarApp: NSObject {
@@ -20,10 +11,12 @@ public class PolarApp: NSObject {
     @objc public static var isLoggingEnabled = true
     @objc public static var isDevelopmentEnabled = false //for Polar team only
     
-    private var trackingEventQueue: TrackingEventQueue!
-    
     lazy var apiService = APIService(server: Configuration.Env.server)
     lazy var appDirectory = FileStorageURL.sdkDirectory.appendingSubDirectory(appId)
+    
+    private var currentUserSession: UserSession?
+    private var otherUserSessions = [UserSession]()
+    private var previousEventQueues = [TrackingEventQueue]()
     
     private init(appId: String, apiKey: String, onLinkClickHandler: @escaping OnLinkClickHandler) {
         self.appId = appId
@@ -36,82 +29,41 @@ public class PolarApp: NSObject {
     }
     
     private func startInitializingApp() {
-        let trackingEventStorageUrl = appDirectory.file(name: "tracking.json")
-        trackingEventQueue = TrackingEventQueue(fileUrl: trackingEventStorageUrl)
-        Log("Unsent tracking events stored in `\(trackingEventStorageUrl.absoluteString)`")
-
+        //Make sure all events sent to backend in previous app sessions and user session
+        
         apiService.defaultHeaders = [
             "x-api-key": apiKey
         ]
-        
-        let date = Date()
-        Task {
-            let launchEvent = TrackEventModel(
-                organizationUnid: appId,
-                eventName: "app_launch",
-                eventTime: date,
-                data: [:]
-            )
-            
-            var initializazingError: Error? = nil
-            repeat {
-                do {
-                    try await apiService.trackEvent(launchEvent)
-                    try Task.checkCancellation()
-                    Log("Initializing - successful ✅ with \(Configuration.Env.name) enviroment")
-                    initializazingError = nil
-                                        
-                }catch let error where error is URLError {
-                    Log("Initializing - failed ⛔️ + retrying 🔁: \(error)")
-                    initializazingError = error
-                    try? await Task.sleep(nanoseconds: 1_000_0000_000)
-                    
-                }catch let error {
-                    Log("Initializing - failed ⛔️ + stopped ⛔️: \(error)")
-                    initializazingError = nil
-                    
-                    if error.apiError?.httpStatus == 403 {
-                        RLog("⛔️⛔️⛔️ INVALID appId or apiKey! ⛔️⛔️⛔️")
-                    }
-                }
-            }while initializazingError != nil
-            
-            await trackingEventQueue.setTrackingQueueIsRunning(false)
-            await startTrackingQueueIfNeeded()
-        }
-        
         startTrackingAppLifeCycle()
     }
     
-    private func trackEvent(name: String, date: Date, attributes: [String: String]) async {
-        await trackingEventQueue.push(TrackEventModel(
-            organizationUnid: self.appId,
-            eventName: name,
-            eventTime: date,
-            data: attributes
-        ))
-        await startTrackingQueueIfNeeded()
-    }
+    //MARK: Setting user
     
-    private func startTrackingQueueIfNeeded() async {
-        guard await trackingEventQueue.trackingQueueIsRunning == false else {
-            return
-        }
-        
-        await trackingEventQueue.setTrackingQueueIsRunning(true)
-
-        Task {
-            do {
-                while let event = await trackingEventQueue.willPop() {
-                    try await apiService.trackEvent(event)
-                    await trackingEventQueue.pop()
+    private func setUser(userID: String?, attributes: [String: String]?) {
+        Task { @MainActor in
+            if let userSession = currentUserSession {
+                if userSession.userID != userID {
+                    currentUserSession = nil
+                    otherUserSessions.append(userSession)
                 }
-                
-            }catch let error {
-                Log("Tracking - failed ⛔️ + stopped ⛔️: \(error)")
+            }else{
+                if let userID = userID {
+                    let fileUrl = appDirectory.file(name: "\(Date().timeIntervalSince1970)-\(UUID().uuidString).json")
+                    Logger.log("TrackingEvents stored in `\(fileUrl.absoluteString)`")
+                    
+                    currentUserSession = UserSession(organizationUnid: appId, userID: userID, apiService: apiService, trackingStorageURL: fileUrl)
+                }
             }
             
-            await trackingEventQueue.setTrackingQueueIsRunning(false)
+            await currentUserSession?.setAttributes(attributes ?? [:])
+        }
+    }
+    
+    //MARK: Track Events
+    
+    private func trackEvent(name: String, date: Date, attributes: [String: String]) {
+        Task { @MainActor in
+            await currentUserSession?.trackEvent(name: name, date: date, attributes: attributes)
         }
     }
     
@@ -128,7 +80,8 @@ public class PolarApp: NSObject {
             case UIApplication.willTerminateNotification: "app_ternimate"
             default: "unknown_lifecycle"
             }
-            Task { await self?.trackEvent(name: eventName, date: date, attributes: [:]) }
+            
+            self?.trackEvent(name: eventName, date: date, attributes: [:])
         }
         nc.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: queue, using: track)
         nc.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: queue, using: track)
@@ -136,6 +89,8 @@ public class PolarApp: NSObject {
         nc.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: queue, using: track)
         nc.addObserver(forName: UIApplication.willTerminateNotification, object: nil, queue: queue, using: track)
     }
+    
+    //MARK: Link Clicks
     
     private func handleOpenningURL(_ openningURL: URL, subDomain: String, slug: String, clickUnid: String?) async {
         let clickTime = Date()
@@ -178,11 +133,12 @@ public extension PolarApp {
         _shared = PolarApp(appId: appId, apiKey: apiKey, onLinkClickHandler: onLinkClickHandler)
     }
     
+    @objc func updateUser(userID: String?, attributes: [String: String]?) {
+        setUser(userID: userID, attributes: attributes)
+    }
+    
     @objc func trackEvent(name: String, attributes: [String: String]) {
-        let date = Date()
-        Task {
-            await trackEvent(name: name, date: date, attributes: attributes)
-        }
+        trackEvent(name: name, date: Date(), attributes: attributes)
     }
     
     @discardableResult
