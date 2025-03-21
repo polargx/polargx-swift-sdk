@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("\n[DEMO] detect clicked: \(link), data: \(data), error: \(error)\n")
         }
         
-        PolarApp.shared.updateUser(userID: "dl1@infinitech.dev", attributes: ["name": "dl1"])
+        PolarApp.shared.updateUser(userID: "e1a3cb25-839e-4deb-95b0-2fb8ebd79401", attributes: ["name": "dl1", "email": "dl1@gmail.com"])
         
         return true
     }
