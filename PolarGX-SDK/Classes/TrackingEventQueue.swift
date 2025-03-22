@@ -3,7 +3,7 @@ import Foundation
 actor TrackingEventQueue {
     private let fileUrl: URL
     private let apiService: APIService
-    private var events: [TrackEventModel]
+    private(set) var events: [TrackEventModel]
     private(set) var isReady = false
     private(set) var isRunning = false
     
@@ -28,10 +28,6 @@ actor TrackingEventQueue {
         if !wasReady {
             save()
         }
-    }
-    
-    func setRunning(_ isRunning: Bool) {
-        self.isRunning = isRunning
     }
     
     func push(_ event: TrackEventModel) {

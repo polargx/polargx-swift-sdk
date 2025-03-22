@@ -16,7 +16,6 @@ public class PolarApp: NSObject {
     
     private var currentUserSession: UserSession?
     private var otherUserSessions = [UserSession]()
-    private var previousEventQueues = [TrackingEventQueue]()
     
     private init(appId: String, apiKey: String, onLinkClickHandler: @escaping OnLinkClickHandler) {
         self.appId = appId
@@ -29,12 +28,13 @@ public class PolarApp: NSObject {
     }
     
     private func startInitializingApp() {
-        //Make sure all events sent to backend in previous app sessions and user session
-        
         apiService.defaultHeaders = [
             "x-api-key": apiKey
         ]
         startTrackingAppLifeCycle()
+        
+        let pendingEventFiles = try? FileStorage.listFiles(in: appDirectory).filter({ $0.hasPrefix("events_") })
+        Task { await startResolvingPendingEvents(pendingEventFiles: pendingEventFiles) }
     }
     
     //MARK: Setting user
@@ -46,13 +46,13 @@ public class PolarApp: NSObject {
                     currentUserSession = nil
                     otherUserSessions.append(userSession)
                 }
-            }else{
-                if let userID = userID {
-                    let fileUrl = appDirectory.file(name: "\(Date().timeIntervalSince1970)-\(UUID().uuidString).json")
-                    Logger.log("TrackingEvents stored in `\(fileUrl.absoluteString)`")
-                    
-                    currentUserSession = UserSession(organizationUnid: appId, userID: userID, apiService: apiService, trackingStorageURL: fileUrl)
-                }
+            }
+            
+            if currentUserSession == nil, let userID = userID {
+                let fileUrl = appDirectory.file(name: "events_\(Date().timeIntervalSince1970)_\(UUID().uuidString).json")
+                Logger.log("TrackingEvents stored in `\(fileUrl.absoluteString)`")
+                
+                currentUserSession = UserSession(organizationUnid: appId, userID: userID, apiService: apiService, trackingStorageURL: fileUrl)
             }
             
             await currentUserSession?.setAttributes(attributes ?? [:])
@@ -88,6 +88,24 @@ public class PolarApp: NSObject {
         nc.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: queue, using: track)
         nc.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: queue, using: track)
         nc.addObserver(forName: UIApplication.willTerminateNotification, object: nil, queue: queue, using: track)
+    }
+    
+    private func startResolvingPendingEvents(pendingEventFiles: [String]?) async {
+        for file in pendingEventFiles ?? [] {
+            let fileUrl = appDirectory.file(name: file)
+            let eventQueue = TrackingEventQueue(fileUrl: fileUrl, apiService: apiService)
+            if await eventQueue.events.isEmpty {
+                try? FileStorage.remove(file: file, in: appDirectory)
+                continue
+            }
+            
+            await eventQueue.setReady()
+            await eventQueue.sendEventsIfNeeded()
+            
+            if await eventQueue.events.isEmpty {
+                try? FileStorage.remove(file: file, in: appDirectory)
+            }
+        }
     }
     
     //MARK: Link Clicks

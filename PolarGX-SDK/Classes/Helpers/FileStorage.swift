@@ -50,3 +50,15 @@ fileprivate extension FileStorageURL {
         }
     }
 }
+
+struct FileStorage {
+    private static var fm: FileManager { FileManager.default }
+    
+    static func listFiles(in directory: FileStorageURL) throws -> [String] {
+        return try fm.contentsOfDirectory(atPath: directory.url.path)
+    }
+    
+    static func remove(file: String, in directory: FileStorageURL) throws {
+        try fm.removeItem(at: directory.file(name: file))
+    }
+}

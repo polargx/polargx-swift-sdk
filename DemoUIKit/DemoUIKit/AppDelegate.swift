@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         PolarApp.shared.updateUser(userID: "e1a3cb25-839e-4deb-95b0-2fb8ebd79401", attributes: ["name": "dl1", "email": "dl1@gmail.com"])
+        PolarApp.shared.updateUser(userID: "e1a3cb25-839e-4deb-95b0-2fb8ebd79402", attributes: ["name": "dl2", "email": "dl2@gmail.com"])
         
         return true
     }
