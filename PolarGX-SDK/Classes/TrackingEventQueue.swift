@@ -1,5 +1,6 @@
 import Foundation
 
+/// Pupurse: fetch events from disk and manage events
 actor TrackingEventQueue {
     private let fileUrl: URL
     private let apiService: APIService
@@ -9,6 +10,7 @@ actor TrackingEventQueue {
     
     private lazy var encoder = JSONEncoder()
     
+    /// Fetch unsent events from fileUrl
     init(fileUrl: URL, apiService: APIService) {
         self.fileUrl = fileUrl
         self.apiService = apiService
@@ -21,6 +23,9 @@ actor TrackingEventQueue {
         }
     }
     
+    /// Set isReady flag
+    /// If isReady sets  to True, Events will be saved to disk, The queue is ready to send data to backend
+    /// If isReady sets to False, Events is not saved to the disk.
     func setReady() {
         let wasReady = isReady;
         self.isReady = true
@@ -30,6 +35,7 @@ actor TrackingEventQueue {
         }
     }
     
+    /// Event still pushed to the queue if queue is not ready.
     func push(_ event: TrackEventModel) {
         events.append(event)
         save()
@@ -57,6 +63,7 @@ actor TrackingEventQueue {
         }
     }
     
+    /// Sending Event progress, Only one progress need to be ran at the time.
     func sendEventsIfNeeded() async {
         guard isReady && !isRunning else {
             return
@@ -73,7 +80,7 @@ actor TrackingEventQueue {
                 break
                 
             }catch let error {
-                if let status = error.apiError?.httpStatus, status >= 500 {  //Server error: stop sending, keep elements
+                if let status = error.apiError?.httpStatus, status >= 500 {  //Server error: stop sending, keep elements saved in the disk
                     Logger.log("Tracking: failed ⛔️ + stopped ⛔️: \(error)")
                     break
                 }

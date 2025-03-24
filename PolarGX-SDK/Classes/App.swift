@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 
-
 @objc
 public class PolarApp: NSObject {
     private let appId: String
@@ -12,11 +11,14 @@ public class PolarApp: NSObject {
     @objc public static var isDevelopmentEnabled = false //for Polar team only
     
     lazy var apiService = APIService(server: Configuration.Env.server)
+    
+    /// The storage location to save user data and events (belong to SDK)
     lazy var appDirectory = FileStorageURL.sdkDirectory.appendingSubDirectory(appId)
     
     private var currentUserSession: UserSession?
     private var otherUserSessions = [UserSession]()
     
+    /// App: created by `appId` and `apiKey`.
     private init(appId: String, apiKey: String, onLinkClickHandler: @escaping OnLinkClickHandler) {
         self.appId = appId
         self.apiKey = apiKey
@@ -33,12 +35,16 @@ public class PolarApp: NSObject {
         ]
         startTrackingAppLifeCycle()
         
+        /// Loading pending events from last app sessions and send to backend in low prority thread
         let pendingEventFiles = try? FileStorage.listFiles(in: appDirectory).filter({ $0.hasPrefix("events_") })
         Task { await startResolvingPendingEvents(pendingEventFiles: pendingEventFiles) }
     }
     
     //MARK: Setting user
     
+    /// Set userID and attributes:
+    /// - Create current user session if needed
+    /// - Backup user session into the otherUserSessions to keep running for sending events
     private func setUser(userID: String?, attributes: [String: String]?) {
         Task { @MainActor in
             if let userSession = currentUserSession {
