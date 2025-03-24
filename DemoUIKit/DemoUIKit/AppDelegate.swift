@@ -22,8 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("\n[DEMO] detect clicked: \(link), data: \(data), error: \(error)\n")
         }
         
-        PolarApp.shared.updateUser(userID: "e1a3cb25-839e-4deb-95b0-2fb8ebd79401", attributes: ["name": "dl1", "email": "dl1@gmail.com"])
-        PolarApp.shared.updateUser(userID: "e1a3cb25-839e-4deb-95b0-2fb8ebd79402", attributes: ["name": "dl2", "email": "dl2@gmail.com"])
+        PolarApp.shared.updateUser(userID: "e1a3cb25-839e-4deb-95b0-2fb8ebd79401", attributes: [EventKey.Name: "dl1", EventKey.Email: "dl1@gmail.com"])
+        PolarApp.shared.updateUser(userID: "e1a3cb25-839e-4deb-95b0-2fb8ebd79402", attributes: [EventKey.Name: "dl2", EventKey.Email: "dl2@gmail.com"])
         
         return true
     }

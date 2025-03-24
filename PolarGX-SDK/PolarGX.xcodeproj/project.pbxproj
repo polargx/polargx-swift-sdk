@@ -28,6 +28,7 @@
 		60D672F82D8BE4D60000EC3F /* ThSVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D672F72D8BE4BB0000EC3F /* ThSVariable.swift */; };
 		60D672FA2D8BFE850000EC3F /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D672F92D8BFE800000EC3F /* UserSession.swift */; };
 		60D672FC2D8C08490000EC3F /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D672FB2D8C08460000EC3F /* Logger.swift */; };
+		60DA5C772D91037C002F4059 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DA5C762D910372002F4059 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		60D672F72D8BE4BB0000EC3F /* ThSVariable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThSVariable.swift; sourceTree = "<group>"; };
 		60D672F92D8BFE800000EC3F /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
 		60D672FB2D8C08460000EC3F /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		60DA5C762D910372002F4059 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 		60B678EB2D62EE2200AD8942 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				60DA5C762D910372002F4059 /* Constants.swift */,
 				609EDDCF2D3E0AAB00EFDAFE /* App.swift */,
 				60D672F92D8BFE800000EC3F /* UserSession.swift */,
 				609C336A2D5C9DAD00EA570D /* TrackingEventQueue.swift */,
@@ -227,6 +230,7 @@
 				609EDDEE2D3FA62300EFDAFE /* APIResponseModel.swift in Sources */,
 				609EDDB92D3DFD5F00EFDAFE /* PolarGX.docc in Sources */,
 				600717562D5F3B7300E19F1F /* DictionaryModel.swift in Sources */,
+				60DA5C772D91037C002F4059 /* Constants.swift in Sources */,
 				609EDDD02D3E0AB500EFDAFE /* App.swift in Sources */,
 				609EDDD22D3E0D7F00EFDAFE /* SystemInfo.swift in Sources */,
 				60CDF8AE2D5E53BC006D944C /* LinkClickModel.swift in Sources */,
