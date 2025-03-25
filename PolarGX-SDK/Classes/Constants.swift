@@ -1,6 +1,6 @@
 import Foundation
 
-public struct EventKey {
+public struct PolarEventKey {
     public static let Email: String = "email"
     public static let Name: String = "name"
     public static let FirstName: String = "firstName"
