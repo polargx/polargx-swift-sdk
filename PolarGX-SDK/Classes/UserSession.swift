@@ -48,6 +48,7 @@ actor UserSession {
                 }else{
                     Logger.log("UpdateUser: failed ⛔️ + retrying 🔁: \(error)")
                     try? await Task.sleep(nanoseconds: 1_000_0000_000)
+                    submitError = error
                 }
             }
             

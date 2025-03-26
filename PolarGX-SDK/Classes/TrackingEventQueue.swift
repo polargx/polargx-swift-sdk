@@ -86,7 +86,7 @@ actor TrackingEventQueue {
                 }
                 
                 //Server error: ignore element and send next one.
-                Logger.log("Tracking: failed ⛔️ + retry 🔁: \(error)")
+                Logger.log("Tracking: failed ⛔️ + next 🔁: \(error)")
             }
             pop()
         }
