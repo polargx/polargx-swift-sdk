@@ -89,7 +89,9 @@ class InternalPolarApp: PolarApp {
             default: "unknown_lifecycle"
             }
             
-            self?.trackEvent(name: eventName, date: date, attributes: [:])
+            DispatchQueue.global(qos: .default).asyncAfter(deadline: .now() + 0.5) { [weak self] in
+                self?.trackEvent(name: eventName, date: date, attributes: [:])
+            }
         }
         nc.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: queue, using: track)
         nc.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: queue, using: track)
