@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 
 @objc
-public class PolarApp: NSObject {
+public class PolarApp: App {
     private let appId: String
     private let apiKey: String
     private let onLinkClickHandler: OnLinkClickHandler
@@ -147,31 +147,32 @@ public class PolarApp: NSObject {
             }
         }
     }
-}
 
-//Access
-public extension PolarApp {
-    private static var _shared: PolarApp?
-    @objc static var shared: PolarApp! {
-        guard let instance = _shared else { fatalError("PolarApp hasn't been initialized!") }
-        return instance
+    //MARK: Accessability
+    
+    private static var _shared: App?
+    @objc public static var shared: App {
+        _shared ?? {
+            Logger.rlog("PolarApp hasn't been initialized!")
+            return App()
+        }()
     }
         
-    typealias OnLinkClickHandler = (_ link: URL, _ data: [String: Any]?, _ error: Error?) -> Void
-    @objc static func initialize(appId: String, apiKey: String, onLinkClickHandler: @escaping OnLinkClickHandler)  {
+    public typealias OnLinkClickHandler = (_ link: URL, _ data: [String: Any]?, _ error: Error?) -> Void
+    @objc public static func initialize(appId: String, apiKey: String, onLinkClickHandler: @escaping OnLinkClickHandler)  {
         _shared = PolarApp(appId: appId, apiKey: apiKey, onLinkClickHandler: onLinkClickHandler)
     }
     
-    @objc func updateUser(userID: String?, attributes: [String: String]?) {
+    @objc public override func updateUser(userID: String?, attributes: [String: String]?) {
         setUser(userID: userID, attributes: attributes)
     }
     
-    @objc func trackEvent(name: String, attributes: [String: String]) {
+    @objc public override func trackEvent(name: String, attributes: [String: String]) {
         trackEvent(name: name, date: Date(), attributes: attributes)
     }
     
     @discardableResult
-    @objc func continueUserActivity(_ activity: NSUserActivity) -> Bool {
+    @objc public override func continueUserActivity(_ activity: NSUserActivity) -> Bool {
         switch activity.activityType {
         case NSUserActivityTypeBrowsingWeb:
             if let url = activity.webpageURL, let (subDomain, slug) = Formatter.validateSupportingURL(url) {
@@ -187,7 +188,7 @@ public extension PolarApp {
     }
     
     @discardableResult
-    @objc func openUrl(_ url: URL) -> Bool {
+    @objc public override func openUrl(_ url: URL) -> Bool {
         guard let (subDomain, slug) = Formatter.validateSupportingURL(url) else {
             return false
         }
@@ -203,4 +204,12 @@ public extension PolarApp {
         Task { await handleOpenningURL(httpsUrl, subDomain: subDomain, slug: slug, clickUnid: clickId) }
         return true
     }
+}
+
+//MARK: - App
+public class App: NSObject {
+    @objc public func updateUser(userID: String?, attributes: [String: String]?) {}
+    @objc public func trackEvent(name: String, attributes: [String: String]) { }
+    @objc public func continueUserActivity(_ activity: NSUserActivity) -> Bool { false }
+    @objc public func openUrl(_ url: URL) -> Bool { false }
 }
