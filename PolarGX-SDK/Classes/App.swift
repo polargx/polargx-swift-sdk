@@ -8,7 +8,6 @@ public class PolarApp: NSObject {
     private let onLinkClickHandler: OnLinkClickHandler
     
     @objc public static var isLoggingEnabled = true
-    @objc public static var isDevelopmentEnabled = false //for Polar team only
     
     lazy var apiService = APIService(server: Configuration.Env.server)
     
@@ -20,6 +19,12 @@ public class PolarApp: NSObject {
     
     /// App: created by `appId` and `apiKey`.
     private init(appId: String, apiKey: String, onLinkClickHandler: @escaping OnLinkClickHandler) {
+        var apiKey = apiKey;
+        if apiKey.hasPrefix("dev_") {
+            apiKey.removeFirst(4)
+            Configuration.Env = DevEnvConfigutation()
+        }
+        
         self.appId = appId
         self.apiKey = apiKey
         self.onLinkClickHandler = onLinkClickHandler

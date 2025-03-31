@@ -16,9 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        PolarApp.isDevelopmentEnabled = true;
         PolarApp.isLoggingEnabled = true;
-        PolarApp.initialize(appId: "e1a3cb25-839e-4deb-95b0-2fb8ebd79461", apiKey: "5NYxdL88goaBw7qEw6oBu5YADSTOyG5E8oncu48J") { link, data, error in
+        PolarApp.initialize(appId: "e1a3cb25-839e-4deb-95b0-2fb8ebd79461", apiKey: "dev_5NYxdL88goaBw7qEw6oBu5YADSTOyG5E8oncu48J") { link, data, error in
             print("\n[DEMO] detect clicked: \(link), data: \(data), error: \(error)\n")
         }
         

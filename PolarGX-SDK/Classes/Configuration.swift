@@ -22,5 +22,5 @@ class DevEnvConfigutation: EnvConfigrationDescribe {
 
 struct Configuration {
     static let Brand = "Polar"
-    static let Env: EnvConfigrationDescribe = PolarApp.isDevelopmentEnabled ? DevEnvConfigutation() : ProdEnvConfigutation()
+    static var Env: EnvConfigrationDescribe = ProdEnvConfigutation()
 }
