@@ -1,14 +1,11 @@
 import Foundation
 import UIKit
 
-@objc
-public class PolarApp: App {
+class InternalPolarApp: PolarApp {
     private let appId: String
     private let apiKey: String
     private let onLinkClickHandler: OnLinkClickHandler
-    
-    @objc public static var isLoggingEnabled = true
-    
+        
     lazy var apiService = APIService(server: Configuration.Env.server)
     
     /// The storage location to save user data and events (belong to SDK)
@@ -18,7 +15,7 @@ public class PolarApp: App {
     private var otherUserSessions = [UserSession]()
     
     /// App: created by `appId` and `apiKey`.
-    private init(appId: String, apiKey: String, onLinkClickHandler: @escaping OnLinkClickHandler) {
+    init(appId: String, apiKey: String, onLinkClickHandler: @escaping OnLinkClickHandler) {
         var apiKey = apiKey;
         if apiKey.hasPrefix("dev_") {
             apiKey.removeFirst(4)
@@ -148,20 +145,7 @@ public class PolarApp: App {
         }
     }
 
-    //MARK: Accessability
-    
-    private static var _shared: App?
-    @objc public static var shared: App {
-        _shared ?? {
-            Logger.rlog("PolarApp hasn't been initialized!")
-            return App()
-        }()
-    }
-        
-    public typealias OnLinkClickHandler = (_ link: URL, _ data: [String: Any]?, _ error: Error?) -> Void
-    @objc public static func initialize(appId: String, apiKey: String, onLinkClickHandler: @escaping OnLinkClickHandler)  {
-        _shared = PolarApp(appId: appId, apiKey: apiKey, onLinkClickHandler: onLinkClickHandler)
-    }
+    //MARK: PolarApp methods
     
     @objc public override func updateUser(userID: String?, attributes: [String: String]?) {
         setUser(userID: userID, attributes: attributes)
@@ -207,7 +191,23 @@ public class PolarApp: App {
 }
 
 //MARK: - App
-public class App: NSObject {
+@objc
+public class PolarApp: NSObject {
+    @objc public static var isLoggingEnabled = true
+
+    private static var _shared: PolarApp?
+    @objc public static var shared: PolarApp {
+        _shared ?? {
+            Logger.rlog("PolarApp hasn't been initialized!")
+            return PolarApp()
+        }()
+    }
+    
+    public typealias OnLinkClickHandler = (_ link: URL, _ data: [String: Any]?, _ error: Error?) -> Void
+    @objc public static func initialize(appId: String, apiKey: String, onLinkClickHandler: @escaping OnLinkClickHandler)  {
+        _shared = InternalPolarApp(appId: appId, apiKey: apiKey, onLinkClickHandler: onLinkClickHandler)
+    }
+    
     @objc public func updateUser(userID: String?, attributes: [String: String]?) {}
     @objc public func trackEvent(name: String, attributes: [String: String]) { }
     @objc public func continueUserActivity(_ activity: NSUserActivity) -> Bool { false }
