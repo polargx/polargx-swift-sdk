@@ -36,8 +36,8 @@ actor TrackingEventQueue {
     }
     
     /// Event still pushed to the queue if queue is not ready.
-    func push(_ event: TrackEventModel) {
-        events.append(event)
+    func push(_ newEvents: [TrackEventModel]) {
+        events.append(contentsOf: newEvents)
         save()
     }
     

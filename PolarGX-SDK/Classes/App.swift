@@ -1,6 +1,8 @@
 import Foundation
 import UIKit
 
+typealias UntrackedEvent = (eventName: String, date: Date, attributes: [String: String])
+
 class InternalPolarApp: PolarApp {
     private let appId: String
     private let apiKey: String
@@ -13,6 +15,7 @@ class InternalPolarApp: PolarApp {
     
     private var currentUserSession: UserSession?
     private var otherUserSessions = [UserSession]()
+    private var pendingEvents = [UntrackedEvent]()
     
     /// App: created by `appId` and `apiKey`.
     init(appId: String, apiKey: String, onLinkClickHandler: @escaping OnLinkClickHandler) {
@@ -28,6 +31,7 @@ class InternalPolarApp: PolarApp {
         
         super.init()
         
+        self.pendingEvents.reserveCapacity(100)
         self.startInitializingApp()
     }
     
@@ -56,14 +60,21 @@ class InternalPolarApp: PolarApp {
                 }
             }
             
+            var events: [UntrackedEvent] = []
             if currentUserSession == nil, let userID = userID {
                 let fileUrl = appDirectory.file(name: "events_\(Date().timeIntervalSince1970)_\(UUID().uuidString).json")
                 Logger.log("TrackingEvents stored in `\(fileUrl.absoluteString)`")
                 
+                events = pendingEvents;
+                pendingEvents = []
+                
                 currentUserSession = UserSession(organizationUnid: appId, userID: userID, apiService: apiService, trackingStorageURL: fileUrl)
             }
             
-            await currentUserSession?.setAttributes(attributes ?? [:])
+            Task {
+                await currentUserSession?.trackEvents(events)
+                await currentUserSession?.setAttributes(attributes ?? [:])
+            }
         }
     }
     
@@ -71,7 +82,17 @@ class InternalPolarApp: PolarApp {
     
     private func trackEvent(name: String, date: Date, attributes: [String: String]) {
         Task { @MainActor in
-            await currentUserSession?.trackEvent(name: name, date: date, attributes: attributes)
+            if let userSession = currentUserSession {
+                Task {
+                    await userSession.trackEvents([(name, date, attributes)])
+                }
+                
+            }else{
+                if pendingEvents.count == pendingEvents.capacity {
+                    pendingEvents.removeFirst()
+                }
+                pendingEvents.append((name, date, attributes))
+            }
         }
     }
     
@@ -80,16 +101,16 @@ class InternalPolarApp: PolarApp {
         let queue = OperationQueue.main
         let track = { [weak self] (notification: Notification) in
             let date = Date()
-            let eventName = switch notification.name {
+            let eventName: String? = switch notification.name {
             case UIApplication.willEnterForegroundNotification: "app_open"
             case UIApplication.didEnterBackgroundNotification: "app_close"
             case UIApplication.didBecomeActiveNotification: "app_active"
             case UIApplication.willResignActiveNotification: "app_inactive"
             case UIApplication.willTerminateNotification: "app_ternimate"
-            default: "unknown_lifecycle"
+            default: nil
             }
             
-            DispatchQueue.global(qos: .default).asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            if let eventName = eventName {
                 self?.trackEvent(name: eventName, date: date, attributes: [:])
             }
         }

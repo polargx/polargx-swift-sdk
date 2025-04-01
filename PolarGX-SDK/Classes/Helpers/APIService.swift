@@ -103,8 +103,8 @@ class APIService {
             lazy var path = (request.url?.absoluteString).flatMap({ $0[$0.index($0.startIndex, offsetBy: server.count)...] }) ?? ""
             lazy var statusCode = (response as? HTTPURLResponse)?.statusCode ?? -1
             lazy var requestBodyString = request.httpBody.flatMap({ String(data: $0, encoding: .utf8) }) ?? "<<empty>>"
-            lazy var responseDataString = responseData.flatMap({ String(data: $0, encoding: .utf8) }) ?? ""
-            print("[\(Configuration.Brand)][API]🌐 \(method) \(path) [\(statusCode)] 💚\n-B \(requestBodyString) ➡️ \(responseDataString)")
+            lazy var responseDataString = responseData.flatMap({ String(data: $0, encoding: .utf8) })?.replacingOccurrences(of: "\n", with: "") ?? ""
+            print("[\(Configuration.Brand)][API]🌐 \(method) \(path) [\(statusCode)] 💚 -B \(requestBodyString) ➡️ \(responseDataString)")
         }
     }
     
@@ -113,10 +113,10 @@ class APIService {
             lazy var method = request.httpMethod ?? ""
             lazy var server = (request.url?.absoluteString) ?? "<<none>>"
             lazy var statusCode = (response as? HTTPURLResponse)?.statusCode ?? -1
-            lazy var requestHeaderString = request.allHTTPHeaderFields?.map{ "-H \($0.key): \($0.value)" }.joined(separator: "\n") ?? "<<none>>"
+            lazy var requestHeaderString = request.allHTTPHeaderFields?.map{ "-H \($0.key): \($0.value)" }.joined(separator: " ") ?? "<<none>>"
             lazy var requestBodyString = request.httpBody.flatMap({ String(data: $0, encoding: .utf8) }) ?? "<<none>>"
-            lazy var responseDataString = responseData.flatMap({ String(data: $0, encoding: .utf8) }) ?? ""
-            print("[\(Configuration.Brand)][API]🌐 \(method) \(server) [\(statusCode)] ❤️\n\(requestHeaderString)\n-B \(requestBodyString) ➡️ \(responseDataString)")
+            lazy var responseDataString = responseData.flatMap({ String(data: $0, encoding: .utf8) })?.replacingOccurrences(of: "\n", with: "") ?? ""
+            print("[\(Configuration.Brand)][API]🌐 \(method) \(server) [\(statusCode)] ❤️ \(requestHeaderString) -B \(requestBodyString) ➡️ \(responseDataString)")
         }
     }
 }

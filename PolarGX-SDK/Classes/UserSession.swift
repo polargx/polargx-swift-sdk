@@ -61,14 +61,18 @@ actor UserSession {
     }
     
     /// Track event for user.
-    func trackEvent(name: String, date: Date, attributes: [String: String]) async {
-        await trackingEventQueue.push(TrackEventModel(
-            organizationUnid: organizationUnid,
-            userID: userID,
-            eventName: name,
-            eventTime: date,
-            data: attributes
-        ))
+    func trackEvents(_ events: [UntrackedEvent]) async {
+        await trackingEventQueue.push(
+            events.map{
+                TrackEventModel(
+                    organizationUnid: organizationUnid,
+                    userID: userID,
+                    eventName: $0.eventName,
+                    eventTime: $0.date,
+                    data: $0.attributes
+                )
+            }
+        )
         await trackingEventQueue.sendEventsIfNeeded()
     }
 }
