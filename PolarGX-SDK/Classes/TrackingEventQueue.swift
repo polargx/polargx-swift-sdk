@@ -85,6 +85,11 @@ actor TrackingEventQueue {
                     break
                 }
                 
+                else if error is EncodingError {
+                    Logger.log("Tracking: failed ⛔️ + stopped ⛔️: \(error)")
+                    break
+                }
+                
                 //Server error: ignore element and send next one.
                 Logger.log("Tracking: failed ⛔️ + next 🔁: \(error)")
             }

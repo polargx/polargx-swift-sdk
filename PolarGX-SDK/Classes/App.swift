@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-typealias UntrackedEvent = (eventName: String, date: Date, attributes: [String: String])
+typealias UntrackedEvent = (eventName: String, date: Date, attributes: [String: Any])
 
 class InternalPolarApp: PolarApp {
     private let appId: String
@@ -51,7 +51,7 @@ class InternalPolarApp: PolarApp {
     /// Set userID and attributes:
     /// - Create current user session if needed
     /// - Backup user session into the otherUserSessions to keep running for sending events
-    private func setUser(userID: String?, attributes: [String: String]?) {
+    private func setUser(userID: String?, attributes: [String: Any]?) {
         Task { @MainActor in
             if let userSession = currentUserSession {
                 if userSession.userID != userID {
@@ -80,7 +80,7 @@ class InternalPolarApp: PolarApp {
     
     //MARK: Track Events
     
-    private func trackEvent(name: String, date: Date, attributes: [String: String]) {
+    private func trackEvent(name: String, date: Date, attributes: [String: Any]) {
         Task { @MainActor in
             if let userSession = currentUserSession {
                 Task {
@@ -170,11 +170,11 @@ class InternalPolarApp: PolarApp {
 
     //MARK: PolarApp methods
     
-    @objc public override func updateUser(userID: String?, attributes: [String: String]?) {
+    @objc public override func updateUser(userID: String?, attributes: [String: Any]?) {
         setUser(userID: userID, attributes: attributes)
     }
     
-    @objc public override func trackEvent(name: String, attributes: [String: String]) {
+    @objc public override func trackEvent(name: String, attributes: [String: Any]) {
         trackEvent(name: name, date: Date(), attributes: attributes)
     }
     
@@ -231,8 +231,8 @@ public class PolarApp: NSObject {
         _shared = InternalPolarApp(appId: appId, apiKey: apiKey, onLinkClickHandler: onLinkClickHandler)
     }
     
-    @objc public func updateUser(userID: String?, attributes: [String: String]?) {}
-    @objc public func trackEvent(name: String, attributes: [String: String]) { }
+    @objc public func updateUser(userID: String?, attributes: [String: Any]?) {}
+    @objc public func trackEvent(name: String, attributes: [String: Any]) { }
     @objc public func continueUserActivity(_ activity: NSUserActivity) -> Bool { false }
     @objc public func openUrl(_ url: URL) -> Bool { false }
 }

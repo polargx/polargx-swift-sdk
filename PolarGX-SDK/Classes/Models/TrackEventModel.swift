@@ -5,15 +5,15 @@ struct TrackEventModel: Codable {
     let userID: String
     let eventName: String
     let eventTime: String
-    let data: [String: String]
+    let data: DictionaryModel
     
     var eventUnid: String?
     
-    init(organizationUnid: String, userID: String, eventName: String, eventTime: Date, data: [String : String]) {
+    init(organizationUnid: String, userID: String, eventName: String, eventTime: Date, data: [String: Any]) {
         self.organizationUnid = organizationUnid
         self.userID = userID
         self.eventName = eventName
         self.eventTime = Formatter.BackendDateTimeMsFormatter.string(from: eventTime)
-        self.data = data
+        self.data = DictionaryModel(content: data)
     }
 }

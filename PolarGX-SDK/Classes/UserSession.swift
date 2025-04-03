@@ -9,7 +9,7 @@ actor UserSession {
     let apiService: APIService
     let trackingStorageURL: URL
     
-    private var attributes = [String: String]()
+    private var attributes = [String: Any]()
     
     lazy var trackingEventQueue = TrackingEventQueue(fileUrl: trackingStorageURL, apiService: apiService)
     
@@ -21,7 +21,7 @@ actor UserSession {
     }
     
     /// Keep all user attributes for next sending. I don't make sure server supports to merging existing user attributes and the new attributues
-    func setAttributes(_ attributes: [String: String]) {
+    func setAttributes(_ attributes: [String: Any]) {
         Task {
             self.attributes = self.attributes.merging(attributes, uniquingKeysWith: { $1 })
             await startToUpdateUser()
@@ -43,6 +43,10 @@ actor UserSession {
             }catch let error {
                 if error.apiError?.httpStatus == 403 {
                     Logger.rlog("UpdateUser: ⛔️⛔️⛔️ INVALID appId OR apiKey! ⛔️⛔️⛔️")
+                    submitError = nil
+                    
+                }else if error is EncodingError {
+                    Logger.rlog("UpdateUser: ⛔️⛔️⛔️ failed + stopped ⛔️: \(error)")
                     submitError = nil
                     
                 }else{

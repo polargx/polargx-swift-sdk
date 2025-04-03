@@ -22,7 +22,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         PolarApp.shared.updateUser(userID: "e1a3cb25-839e-4deb-95b0-2fb8ebd79401", attributes: [PolarEventKey.Name: "dl1", PolarEventKey.Email: "dl1@gmail.com"])
-        PolarApp.shared.updateUser(userID: "e1a3cb25-839e-4deb-95b0-2fb8ebd79402", attributes: [PolarEventKey.Name: "dl2", PolarEventKey.Email: "dl2@gmail.com"])
+        PolarApp.shared.updateUser(userID: "e1a3cb25-839e-4deb-95b0-2fb8ebd79402", attributes: [
+            PolarEventKey.Name: "dl2", 
+            PolarEventKey.Email: "dl2@gmail.com",
+            "datap1": [
+                "datasub1": 1,
+                "datasub2": false,
+                "datasub3": "hele",
+                "datasub4": UInt(3),
+                "datasub5": Float(5),
+                "datasub6": Decimal(1000)
+            ]
+        ])
+        
         
         return true
     }
