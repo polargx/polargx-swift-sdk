@@ -35,6 +35,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             ]
         ])
         
+        PolarApp.shared.trackEvent(name: "DL event", attributes: [
+            "datap1": [
+                "datasub1": 1,
+                "datasub2": false,
+                "datasub3": "hele",
+                "datasub4": UInt(3),
+                "datasub5": Float(5),
+                "datasub6": Decimal(1000)
+            ]
+        ])
         
         return true
     }
