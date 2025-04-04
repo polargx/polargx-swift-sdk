@@ -84,8 +84,8 @@ struct DictionaryModel: Codable {
             }else if let value = value as? Int64 {
                 try container.encode(value, forKey: codingKey)
                 
-            }else if #available(iOS 18.0, *), let value = value as? Int128 {
-                try container.encode(value, forKey: codingKey)
+//            }else if #available(iOS 18.0, *), let value = value as? Int128 {
+//                try container.encode(value, forKey: codingKey)
                 
             }else if let value = value as? UInt {
                 try container.encode(value, forKey: codingKey)
@@ -102,8 +102,8 @@ struct DictionaryModel: Codable {
             }else if let value = value as? UInt64 {
                 try container.encode(value, forKey: codingKey)
                 
-            }else if #available(iOS 18.0, *), let value = value as? UInt128 {
-                try container.encode(value, forKey: codingKey)
+//            }else if #available(iOS 18.0, *), let value = value as? UInt128 {
+//                try container.encode(value, forKey: codingKey)
                 
             }else if let value = value as? Float {
                 try container.encode(value, forKey: codingKey)
