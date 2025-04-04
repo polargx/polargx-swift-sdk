@@ -31,7 +31,7 @@ class InternalPolarApp: PolarApp {
         
         super.init()
         
-        self.pendingEvents.reserveCapacity(100)
+        self.pendingEvents.reserveCapacity(Self.PendingEventsCapacity)
         self.startInitializingApp()
     }
     
@@ -67,6 +67,7 @@ class InternalPolarApp: PolarApp {
                 
                 events = pendingEvents;
                 pendingEvents = []
+                pendingEvents.reserveCapacity(Self.PendingEventsCapacity)
                 
                 currentUserSession = UserSession(organizationUnid: appId, userID: userID, apiService: apiService, trackingStorageURL: fileUrl)
             }
@@ -88,7 +89,7 @@ class InternalPolarApp: PolarApp {
                 }
                 
             }else{
-                if pendingEvents.count == pendingEvents.capacity {
+                if pendingEvents.count == Self.PendingEventsCapacity {
                     pendingEvents.removeFirst()
                 }
                 pendingEvents.append((name, date, attributes))
@@ -217,6 +218,7 @@ class InternalPolarApp: PolarApp {
 @objc
 public class PolarApp: NSObject {
     @objc public static var isLoggingEnabled = true
+    @objc public static var PendingEventsCapacity = 100
 
     private static var _shared: PolarApp?
     @objc public static var shared: PolarApp {
