@@ -10,6 +10,7 @@ actor UserSession {
     let trackingStorageURL: URL
     
     private var attributes = [String: Any]()
+    private var pendingRegisterPushToken: (apns: String?, fcm: String?)?
     
     lazy var trackingEventQueue = TrackingEventQueue(fileUrl: trackingStorageURL, apiService: apiService)
     
@@ -25,6 +26,13 @@ actor UserSession {
         Task {
             self.attributes = self.attributes.merging(attributes, uniquingKeysWith: { $1 })
             await startToUpdateUser()
+        }
+    }
+    
+    func setPushToken(apns: String?, fcm: String?) {
+        Task {
+            pendingRegisterPushToken = (apns, fcm)
+            await startToRegisterPushToken()
         }
     }
     
@@ -62,6 +70,45 @@ actor UserSession {
             await trackingEventQueue.setReady()
             await trackingEventQueue.sendEventsIfNeeded()
         }
+    }
+    
+    /// Stop sending retrying process if server retuns status code #403.
+    /// Retry when network connection issue, server returns status code #400 ...
+    private func startToRegisterPushToken() async {
+        var submitError: Error? = nil
+        
+        repeat {
+            do {
+                if let token = pendingRegisterPushToken?.apns {
+                    let apns = UpdateAPNSModel(organizationUnid: organizationUnid, userID: userID, deviceToken: token)
+                    try await apiService.registerAPNS(apns)
+                    
+                }else if let token = pendingRegisterPushToken?.fcm {
+                    let fcm = UpdateFCMModel(organizationUnid: organizationUnid, userID: userID, fcmToken: token)
+                    try await apiService.registerFCM(fcm)
+                }else {
+                    //TODO: how to unregister?
+                }
+                
+                pendingRegisterPushToken = nil
+                
+            }catch let error {
+                if error.apiError?.httpStatus == 403 {
+                    Logger.rlog("RegisterPushToken: ⛔️⛔️⛔️ INVALID appId OR apiKey! ⛔️⛔️⛔️")
+                    submitError = nil
+                    
+                }else if error is EncodingError {
+                    Logger.rlog("RegisterPushToken: ⛔️⛔️⛔️ failed + stopped ⛔️: \(error)")
+                    submitError = nil
+                    
+                }else{
+                    Logger.log("RegisterPushToken: failed ⛔️ + retrying 🔁: \(error)")
+                    try? await Task.sleep(nanoseconds: 1_000_0000_000)
+                    submitError = error
+                }
+            }
+            
+        }while submitError != nil
     }
     
     /// Track event for user.

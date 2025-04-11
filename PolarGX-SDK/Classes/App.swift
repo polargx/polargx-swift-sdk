@@ -79,6 +79,16 @@ class InternalPolarApp: PolarApp {
         }
     }
     
+    private func setPushToken(apns: String?, fcm: String?) {
+        Task { @MainActor in
+            if let userSession = currentUserSession {
+                Task {
+                    await userSession.setPushToken(apns: apns, fcm: fcm)
+                }
+            }
+        }
+    }
+    
     //MARK: Track Events
     
     private func trackEvent(name: String, date: Date, attributes: [String: Any]) {
@@ -163,8 +173,9 @@ class InternalPolarApp: PolarApp {
             }
             
         }catch let error {
+            let clickHandler = onLinkClickHandler
             DispatchQueue.main.async {
-                self.onLinkClickHandler(openningURL, nil, error)
+                clickHandler(openningURL, nil, error)
             }
         }
     }
@@ -173,6 +184,11 @@ class InternalPolarApp: PolarApp {
     
     @objc public override func updateUser(userID: String?, attributes: [String: Any]?) {
         setUser(userID: userID, attributes: attributes)
+    }
+    
+    override func setPushToken(deviceToken: Data?, fcmToken: String?) {
+        let apnsToken = deviceToken?.reduce("", {$0 + String(format: "%02X", $1)})
+        setPushToken(apns: apnsToken, fcm: fcmToken)
     }
     
     @objc public override func trackEvent(name: String, attributes: [String: Any]) {
@@ -234,6 +250,7 @@ public class PolarApp: NSObject {
     }
     
     @objc public func updateUser(userID: String?, attributes: [String: Any]?) {}
+    @objc public func setPushToken(deviceToken: Data?, fcmToken: String?) {}
     @objc public func trackEvent(name: String, attributes: [String: Any]) { }
     @objc public func continueUserActivity(_ activity: NSUserActivity) -> Bool { false }
     @objc public func openUrl(_ url: URL) -> Bool { false }

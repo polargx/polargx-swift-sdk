@@ -14,6 +14,30 @@ extension APIService {
     }
     
     @discardableResult
+    func registerAPNS(_ apns: UpdateAPNSModel) async throws -> EmptyModel? {
+        return try await request(
+            method: .POST,
+            path: "/sdk/v1/users/registerDeviceToken",
+            headers: [:],
+            queries: [:],
+            body: apns,
+            result: EmptyModel.self
+        )
+    }
+    
+    @discardableResult
+    func registerFCM(_ fcm: UpdateFCMModel) async throws -> EmptyModel? {
+        return try await request(
+            method: .POST,
+            path: "/sdk/v1/users/registerFcmToken",
+            headers: [:],
+            queries: [:],
+            body: fcm,
+            result: EmptyModel.self
+        )
+    }
+    
+    @discardableResult
     func trackEvent(_ event: TrackEventModel) async throws -> EmptyModel? {
         return try await request(
             method: .POST,
