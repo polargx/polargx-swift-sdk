@@ -57,6 +57,9 @@ class InternalPolarApp: PolarApp {
                 if userSession.userID != userID {
                     currentUserSession = nil
                     otherUserSessions.append(userSession)
+                    Task{
+                        await userSession.invalidate()
+                    }
                 }
             }
             

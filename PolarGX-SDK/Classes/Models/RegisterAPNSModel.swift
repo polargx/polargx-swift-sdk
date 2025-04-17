@@ -1,7 +1,7 @@
 
 import Foundation
 
-struct UpdateAPNSModel: Codable {
+struct RegisterAPNSModel: Codable {
     let organizationUnid: String
     let userID: String
     let deviceToken: String
@@ -13,10 +13,12 @@ struct UpdateAPNSModel: Codable {
     }
 }
 
+typealias DeregisterAPNSModel = RegisterAPNSModel
+
 
 /*
 {
-  "fcmToken": "string",
+  "deviceToken": "string",
   "organizationUnid": "string",
   "userID": "string"
 }*/

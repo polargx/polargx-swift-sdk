@@ -1,7 +1,7 @@
 
 import Foundation
 
-struct UpdateFCMModel: Codable {
+struct RegisterFCMModel: Codable {
     let organizationUnid: String
     let userID: String
     let fcmToken: String
@@ -13,6 +13,7 @@ struct UpdateFCMModel: Codable {
     }
 }
 
+typealias DeregisterFCMModel = RegisterFCMModel
 
 /*
 {
