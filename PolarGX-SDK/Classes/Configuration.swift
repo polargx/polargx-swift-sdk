@@ -10,13 +10,13 @@ protocol EnvConfigrationDescribe {
 
 struct ProdEnvConfigutation: EnvConfigrationDescribe {
     var name: String { "Production" }
-    var server: String { "https://lydxigat68.execute-api.us-east-1.amazonaws.com/prod" }
+    var server: String { "https://8mr6rftgmb.execute-api.us-east-1.amazonaws.com/prod" }
     var supportedBaseDomains: [String] { ["gxlnk.com"] }
 }
 
 class DevEnvConfigutation: EnvConfigrationDescribe {
     var name: String { "Development" }
-    var server: String { "https://lydxigat68.execute-api.us-east-1.amazonaws.com/dev" }
+    var server: String { "https://8mr6rftgmb.execute-api.us-east-1.amazonaws.com/dev" }
     var supportedBaseDomains: [String] { ["makelabs.ai"] }
 }
 

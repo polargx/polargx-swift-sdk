@@ -5,7 +5,7 @@ extension APIService {
     func updateUser(_ user: UpdateUserModel) async throws -> EmptyModel? {
         return try await request(
             method: .POST,
-            path: "/sdk/v1/users/profileUpdate",
+            path: "/api/v1/users/profile",
             headers: [:],
             queries: [:],
             body: user,
@@ -17,7 +17,7 @@ extension APIService {
     func trackEvent(_ event: TrackEventModel) async throws -> EmptyModel? {
         return try await request(
             method: .POST,
-            path: "/sdk/v1/events/track",
+            path: "/api/v1/events/track",
             headers: [:],
             queries: [:],
             body: event,
