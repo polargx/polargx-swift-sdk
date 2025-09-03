@@ -10,4 +10,11 @@
    <FileRef
       location = "container:../PolarGX.podspec">
    </FileRef>
+   <Group
+      location = "container:../Tools"
+      name = "Tools">
+      <FileRef
+         location = "group:sync-to.sh">
+      </FileRef>
+   </Group>
 </Workspace>
