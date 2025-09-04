@@ -17,7 +17,7 @@ struct ProdEnvConfigutation: EnvConfigrationDescribe {
 class DevEnvConfigutation: EnvConfigrationDescribe {
     var name: String { "Development" }
     var server: String { "https://8mr6rftgmb.execute-api.us-east-1.amazonaws.com/dev" }
-    var supportedBaseDomains: [String] { ["makelabs.ai"] }
+    var supportedBaseDomains: [String] { ["makelabs.ai", "biglittlecookies.com"] }
 }
 
 struct Configuration {

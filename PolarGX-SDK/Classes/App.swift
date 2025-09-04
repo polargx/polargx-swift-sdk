@@ -41,6 +41,8 @@ class InternalPolarApp: PolarApp {
         ]
         startTrackingAppLifeCycle()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(checkLinkWebClick), name: UIApplication.willEnterForegroundNotification, object: nil)
+        
         /// Loading pending events from last app sessions and send to backend in low prority thread
         let pendingEventFiles = try? FileStorage.listFiles(in: appDirectory).filter({ $0.hasPrefix("events_") })
         Task { await startResolvingPendingEvents(pendingEventFiles: pendingEventFiles) }
@@ -154,6 +156,16 @@ class InternalPolarApp: PolarApp {
     }
     
     //MARK: Link Clicks
+    
+    @objc
+    private func checkLinkWebClick() {
+        let pastboardTypes = UIPasteboard.general.types;
+        let fingersprints = pastboardTypes
+            .filter({ $0.hasPrefix(PolarConstants.LinkMineTypePrefix) })
+            .map({ $0[$0.index($0.startIndex, offsetBy: PolarConstants.LinkMineTypePrefix.count + 1)...] })
+        Logger.log("pastboardTypes: \(pastboardTypes)")
+        Logger.log("fingersprints: \(fingersprints)")
+    }
     
     private func handleOpenningURL(_ openningURL: URL, subDomain: String, slug: String, clickUnid: String?) async {
         let clickTime = Date()
