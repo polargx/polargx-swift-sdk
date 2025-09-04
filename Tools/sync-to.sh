@@ -20,4 +20,4 @@ cp ./PolarGX.podspec "${DEST_DIR}/polargx-swift-sdk.lib/" &&
 cp ./README.md "${DEST_DIR}/polargx-swift-sdk.lib/" &&
 
 cd "${DEST_DIR}" && echo "cd: $(pwd) to pod install..." &&
-pod install
+pod update PolarGX

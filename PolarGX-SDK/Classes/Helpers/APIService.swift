@@ -82,14 +82,14 @@ class APIService {
         
         let responseObject = try decoder.decode(APIResponseModel<RO>.self, from: data)
 
-        guard responseStatus == 200 else {
+        guard responseStatus == 200 && responseObject.error == nil else {
             logFailure(request: urlRequest, response: response, responseData: data)
-
-            let apiError = APIErrorResponse(
-                httpStatus: responseStatus,
-                code: responseObject.code ?? 0,
-                message: responseObject.message ?? "Unknown error!"
+            var apiError = responseObject.error ?? APIErrorResponse(
+                code: "-1",
+                message: "Unknown error!",
+                statusCode: -1
             )
+            apiError.httpStatus = responseStatus
             throw Errors.apiError(apiError)
         }
         

@@ -6,7 +6,7 @@ extension APIService {
     func getLinkData(domain: String, slug: String) async throws -> LinkDataModel? {
         return try await request(
             method: .GET,
-            path: "/api/v1/links/data",
+            path: "/api/v1/links/resolve",
             headers: [:],
             queries: ["domain": domain, "slug": slug],
             body: nil,
@@ -18,7 +18,7 @@ extension APIService {
     func trackLinkClick(_ click: LinkClickModel) async throws -> LinkClickResultModel? {
         return try await request(
             method: .POST,
-            path: "/api/v1/links/track",
+            path: "/api/v1/links/clicks",
             headers: [:],
             queries: [:],
             body: click,
@@ -36,6 +36,19 @@ extension APIService {
             body: ["SdkUsed": sdkUsed],
             logResult: false,
             result: EmptyModel.self
+        )
+    }
+    
+    @discardableResult
+    func matchLinkClick(fingerprint: String) async throws -> LinkClickResultModel? {
+        return try await request(
+            method: .GET,
+            path: "/api/v1/links/clicks/match",
+            headers: [:],
+            queries: ["fingerprint": fingerprint],
+            body: nil,
+            logResult: false,
+            result: LinkClickResultModel.self
         )
     }
 }

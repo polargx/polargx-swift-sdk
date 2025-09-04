@@ -1,6 +1,7 @@
 import Foundation
 
 struct TrackEventModel: Codable {
+    let clobberMatchingAttributes: Bool
     let organizationUnid: String
     let userID: String
     let eventName: String
@@ -10,6 +11,7 @@ struct TrackEventModel: Codable {
     var eventUnid: String?
     
     init(organizationUnid: String, userID: String, eventName: String, eventTime: Date, data: [String: Any]) {
+        self.clobberMatchingAttributes = false
         self.organizationUnid = organizationUnid
         self.userID = userID
         self.eventName = eventName
