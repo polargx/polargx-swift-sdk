@@ -5,12 +5,12 @@ class Logger {
     
     static func log(_ sf: @autoclosure () -> String) {
         if PolarApp.isLoggingEnabled {
-            print("[\(Configuration.Brand)/Debug] \(sf())")
+            print("\n[\(Configuration.Brand)/Debug] \(sf())\n")
         }
     }
 
     static func rlog(_ sf: @autoclosure () -> String) {
-        print("[\(Configuration.Brand)] \(sf())")
+        print("\n[\(Configuration.Brand)] \(sf())\n")
     }
 
 }

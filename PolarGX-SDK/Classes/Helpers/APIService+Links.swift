@@ -40,15 +40,15 @@ extension APIService {
     }
     
     @discardableResult
-    func matchLinkClick(fingerprint: String) async throws -> LinkClickResultModel? {
+    func matchLinkClick(fingerprint: String) async throws -> LinkClickResponseModel? {
         return try await request(
             method: .GET,
             path: "/api/v1/links/clicks/match",
             headers: [:],
             queries: ["fingerprint": fingerprint],
             body: nil,
-            logResult: false,
-            result: LinkClickResultModel.self
+            logResult: true,
+            result: LinkClickResponseModel.self
         )
     }
 }

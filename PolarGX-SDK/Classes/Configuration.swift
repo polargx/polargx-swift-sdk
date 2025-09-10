@@ -8,16 +8,24 @@ protocol EnvConfigrationDescribe {
     var supportedBaseDomains: [String] { get }
 }
 
+extension EnvConfigrationDescribe {
+    var appLinkServer: String {
+        "https://___default.\(supportedBaseDomains.last!)"
+    }
+}
+
 struct ProdEnvConfigutation: EnvConfigrationDescribe {
     var name: String { "Production" }
     var server: String { "https://8mr6rftgmb.execute-api.us-east-1.amazonaws.com/prod" }
+    var appLinkServer: String { "https://___default.gxlnk.com" }
     var supportedBaseDomains: [String] { ["gxlnk.com"] }
 }
 
 class DevEnvConfigutation: EnvConfigrationDescribe {
     var name: String { "Development" }
     var server: String { "https://8mr6rftgmb.execute-api.us-east-1.amazonaws.com/dev" }
-    var supportedBaseDomains: [String] { ["makelabs.ai", "biglittlecookies.com"] }
+    var appLinkServer: String { "https://___default.biglittlecookies.com" }
+    var supportedBaseDomains: [String] { ["biglittlecookies.com"] }
 }
 
 struct Configuration {

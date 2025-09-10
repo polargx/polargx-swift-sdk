@@ -8,7 +8,8 @@ class InternalPolarApp: PolarApp {
     private let apiKey: String
     private let onLinkClickHandler: OnLinkClickHandler
         
-    lazy var apiService = APIService(server: Configuration.Env.server)
+    private lazy var apiService = APIService(configuration: Configuration.Env)
+    private lazy var fingerprintGenerator = FingerprintGenerator()
     
     /// The storage location to save user data and events (belong to SDK)
     lazy var appDirectory = FileStorageURL.sdkDirectory.appendingSubDirectory(appId)
@@ -16,6 +17,8 @@ class InternalPolarApp: PolarApp {
     private var currentUserSession: UserSession?
     private var otherUserSessions = [UserSession]()
     private var pendingEvents = [UntrackedEvent]()
+    
+    private var isHandlingOpenUrl = false
     
     /// App: created by `appId` and `apiKey`.
     init(appId: String, apiKey: String, onLinkClickHandler: @escaping OnLinkClickHandler) {
@@ -41,7 +44,7 @@ class InternalPolarApp: PolarApp {
         ]
         startTrackingAppLifeCycle()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(checkLinkWebClick), name: UIApplication.willEnterForegroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(matchingWebLinkClick), name: UIApplication.willEnterForegroundNotification, object: nil)
         
         /// Loading pending events from last app sessions and send to backend in low prority thread
         let pendingEventFiles = try? FileStorage.listFiles(in: appDirectory).filter({ $0.hasPrefix("events_") })
@@ -158,13 +161,42 @@ class InternalPolarApp: PolarApp {
     //MARK: Link Clicks
     
     @objc
-    private func checkLinkWebClick() {
-        let pastboardTypes = UIPasteboard.general.types;
-        let fingersprints = pastboardTypes
-            .filter({ $0.hasPrefix(PolarConstants.LinkMineTypePrefix) })
-            .map({ $0[$0.index($0.startIndex, offsetBy: PolarConstants.LinkMineTypePrefix.count + 1)...] })
-        Logger.log("pastboardTypes: \(pastboardTypes)")
-        Logger.log("fingersprints: \(fingersprints)")
+    private func matchingWebLinkClick() {
+        let apiService = apiService
+        Task { [weak self] in
+            do {
+                while self?.isHandlingOpenUrl == true {
+                    try await Task.sleep(nanoseconds: 1_000_000_000)
+                }
+                
+                guard
+                    let ip = try await apiService.getClientIP(),
+                    let fingerprint = await self?.fingerprintGenerator.generateFingerprint(ip: ip),
+                    let linkClickedResponse = try await apiService.matchLinkClick(fingerprint: fingerprint)
+                else {
+                    throw Errors.with(message: "matchingWebLinkClick failed: Internal SERVER error.")
+                }
+                
+                guard let linkClick = linkClickedResponse.linkClick, !linkClick.sdkUsed else {
+                    Logger.rlog("[WARN] matchingWebLinkClick completed: No matching found!")
+                    return
+                }
+                
+                var linkUrlString = linkClick.url
+                if !linkUrlString.hasPrefix("http://") || !linkUrlString.hasPrefix("https://") {
+                    linkUrlString = "https://" + linkUrlString
+                }
+                
+                guard let linkUrl = URL(string: linkUrlString), let (subDomain, slug) = Formatter.validateSupportingURL(linkUrl) else {
+                    throw Errors.with(message: "matchingWebLinkClick failed: invalid or unsupported url `\(linkClick.url)`")
+                }
+                
+                await self?.handleOpenningURL(linkUrl, subDomain: subDomain, slug: slug, clickUnid: linkClick.unid)
+                
+            }catch let error {
+                Logger.rlog("[ERROR]⛔️ \(error)")
+            }
+        }
     }
     
     private func handleOpenningURL(_ openningURL: URL, subDomain: String, slug: String, clickUnid: String?) async {
@@ -215,7 +247,11 @@ class InternalPolarApp: PolarApp {
         switch activity.activityType {
         case NSUserActivityTypeBrowsingWeb:
             if let url = activity.webpageURL, let (subDomain, slug) = Formatter.validateSupportingURL(url) {
-                Task { await handleOpenningURL(url, subDomain: subDomain, slug: slug, clickUnid: nil) }
+                isHandlingOpenUrl = true
+                Task { @MainActor [weak self] in
+                    await self?.handleOpenningURL(url, subDomain: subDomain, slug: slug, clickUnid: nil)
+                    self?.isHandlingOpenUrl = false
+                }
                 return true
             }
             
@@ -240,7 +276,11 @@ class InternalPolarApp: PolarApp {
             return false
         }
         
-        Task { await handleOpenningURL(httpsUrl, subDomain: subDomain, slug: slug, clickUnid: clickId) }
+        isHandlingOpenUrl = true
+        Task { @MainActor [weak self] in
+            await self?.handleOpenningURL(httpsUrl, subDomain: subDomain, slug: slug, clickUnid: clickId)
+            self?.isHandlingOpenUrl = false
+        }
         return true
     }
 }

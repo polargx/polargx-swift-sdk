@@ -3,11 +3,14 @@ import Foundation
 
 class APIService {
     let server: String
+    let appLinkServer: String
     var defaultHeaders: [String: String] = [:]
 
-    init(server: String) {
-        self.server = server
+    init(configuration: EnvConfigrationDescribe) {
+        self.server = configuration.server
+        self.appLinkServer = configuration.appLinkServer
         assert(!server.hasSuffix("/"), "Invalid server")
+        assert(!appLinkServer.hasSuffix("/"), "Invalid appLinkServer")
     }
     
     private lazy var session = URLSession(configuration: .default)
@@ -34,7 +37,7 @@ class APIService {
             throw Errors.with(message: "Invalid url!")
         }
         
-        return try await _request(
+        return try await request(
             method: method,
             url: url,
             headers: headers,
@@ -46,7 +49,7 @@ class APIService {
     }
     
     
-    private func _request<RO: Decodable>(
+    func request<RO: Decodable>(
         method: HTTPMethod,
         url: URL,
         headers: [String: String],
@@ -100,11 +103,12 @@ class APIService {
     private func logSuccess(request: URLRequest, response: URLResponse, responseData: Data?) {
         if PolarApp.isLoggingEnabled {
             lazy var method = request.httpMethod ?? ""
-            lazy var path = (request.url?.absoluteString).flatMap({ $0[$0.index($0.startIndex, offsetBy: server.count)...] }) ?? ""
+            lazy var url = request.url?.absoluteString ?? ""
+            lazy var path = url.hasPrefix(server) ? url[url.index(url.startIndex, offsetBy: server.count)...] : nil
             lazy var statusCode = (response as? HTTPURLResponse)?.statusCode ?? -1
             lazy var requestBodyString = request.httpBody.flatMap({ String(data: $0, encoding: .utf8) }) ?? "<<empty>>"
             lazy var responseDataString = responseData.flatMap({ String(data: $0, encoding: .utf8) })?.replacingOccurrences(of: "\n", with: "") ?? ""
-            print("[\(Configuration.Brand)][API]🌐 \(method) \(path) [\(statusCode)] 💚 -B \(requestBodyString) ➡️ \(responseDataString)")
+            print("[\(Configuration.Brand)][API]🌐 \(method) \(path ?? url[url.startIndex..<url.endIndex]) [\(statusCode)] 💚 -B \(requestBodyString) ➡️ \(responseDataString)")
         }
     }
     
