@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
       s.author              = { "Bohemian Innovation LLC" => "ift@bohemian.cc" }
 
       s.platform            = :ios, "15.0"
-      s.source              = { :git => "git@github.com:infinitech-dev/LinkAttribution-SwiftSDK.git", :tag => s.version }
+      s.source              = { :git => "git@github.com:polargx/polargx-swift-sdk.git", :tag => s.version }
       s.source_files        = "PolarGX-SDK/Classes/**/*.{h,m,swift}"
       
       s.pod_target_xcconfig = {
