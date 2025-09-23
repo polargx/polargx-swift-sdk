@@ -229,6 +229,10 @@ class InternalPolarApp: PolarApp {
 
     //MARK: PolarApp methods
     
+    override var currentUserID: String? {
+        return currentUserSession?.userID
+    }
+    
     @objc public override func updateUser(userID: String?, attributes: [String: Any]?) {
         setUser(userID: userID, attributes: attributes)
     }
@@ -304,6 +308,7 @@ public class PolarApp: NSObject {
         _shared = InternalPolarApp(appId: appId, apiKey: apiKey, onLinkClickHandler: onLinkClickHandler)
     }
     
+    @objc public var currentUserID: String? { nil }
     @objc public func updateUser(userID: String?, attributes: [String: Any]?) {}
     @objc public func setPushToken(deviceToken: Data?, fcmToken: String?) {}
     @objc public func trackEvent(name: String, attributes: [String: Any]) { }

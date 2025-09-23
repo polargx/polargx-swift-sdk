@@ -1,5 +1,5 @@
 PODS:
-  - PolarGX (0.1.0)
+  - PolarGX (1.0.0)
 
 DEPENDENCIES:
   - PolarGX (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  PolarGX: 345cff894a002929447e54f6e322be8e0adf80fa
+  PolarGX: 6cb5c383666e7925753594f689cdc2d2c8a76935
 
 PODFILE CHECKSUM: 67827dd53e94da970836222e39595afe65f263eb
 
