@@ -10,6 +10,9 @@
    <FileRef
       location = "container:../PolarGX.podspec">
    </FileRef>
+   <FileRef
+      location = "container:../Package.swift">
+   </FileRef>
    <Group
       location = "container:../Tools"
       name = "Tools">

@@ -312,6 +312,9 @@ public class PolarApp: NSObject {
     @objc public func updateUser(userID: String?, attributes: [String: Any]?) {}
     @objc public func setPushToken(deviceToken: Data?, fcmToken: String?) {}
     @objc public func trackEvent(name: String, attributes: [String: Any]) { }
+    
+    @discardableResult
     @objc public func continueUserActivity(_ activity: NSUserActivity) -> Bool { false }
+    @discardableResult
     @objc public func openUrl(_ url: URL) -> Bool { false }
 }
