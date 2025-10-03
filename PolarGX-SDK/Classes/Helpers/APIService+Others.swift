@@ -16,7 +16,7 @@ extension APIService {
     
     func getClientIP() async throws -> String? {
         do {
-            let (ipifyData, ipifyResponse) = try await URLSession(configuration: .default).data(for: URLRequest(url: URL(string: "https://api6.ipify.org/")!))
+            let (ipifyData, ipifyResponse) = try await URLSession(configuration: .default).data(for: URLRequest(url: URL(string: "https://api64.ipify.org/")!))
             guard let status = (ipifyResponse as? HTTPURLResponse)?.statusCode, status >= 200, status <= 299 else {
                 throw Errors.with(message: "Failed with response: \(ipifyResponse)")
             }
