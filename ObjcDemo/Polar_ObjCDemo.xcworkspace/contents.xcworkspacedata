@@ -11,6 +11,9 @@
       location = "container:../PolarGX.podspec">
    </FileRef>
    <FileRef
+      location = "container:../Package.swift">
+   </FileRef>
+   <FileRef
       location = "container:../PolarGX-SDK/PolarGX.xcodeproj">
    </FileRef>
    <Group
