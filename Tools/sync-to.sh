@@ -11,6 +11,9 @@ else
     exit 1
 fi
 
+#cd "${SRCROOT}/.." && echo "cd: $(pwd) to replace..." &&
+echo "Current Dir: $(pwd)"
+
 # Copy PolarGX-SDK files
 rm -rf "${DEST_DIR}/polargx-swift-sdk.lib" && mkdir -p "${DEST_DIR}/polargx-swift-sdk.lib" &&
 cp -R ./PolarGX-SDK "${DEST_DIR}/polargx-swift-sdk.lib/" &&

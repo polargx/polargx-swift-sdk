@@ -12,6 +12,9 @@ actor UserSession {
     private var isValid = true
     
     private var attributes = [String: Any]()
+    private var attributesVersion: UInt64 = 0
+    private var attributesIsSending = false
+    
     private var pendingRegisterPushToken: (apns: String?, fcm: String?)?
     private var lastRegisteredAPNSToken: String?
     private var lastRegisteredFCMToken: String?
@@ -26,11 +29,16 @@ actor UserSession {
     }
     
     /// Keep all user attributes for next sending. I don't make sure server supports to merging existing user attributes and the new attributues
+    /// First setAttributes/user session will be send immediately
     func setAttributes(_ attributes: [String: Any]) {
         guard isValid else { return }
+        
+        let immediateSend = self.attributesVersion == 0
+        self.attributes = self.attributes.merging(attributes, uniquingKeysWith: { $1 })
+        self.attributesVersion += 1
+        
         Task {
-            self.attributes = self.attributes.merging(attributes, uniquingKeysWith: { $1 })
-            await startToUpdateUser()
+            await startToUpdateUser(immediate: immediateSend)
         }
     }
     
@@ -56,38 +64,69 @@ actor UserSession {
     /// Sending user attributes and user id to backend. This API call will create an user if need. After succesful, we need to make `trackingEventQueue` to be ready and sending events if needed.
     /// Stop sending retrying process if server retuns status code #403.
     /// Retry when network connection issue, server returns status code #400 ...
-    private func startToUpdateUser() async {
-        var submitError: Error? = nil
+    private func startToUpdateUser(immediate: Bool) async {
+        //Make sure once startToUpdateUser running per user session
+        guard !attributesIsSending else {
+            return;
+        }
+        attributesIsSending = true
         
+        var immediate = immediate
+        var retry = false
+        var submitError: Error? = nil
+
         repeat {
+            retry = false
             submitError = nil
+
             do {
+                //Delay for collecting enough information - prevent multiple api calls
+                //Use the newest attributes at time the API calls.
+                //After successful, compare sent attributes version with the newest attributes version to decide run the sending again.
+                
+                if submitError != nil {
+                    try? await Task.sleep(nanoseconds: 1_000_0000_000)
+                }else if !immediate {
+                    try await Task.sleep(nanoseconds: PolarApp.minimumIntervalForSendingUserAttributes)
+                }
+                let attributesVersion = self.attributesVersion
                 let attributes = self.attributes
                 let user = UpdateUserModel(organizationUnid: organizationUnid, userID: userID, data: attributes)
                 try await apiService.updateUser(user)
+                submitError = nil;
+                
+                if attributesVersion != self.attributesVersion {
+                    immediate = false
+                    retry = true
+                }
                 
             }catch let error {
                 if error.apiError?.httpStatus == 403 {
                     Logger.rlog("UpdateUser: ⛔️⛔️⛔️ INVALID appId OR apiKey! ⛔️⛔️⛔️")
-                    submitError = nil
+                    submitError = error
+                    retry = false
                     
                 }else if error is EncodingError {
                     Logger.rlog("UpdateUser: ⛔️⛔️⛔️ failed + stopped ⛔️: \(error)")
-                    submitError = nil
+                    submitError = error
+                    retry = false
                     
                 }else{
                     Logger.log("UpdateUser: failed ⛔️ + retrying 🔁: \(error)")
-                    try? await Task.sleep(nanoseconds: 1_000_0000_000)
                     submitError = error
+                    retry = true
                 }
             }
             
-        }while submitError != nil
+        }while retry
         
         if submitError == nil {
             await trackingEventQueue.setReady()
             await trackingEventQueue.sendEventsIfNeeded()
         }
+        
+        //Mark startToUpdateUser is not running
+        attributesIsSending = false
     }
     
     /// Stop sending retrying process if server retuns status code #403.

@@ -34,7 +34,9 @@ class InternalPolarApp: PolarApp {
         
         super.init()
         
-        self.pendingEvents.reserveCapacity(Self.PendingEventsCapacity)
+        Logger.initialTime = .init()
+        
+        self.pendingEvents.reserveCapacity(Self.pendingEventsCapacity)
         self.startInitializingApp()
     }
     
@@ -75,7 +77,7 @@ class InternalPolarApp: PolarApp {
                 
                 events = pendingEvents;
                 pendingEvents = []
-                pendingEvents.reserveCapacity(Self.PendingEventsCapacity)
+                pendingEvents.reserveCapacity(Self.pendingEventsCapacity)
                 
                 currentUserSession = UserSession(organizationUnid: appId, userID: userID, apiService: apiService, trackingStorageURL: fileUrl)
             }
@@ -107,7 +109,7 @@ class InternalPolarApp: PolarApp {
                 }
                 
             }else{
-                if pendingEvents.count == Self.PendingEventsCapacity {
+                if pendingEvents.count == Self.pendingEventsCapacity {
                     pendingEvents.removeFirst()
                 }
                 pendingEvents.append((name, date, attributes))
@@ -293,7 +295,8 @@ class InternalPolarApp: PolarApp {
 @objc
 public class PolarApp: NSObject {
     @objc public static var isLoggingEnabled = true
-    @objc public static var PendingEventsCapacity = 100
+    @objc public static var pendingEventsCapacity = 100
+    @objc public static var minimumIntervalForSendingUserAttributes: UInt64 = 1_000_000_000
 
     private static var _shared: PolarApp?
     @objc public static var shared: PolarApp {

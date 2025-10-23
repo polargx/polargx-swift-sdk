@@ -58,6 +58,8 @@ class APIService {
         logResult: Bool,
         result: RO.Type
     ) async throws -> RO? {
+        let startTime = Logger.initialTime.currentIntervalString()
+        
         guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
             throw Errors.unexpectedError()
         }
@@ -79,14 +81,14 @@ class APIService {
         let responseStatus = (response as? HTTPURLResponse)?.statusCode
                 
         guard let responseStatus = responseStatus else {
-            logFailure(request: urlRequest, response: response, responseData: data)
+            logFailure(request: urlRequest, response: response, responseData: data, startTime: startTime)
             throw Errors.unexpectedError()
         }
         
         let responseObject = try decoder.decode(APIResponseModel<RO>.self, from: data)
 
         guard responseStatus == 200 && responseObject.error == nil else {
-            logFailure(request: urlRequest, response: response, responseData: data)
+            logFailure(request: urlRequest, response: response, responseData: data, startTime: startTime)
             var apiError = responseObject.error ?? APIErrorResponse(
                 code: "-1",
                 message: "Unknown error!",
@@ -96,11 +98,11 @@ class APIService {
             throw Errors.apiError(apiError)
         }
         
-        logSuccess(request: urlRequest, response: response, responseData: logResult ? data : nil)
+        logSuccess(request: urlRequest, response: response, responseData: logResult ? data : nil, startTime: startTime)
         return responseObject.data
     }
     
-    private func logSuccess(request: URLRequest, response: URLResponse, responseData: Data?) {
+    private func logSuccess(request: URLRequest, response: URLResponse, responseData: Data?, startTime: String) {
         if PolarApp.isLoggingEnabled {
             lazy var method = request.httpMethod ?? ""
             lazy var url = request.url?.absoluteString ?? ""
@@ -108,11 +110,12 @@ class APIService {
             lazy var statusCode = (response as? HTTPURLResponse)?.statusCode ?? -1
             lazy var requestBodyString = request.httpBody.flatMap({ String(data: $0, encoding: .utf8) }) ?? "<<empty>>"
             lazy var responseDataString = responseData.flatMap({ String(data: $0, encoding: .utf8) })?.replacingOccurrences(of: "\n", with: "") ?? ""
-            print("[\(Configuration.Brand)][API]🌐 \(method) \(path ?? url[url.startIndex..<url.endIndex]) [\(statusCode)] 💚 -B \(requestBodyString) ➡️ \(responseDataString)")
+            let endTime = Logger.initialTime.currentIntervalString()
+            print("\(startTime)-\(endTime)-[\(Configuration.Brand)][API]🌐 \(method) \(path ?? url[url.startIndex..<url.endIndex]) [\(statusCode)] 💚 -B \(requestBodyString) ➡️ \(responseDataString)")
         }
     }
     
-    private func logFailure(request: URLRequest, response: URLResponse, responseData: Data?) {
+    private func logFailure(request: URLRequest, response: URLResponse, responseData: Data?, startTime: String) {
         if PolarApp.isLoggingEnabled {
             lazy var method = request.httpMethod ?? ""
             lazy var server = (request.url?.absoluteString) ?? "<<none>>"
@@ -120,7 +123,8 @@ class APIService {
             lazy var requestHeaderString = request.allHTTPHeaderFields?.map{ "-H \($0.key): \($0.value)" }.joined(separator: " ") ?? "<<none>>"
             lazy var requestBodyString = request.httpBody.flatMap({ String(data: $0, encoding: .utf8) }) ?? "<<none>>"
             lazy var responseDataString = responseData.flatMap({ String(data: $0, encoding: .utf8) })?.replacingOccurrences(of: "\n", with: "") ?? ""
-            print("[\(Configuration.Brand)][API]🌐 \(method) \(server) [\(statusCode)] ❤️ \(requestHeaderString) -B \(requestBodyString) ➡️ \(responseDataString)")
+            let endTime = Logger.initialTime.currentIntervalString()
+            print("\(startTime)-\(endTime)-[\(Configuration.Brand)][API]🌐 \(method) \(server) [\(statusCode)] ❤️ \(requestHeaderString) -B \(requestBodyString) ➡️ \(responseDataString)")
         }
     }
 }
