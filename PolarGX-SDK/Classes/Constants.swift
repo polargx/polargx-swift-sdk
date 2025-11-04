@@ -10,6 +10,7 @@ internal struct PolarConstants {
 public struct PolarEventKey {
     public static let Email: String = "email"
     public static let Name: String = "name"
-    public static let FirstName: String = "firstName"
-    public static let LastName: String = "lastName"
+    public static let FirstName: String = "firstname"
+    public static let LastName: String = "lastname"
+    public static let phone: String = "phone"
 }

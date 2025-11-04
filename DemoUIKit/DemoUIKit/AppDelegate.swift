@@ -41,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         for i in 1...1 {
-            DispatchQueue.main.asyncAfter(deadline: .now() + TimeInterval(i)/1, execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + TimeInterval(i)/10, execute: {
                 PolarApp.shared.trackEvent(name: "DL event", attributes: [
                     "datap1": [
                         "datasub1": i,
