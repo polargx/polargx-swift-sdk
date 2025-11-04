@@ -10,6 +10,8 @@ actor TrackingEventQueue {
     
     private lazy var encoder = JSONEncoder()
     
+    private var scheduledRetrySendingEventsWorkItem: DispatchWorkItem?
+    
     /// Fetch unsent events from fileUrl
     init(fileUrl: URL, apiService: APIService) {
         self.fileUrl = fileUrl
@@ -69,33 +71,44 @@ actor TrackingEventQueue {
             return
         }
         
+        scheduledRetrySendingEventsWorkItem?.cancel()
         isRunning = true
         
         while let event = willPop() {
             do {
                 try await apiService.trackEvent(event)
+                pop()
                 
-            }catch let error where error is URLError { //Network error: stop sending, keep elements
+            }catch let error where error is URLError { //Network error: stop sending, schedule to retry
                 Logger.log("Tracking: failed ⛔️ + stopped ⛔️: \(error)")
+                scheduleTaskToRetrySendingEvents(duration: 5_000_000_000) //5s
+                break
+                
+            }catch let error where error is EncodingError { //Encoding error: stop sending, schedule to retry
+                Logger.log("Tracking: failed ⛔️ + stopped ⛔️: \(error)")
+                scheduleTaskToRetrySendingEvents(duration: PolarConstants.DeplayToRetryAPIRequestIfServerError) //5m
                 break
                 
             }catch let error {
-                if let status = error.apiError?.httpStatus, status >= 500 {  //Server error: stop sending, keep elements saved in the disk
-                    Logger.log("Tracking: failed ⛔️ + stopped ⛔️: \(error)")
-                    break
-                }
-                
-                else if error is EncodingError {
-                    Logger.log("Tracking: failed ⛔️ + stopped ⛔️: \(error)")
-                    break
-                }
-                
-                //Server error: ignore element and send next one.
-                Logger.log("Tracking: failed ⛔️ + next 🔁: \(error)")
+                Logger.log("Tracking: failed ⛔️ + stopped ⛔️: \(error)")
+                scheduleTaskToRetrySendingEvents(duration: PolarConstants.DeplayToRetryAPIRequestIfServerError) //5m
+                break
             }
-            pop()
         }
 
         isRunning = false
+    }
+    
+    /// Schedule to retry sending events with sepecified time.
+    /// If call `sendEventsIfNeeded` during the wait time, `sendEventsIfNeeded` will be continue and cancel this scheduing.
+    func scheduleTaskToRetrySendingEvents(duration: UInt64) {
+        let newWorkItem = DispatchWorkItem { [weak self] in
+            Task {
+                await self?.sendEventsIfNeeded()
+            }
+        }
+        scheduledRetrySendingEventsWorkItem?.cancel()
+        scheduledRetrySendingEventsWorkItem = newWorkItem
+        DispatchQueue.global().asyncAfter(wallDeadline: .now() + Double(duration)/1_000_000_000 + 0.1, execute: newWorkItem)
     }
 }

@@ -9,7 +9,7 @@ extension APIService {
             path: "/api/v1/links/resolve",
             headers: [:],
             queries: ["domain": domain, "slug": slug],
-            body: nil,
+            body: {nil},
             result: LinkDataResponseModel.self
         )?.sdkLinkData
     }
@@ -21,7 +21,7 @@ extension APIService {
             path: "/api/v1/links/clicks",
             headers: [:],
             queries: [:],
-            body: click,
+            body: {click},
             result: LinkClickResponseModel.self
         )?.linkClick
     }
@@ -33,7 +33,7 @@ extension APIService {
             path: "/api/v1/links/clicks/\(clickUnid)",
             headers: [:],
             queries: [:],
-            body: ["SdkUsed": sdkUsed],
+            body: {["SdkUsed": sdkUsed]},
             logResult: false,
             result: EmptyModel.self
         )
@@ -46,7 +46,7 @@ extension APIService {
             path: "/api/v1/links/clicks/match",
             headers: [:],
             queries: ["fingerprint": fingerprint],
-            body: nil,
+            body: {nil},
             logResult: true,
             result: LinkClickResponseModel.self
         )

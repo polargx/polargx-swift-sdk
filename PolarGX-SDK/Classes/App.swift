@@ -146,6 +146,8 @@ class InternalPolarApp: PolarApp {
         for file in pendingEventFiles ?? [] {
             let fileUrl = appDirectory.file(name: file)
             let eventQueue = TrackingEventQueue(fileUrl: fileUrl, apiService: apiService)
+            let eventCount = await eventQueue.events.count
+            Logger.log("startResolvingPendingEvents: \(eventCount) in \(file)")
             if await eventQueue.events.isEmpty {
                 try? FileStorage.remove(file: file, in: appDirectory)
                 continue
@@ -296,7 +298,6 @@ class InternalPolarApp: PolarApp {
 public class PolarApp: NSObject {
     @objc public static var isLoggingEnabled = true
     @objc public static var pendingEventsCapacity = 100
-    @objc public static var minimumIntervalForSendingUserAttributes: UInt64 = 1_000_000_000
 
     private static var _shared: PolarApp?
     @objc public static var shared: PolarApp {

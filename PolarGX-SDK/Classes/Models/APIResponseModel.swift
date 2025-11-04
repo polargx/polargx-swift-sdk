@@ -9,9 +9,9 @@ struct APIResponseModel<DATA: Decodable>: Decodable {
 
 struct APIErrorResponse: Decodable {
     var httpStatus: Int!
-    let code: String
+    let code: String?
     let message: String
-    let statusCode: Int
+    let statusCode: Int?
     
     enum CodingKeys: CodingKey {
         case code

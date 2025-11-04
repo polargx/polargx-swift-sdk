@@ -26,9 +26,9 @@ struct Errors {
     static func apiError(_ error: APIErrorResponse) -> Error {
         return NSError(
             domain: ErrorDomain,
-            code: error.statusCode,
+            code: error.statusCode ?? -1,
             userInfo: [
-                NSLocalizedDescriptionKey: error.message + " #\(error.code)",
+                NSLocalizedDescriptionKey: error.message + " #\(error.code ?? "NaN")",
                 "\(Configuration.Brand)APIError": error
             ]
         ) as Error

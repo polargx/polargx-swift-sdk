@@ -8,7 +8,7 @@ extension APIService {
             url: URL(string: appLinkServer + "/api/client-info")!,
             headers: [:],
             queries: [:],
-            body: nil,
+            body: {nil},
             logResult: false,
             result: ClientInfoModel.self
         )

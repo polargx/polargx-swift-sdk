@@ -14,11 +14,12 @@ actor UserSession {
     private var attributes = [String: Any]()
     private var attributesVersion: UInt64 = 0
     private var attributesIsSending = false
+    private var scheduledRetryUpdatingUserWorkItem: DispatchWorkItem?
     
     private var pendingRegisterPushToken: (apns: String?, fcm: String?)?
     private var lastRegisteredAPNSToken: String?
     private var lastRegisteredFCMToken: String?
-    
+
     lazy var trackingEventQueue = TrackingEventQueue(fileUrl: trackingStorageURL, apiService: apiService)
     
     init(organizationUnid: String, userID: String, apiService: APIService, trackingStorageURL: URL) {
@@ -61,6 +62,10 @@ actor UserSession {
         }
     }
     
+    private func getAttributes() -> (attributes: [String: Any], version: UInt64) {
+        return (attributes, attributesVersion)
+    }
+    
     /// Sending user attributes and user id to backend. This API call will create an user if need. After succesful, we need to make `trackingEventQueue` to be ready and sending events if needed.
     /// Stop sending retrying process if server retuns status code #403.
     /// Retry when network connection issue, server returns status code #400 ...
@@ -69,9 +74,11 @@ actor UserSession {
         guard !attributesIsSending else {
             return;
         }
+        
+        scheduledRetryUpdatingUserWorkItem?.cancel();
         attributesIsSending = true
         
-        var immediate = immediate
+        var waitTime: UInt64 = immediate ? 0 : PolarConstants.DeplayToUpdateProfileDuration
         var retry = false
         var submitError: Error? = nil
 
@@ -83,38 +90,51 @@ actor UserSession {
                 //Delay for collecting enough information - prevent multiple api calls
                 //Use the newest attributes at time the API calls.
                 //After successful, compare sent attributes version with the newest attributes version to decide run the sending again.
+                try? await Task.sleep(nanoseconds: waitTime)
                 
-                if submitError != nil {
-                    try? await Task.sleep(nanoseconds: 1_000_0000_000)
-                }else if !immediate {
-                    try await Task.sleep(nanoseconds: PolarApp.minimumIntervalForSendingUserAttributes)
-                }
-                let attributesVersion = self.attributesVersion
-                let attributes = self.attributes
-                let user = UpdateUserModel(organizationUnid: organizationUnid, userID: userID, data: attributes)
-                try await apiService.updateUser(user)
+                var attributesVersion: UInt64? = nil
+                try await apiService.updateUser({ [weak self] in
+                    guard let self = self else { throw Errors.unexpectedError() }
+                    
+                    let (organizationUnid, userID, attributes, version) = await (
+                        self.organizationUnid,
+                        self.userID,
+                        self.attributes,
+                        self.attributesVersion
+                    )
+                    attributesVersion = version
+                    return UpdateUserModel(organizationUnid: organizationUnid, userID: userID, data: attributes)
+                })
                 submitError = nil;
                 
                 if attributesVersion != self.attributesVersion {
-                    immediate = false
+                    waitTime = PolarConstants.DeplayToUpdateProfileDuration;
                     retry = true
                 }
                 
+            }catch let error where error is URLError { //Network error: stop sending, schedule to retry
+                Logger.log("UpdateUser: failed ⛔️ + stopped ⛔️: \(error)")
+                submitError = error
+                scheduleTaskToRetryUpdatingUser(duration: 5_000_000_000) //5s
+                retry = false
+                
+            }catch let error where error is EncodingError { //Encoding error: stop sending, schedule to retry
+                Logger.log("UpdateUser: failed ⛔️ + stopped ⛔️: \(error)")
+                submitError = error
+                scheduleTaskToRetryUpdatingUser(duration: PolarConstants.DeplayToRetryAPIRequestIfServerError) //5m
+                retry = false
+                
             }catch let error {
+                submitError = error
+
                 if error.apiError?.httpStatus == 403 {
                     Logger.rlog("UpdateUser: ⛔️⛔️⛔️ INVALID appId OR apiKey! ⛔️⛔️⛔️")
-                    submitError = error
-                    retry = false
-                    
-                }else if error is EncodingError {
-                    Logger.rlog("UpdateUser: ⛔️⛔️⛔️ failed + stopped ⛔️: \(error)")
-                    submitError = error
                     retry = false
                     
                 }else{
-                    Logger.log("UpdateUser: failed ⛔️ + retrying 🔁: \(error)")
-                    submitError = error
-                    retry = true
+                    Logger.log("UpdateUser: failed ⛔️ + stopped ⛔️: \(error)")
+                    scheduleTaskToRetryUpdatingUser(duration: PolarConstants.DeplayToRetryAPIRequestIfServerError) //5m
+                    retry = false
                 }
             }
             
@@ -129,6 +149,19 @@ actor UserSession {
         attributesIsSending = false
     }
     
+    /// Schedule to retry sending events with sepecified time.
+    /// If call `startToUpdateUser` during the wait time, `startToUpdateUser` will be continue and cancel this scheduing.
+    func scheduleTaskToRetryUpdatingUser(duration: UInt64) {
+        let newWorkItem = DispatchWorkItem { [weak self] in
+            Task {
+                await self?.startToUpdateUser(immediate: false)
+            }
+        }
+        scheduledRetryUpdatingUserWorkItem?.cancel()
+        scheduledRetryUpdatingUserWorkItem = newWorkItem
+        DispatchQueue.global().asyncAfter(wallDeadline: .now() + Double(duration)/1_000_000_000, execute: newWorkItem)
+    }
+    
     /// Stop sending retrying process if server retuns status code #403.
     /// Retry when network connection issue, server returns status code #400 ...
     private func startToRegisterPushToken() async {
@@ -140,12 +173,12 @@ actor UserSession {
                 let registeringPushToken = self.pendingRegisterPushToken
                 if let token = registeringPushToken?.apns {
                     let apns = RegisterAPNSModel(organizationUnid: organizationUnid, userID: userID, deviceToken: token)
-                    try await apiService.registerAPNS(apns)
+                    try await apiService.registerAPNS({apns})
                     lastRegisteredAPNSToken = token
                     
                 }else if let token = registeringPushToken?.fcm {
                     let fcm = RegisterFCMModel(organizationUnid: organizationUnid, userID: userID, fcmToken: token)
-                    try await apiService.registerFCM(fcm)
+                    try await apiService.registerFCM({fcm})
                     lastRegisteredFCMToken = token
                 }
                 
@@ -186,14 +219,14 @@ actor UserSession {
             do {
                 if let token = lastRegisteredAPNSToken {
                     let apns = DeregisterAPNSModel(organizationUnid: organizationUnid, userID: userID, deviceToken: token)
-                    try await apiService.deregisterAPNS(apns)
+                    try await apiService.deregisterAPNS({apns})
                     lastRegisteredAPNSToken = nil
                     
                 }
                 
                 if let token = lastRegisteredFCMToken {
                     let fcm = DeregisterFCMModel(organizationUnid: organizationUnid, userID: userID, fcmToken: token)
-                    try await apiService.deregisterFCM(fcm)
+                    try await apiService.deregisterFCM({fcm})
                     lastRegisteredFCMToken = nil
                 }
                 

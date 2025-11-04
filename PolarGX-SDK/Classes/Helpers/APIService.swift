@@ -5,7 +5,9 @@ class APIService {
     let server: String
     let appLinkServer: String
     var defaultHeaders: [String: String] = [:]
-
+    
+    private var locker = ThLocker()
+    
     init(configuration: EnvConfigrationDescribe) {
         self.server = configuration.server
         self.appLinkServer = configuration.appLinkServer
@@ -28,7 +30,7 @@ class APIService {
         path: String,
         headers: [String: String],
         queries: [String: String],
-        body: Encodable?,
+        body: () async throws -> Encodable?,
         logResult: Bool = true,
         result: RO.Type
     ) async throws -> RO? {
@@ -54,10 +56,14 @@ class APIService {
         url: URL,
         headers: [String: String],
         queries: [String: String],
-        body: Encodable?,
+        body: () async throws -> Encodable?,
         logResult: Bool,
-        result: RO.Type
+        result: RO.Type,
     ) async throws -> RO? {
+        await locker.waitForUnlock()
+        
+        let number = Int.random(in: 10000..<100000)
+        
         let startTime = Logger.initialTime.currentIntervalString()
         
         guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
@@ -67,42 +73,57 @@ class APIService {
         guard let url = urlComponents.url else {
             throw Errors.unexpectedError()
         }
-                
-        var urlRequest = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 20)
-        urlRequest.httpMethod = method.rawValue
-        urlRequest.httpBody = try body.flatMap({ try encoder.encode($0) })
+        
+        var retry: Bool
+        repeat {
+            retry = false
+            
+            var urlRequest = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 20)
+            urlRequest.httpMethod = method.rawValue
+            urlRequest.httpBody = try await body().flatMap({ try encoder.encode($0) })
 
-        var headers = defaultHeaders.merging(headers, uniquingKeysWith: { $1 })
-        headers["Content-Type"] = "application/json"
-        headers["Content-Length"] = "\(urlRequest.httpBody?.count ?? 0)"
-        urlRequest.allHTTPHeaderFields = headers
-        
-        let (data, response) = try await session.data(for: urlRequest)
-        let responseStatus = (response as? HTTPURLResponse)?.statusCode
-                
-        guard let responseStatus = responseStatus else {
-            logFailure(request: urlRequest, response: response, responseData: data, startTime: startTime)
-            throw Errors.unexpectedError()
-        }
-        
-        let responseObject = try decoder.decode(APIResponseModel<RO>.self, from: data)
+            var headers = defaultHeaders.merging(headers, uniquingKeysWith: { $1 })
+            headers["Content-Type"] = "application/json"
+            headers["Content-Length"] = "\(urlRequest.httpBody?.count ?? 0)"
+            urlRequest.allHTTPHeaderFields = headers
+            
+            let (data, response) = try await session.data(for: urlRequest)
+            let responseStatus = (response as? HTTPURLResponse)?.statusCode
+                    
+            guard let responseStatus = responseStatus else {
+                logFailure(request: urlRequest, response: response, responseData: data, startTime: startTime, number: number)
+                throw Errors.unexpectedError()
+            }
+            
+            let responseObject = try decoder.decode(APIResponseModel<RO>.self, from: data)
+            
+            if responseStatus == 429 {
+                await locker.lock()
+                logWarning(request: urlRequest, response: response, responseData: data, startTime: startTime, number: number)
+                try? await Task.sleep(nanoseconds: PolarConstants.DeplayToRetryAPIRequestIfTimeLimits)
+                await locker.unlock()
+                retry = true
+                continue
+            }
 
-        guard responseStatus == 200 && responseObject.error == nil else {
-            logFailure(request: urlRequest, response: response, responseData: data, startTime: startTime)
-            var apiError = responseObject.error ?? APIErrorResponse(
-                code: "-1",
-                message: "Unknown error!",
-                statusCode: -1
-            )
-            apiError.httpStatus = responseStatus
-            throw Errors.apiError(apiError)
-        }
-        
-        logSuccess(request: urlRequest, response: response, responseData: logResult ? data : nil, startTime: startTime)
-        return responseObject.data
+            guard responseStatus == 200 && responseObject.error == nil else {
+                logFailure(request: urlRequest, response: response, responseData: data, startTime: startTime, number: number)
+                var apiError = responseObject.error ?? APIErrorResponse(
+                    code: "-1",
+                    message: "Unknown error!",
+                    statusCode: -1
+                )
+                apiError.httpStatus = responseStatus
+                throw Errors.apiError(apiError)
+            }
+            
+            logSuccess(request: urlRequest, response: response, responseData: logResult ? data : nil, startTime: startTime, number: number)
+            return responseObject.data
+            
+        }while retry
     }
     
-    private func logSuccess(request: URLRequest, response: URLResponse, responseData: Data?, startTime: String) {
+    private func logSuccess(request: URLRequest, response: URLResponse, responseData: Data?, startTime: String, number: Int) {
         if PolarApp.isLoggingEnabled {
             lazy var method = request.httpMethod ?? ""
             lazy var url = request.url?.absoluteString ?? ""
@@ -111,11 +132,11 @@ class APIService {
             lazy var requestBodyString = request.httpBody.flatMap({ String(data: $0, encoding: .utf8) }) ?? "<<empty>>"
             lazy var responseDataString = responseData.flatMap({ String(data: $0, encoding: .utf8) })?.replacingOccurrences(of: "\n", with: "") ?? ""
             let endTime = Logger.initialTime.currentIntervalString()
-            print("\(startTime)-\(endTime)-[\(Configuration.Brand)][API]🌐 \(method) \(path ?? url[url.startIndex..<url.endIndex]) [\(statusCode)] 💚 -B \(requestBodyString) ➡️ \(responseDataString)")
+            print("\(startTime)-\(endTime)-[\(Configuration.Brand)][API]🌐 #\(number) \(method) \(path ?? url[url.startIndex..<url.endIndex]) [\(statusCode)] 💚 -B \(requestBodyString) ➡️ \(responseDataString)")
         }
     }
     
-    private func logFailure(request: URLRequest, response: URLResponse, responseData: Data?, startTime: String) {
+    private func logFailure(request: URLRequest, response: URLResponse, responseData: Data?, startTime: String, number: Int) {
         if PolarApp.isLoggingEnabled {
             lazy var method = request.httpMethod ?? ""
             lazy var server = (request.url?.absoluteString) ?? "<<none>>"
@@ -124,7 +145,20 @@ class APIService {
             lazy var requestBodyString = request.httpBody.flatMap({ String(data: $0, encoding: .utf8) }) ?? "<<none>>"
             lazy var responseDataString = responseData.flatMap({ String(data: $0, encoding: .utf8) })?.replacingOccurrences(of: "\n", with: "") ?? ""
             let endTime = Logger.initialTime.currentIntervalString()
-            print("\(startTime)-\(endTime)-[\(Configuration.Brand)][API]🌐 \(method) \(server) [\(statusCode)] ❤️ \(requestHeaderString) -B \(requestBodyString) ➡️ \(responseDataString)")
+            print("\(startTime)-\(endTime)-[\(Configuration.Brand)][API]🌐 #\(number) \(method) \(server) [\(statusCode)] ❤️ \(requestHeaderString) -B \(requestBodyString) ➡️ \(responseDataString)")
+        }
+    }
+    
+    private func logWarning(request: URLRequest, response: URLResponse, responseData: Data?, startTime: String, number: Int) {
+        if PolarApp.isLoggingEnabled {
+            lazy var method = request.httpMethod ?? ""
+            lazy var server = (request.url?.absoluteString) ?? "<<none>>"
+            lazy var statusCode = (response as? HTTPURLResponse)?.statusCode ?? -1
+            lazy var requestHeaderString = request.allHTTPHeaderFields?.map{ "-H \($0.key): \($0.value)" }.joined(separator: " ") ?? "<<none>>"
+            lazy var requestBodyString = request.httpBody.flatMap({ String(data: $0, encoding: .utf8) }) ?? "<<none>>"
+            lazy var responseDataString = responseData.flatMap({ String(data: $0, encoding: .utf8) })?.replacingOccurrences(of: "\n", with: "") ?? ""
+            let endTime = Logger.initialTime.currentIntervalString()
+            print("\(startTime)-\(endTime)-[\(Configuration.Brand)][API]🌐 #\(number) \(method) \(server) [\(statusCode)] 💛 \(requestHeaderString) -B \(requestBodyString) ➡️ \(responseDataString)")
         }
     }
 }

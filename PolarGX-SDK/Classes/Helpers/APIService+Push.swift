@@ -3,7 +3,7 @@ import Foundation
 extension APIService {
     
     @discardableResult
-    func registerAPNS(_ apns: RegisterAPNSModel) async throws -> EmptyModel? {
+    func registerAPNS(_ apns: () -> RegisterAPNSModel) async throws -> EmptyModel? {
         return try await request(
             method: .POST,
             path: "/api/v1/users/device-tokens/deregister",
@@ -15,7 +15,7 @@ extension APIService {
     }
     
     @discardableResult
-    func deregisterAPNS(_ apns: DeregisterAPNSModel) async throws -> EmptyModel? {
+    func deregisterAPNS(_ apns: () -> DeregisterAPNSModel) async throws -> EmptyModel? {
         return try await request(
             method: .POST,
             path: "/api/v1/users/device-tokens/register",
@@ -27,7 +27,7 @@ extension APIService {
     }
     
     @discardableResult
-    func registerFCM(_ fcm: RegisterFCMModel) async throws -> EmptyModel? {
+    func registerFCM(_ fcm: () -> RegisterFCMModel) async throws -> EmptyModel? {
         return try await request(
             method: .POST,
             path: "/api/v1/users/fcm-tokens/register",
@@ -39,7 +39,7 @@ extension APIService {
     }
     
     @discardableResult
-    func deregisterFCM(_ fcm: DeregisterFCMModel) async throws -> EmptyModel? {
+    func deregisterFCM(_ fcm: () -> DeregisterFCMModel) async throws -> EmptyModel? {
         return try await request(
             method: .POST,
             path: "/api/v1/users/fcm-tokens/deregister",
