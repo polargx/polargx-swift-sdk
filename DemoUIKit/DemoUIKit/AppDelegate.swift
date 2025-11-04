@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        
         for i in 1...2 {
             DispatchQueue.main.asyncAfter(deadline: .now() + TimeInterval(i)/1, execute: {
-                PolarApp.shared.updateUser(userID: "e1a3cb25-839e-4deb-95b0-2fb8ebd79402", attributes: [
+                PolarApp.shared.updateUser(userID: "e1a3cb25-839e-4deb-95b0-2fb8ebd7941\(i)", attributes: [
                     PolarEventKey.Name: "dl2",
                     PolarEventKey.Email: "dl2@gmail.com",
                     "datap1": [
@@ -39,6 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 ])
             })
         }
+        PolarApp.shared.setPushToken(deviceToken: nil, fcmToken: "fcm-test")
         
         for i in 1...1 {
             DispatchQueue.main.asyncAfter(deadline: .now() + TimeInterval(i)/10, execute: {

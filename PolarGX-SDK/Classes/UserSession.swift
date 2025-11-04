@@ -173,12 +173,22 @@ actor UserSession {
                 let registeringPushToken = self.pendingRegisterPushToken
                 if let token = registeringPushToken?.apns {
                     let apns = RegisterAPNSModel(organizationUnid: organizationUnid, userID: userID, deviceToken: token)
-                    try await apiService.registerAPNS({apns})
+                    try await apiService.registerAPNS({ [weak self] in
+                        if await self?.isValid == true, let r1 = registeringPushToken, let r2 = await self?.pendingRegisterPushToken, r1 == r2 {
+                            return apns
+                        }
+                        throw CancellationError()
+                    })
                     lastRegisteredAPNSToken = token
                     
                 }else if let token = registeringPushToken?.fcm {
                     let fcm = RegisterFCMModel(organizationUnid: organizationUnid, userID: userID, fcmToken: token)
-                    try await apiService.registerFCM({fcm})
+                    try await apiService.registerFCM({ [weak self] in
+                        if await self?.isValid == true, let r1 = registeringPushToken, let r2 = await self?.pendingRegisterPushToken, r1 == r2 {
+                            return fcm
+                        }
+                        throw CancellationError()
+                    })
                     lastRegisteredFCMToken = token
                 }
                 
@@ -199,7 +209,7 @@ actor UserSession {
                     
                 }else{
                     Logger.log("RegisterPushToken: failed ⛔️ + retrying 🔁: \(error)")
-                    try? await Task.sleep(nanoseconds: 1_000_0000_000)
+                    try? await Task.sleep(nanoseconds: 5_000_0000_000)
                     submitError = error
                 }
             }
@@ -241,7 +251,7 @@ actor UserSession {
                     
                 }else{
                     Logger.log("DeregisterPushToken: failed ⛔️ + retrying 🔁: \(error)")
-                    try? await Task.sleep(nanoseconds: 1_000_0000_000)
+                    try? await Task.sleep(nanoseconds: 5_000_0000_000)
                     submitError = error
                 }
             }

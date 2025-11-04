@@ -17,6 +17,7 @@ class InternalPolarApp: PolarApp {
     private var currentUserSession: UserSession?
     private var otherUserSessions = [UserSession]()
     private var pendingEvents = [UntrackedEvent]()
+    private var currentPushToken: (apns: String?, fcm: String?) = (nil, nil)
     
     private var isHandlingOpenUrl = false
     
@@ -71,6 +72,7 @@ class InternalPolarApp: PolarApp {
             }
             
             var events: [UntrackedEvent] = []
+            var pushToken: (apns: String?, fcm: String?)? = nil
             if currentUserSession == nil, let userID = userID {
                 let fileUrl = appDirectory.file(name: "events_\(Date().timeIntervalSince1970)_\(UUID().uuidString).json")
                 Logger.log("TrackingEvents stored in `\(fileUrl.absoluteString)`")
@@ -79,11 +81,17 @@ class InternalPolarApp: PolarApp {
                 pendingEvents = []
                 pendingEvents.reserveCapacity(Self.pendingEventsCapacity)
                 
+                pushToken = currentPushToken
+                
                 currentUserSession = UserSession(organizationUnid: appId, userID: userID, apiService: apiService, trackingStorageURL: fileUrl)
             }
             
             Task {
                 await currentUserSession?.trackEvents(events)
+                if let pushToken = pushToken {
+                    await currentUserSession?.setPushToken(apns: pushToken.apns, fcm: pushToken.fcm)
+                }
+                
                 await currentUserSession?.setAttributes(attributes ?? [:])
             }
         }
@@ -91,6 +99,7 @@ class InternalPolarApp: PolarApp {
     
     private func setPushToken(apns: String?, fcm: String?) {
         Task { @MainActor in
+            currentPushToken = (apns: apns, fcm: fcm)
             if let userSession = currentUserSession {
                 Task {
                     await userSession.setPushToken(apns: apns, fcm: fcm)
