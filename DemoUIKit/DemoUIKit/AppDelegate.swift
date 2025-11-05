@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         PolarApp.isLoggingEnabled = true;
-        PolarApp.initialize(appId: "40b59333-4350-4fc8-a59b-fdcab6bc0274", apiKey: "dev_HkP4KkjQ0i1z3t8BodVfPokPm5x3Qsm5JvrfUcKc") { link, data, error in
+        PolarApp.initialize(appId: "40b59333-4350-4fc8-a59b-fdcab6bc0274", apiKey: "deb_HkP4KkjQ0i1z3t8BodVfPokPm5x3Qsm5JvrfUcKc") { link, data, error in
             print("\n[DEMO] detect clicked: \(link), data: \(data), error: \(error)\n")
         }
         

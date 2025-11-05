@@ -8,6 +8,7 @@ protocol EnvConfigrationDescribe {
     var supportedBaseDomains: [String] { get }
     
     var isDevelopment: Bool { get }
+    var isDebugging: Bool { get }
 }
 
 extension EnvConfigrationDescribe {
@@ -23,6 +24,7 @@ struct ProdEnvConfigutation: EnvConfigrationDescribe {
     var supportedBaseDomains: [String] { ["gxlnk.com"] }
     
     var isDevelopment: Bool { false }
+    var isDebugging: Bool { false }
 }
 
 class DevEnvConfigutation: EnvConfigrationDescribe {
@@ -32,6 +34,11 @@ class DevEnvConfigutation: EnvConfigrationDescribe {
     var supportedBaseDomains: [String] { ["biglittlecookies.com"] }
 
     var isDevelopment: Bool { true }
+    var isDebugging: Bool
+    
+    init(isDebugging: Bool) {
+        self.isDebugging = isDebugging
+    }
 }
 
 struct Configuration {

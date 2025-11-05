@@ -28,7 +28,11 @@ class InternalPolarApp: PolarApp {
         var apiKey = apiKey;
         if apiKey.hasPrefix("dev_") {
             apiKey.removeFirst(4)
-            Configuration.Env = DevEnvConfigutation()
+            Configuration.Env = DevEnvConfigutation(isDebugging: false)
+            
+        }else if apiKey.hasPrefix("deb_") {
+            apiKey.removeFirst(4)
+            Configuration.Env = DevEnvConfigutation(isDebugging: true)
         }
         
         self.appId = appId
