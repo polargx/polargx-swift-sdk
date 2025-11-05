@@ -16,11 +16,8 @@ actor UserSession {
     private var attributesIsSending = false
     private var scheduledRetryUpdatingUserWorkItem: DispatchWorkItem?
     
-    private var pendingRegisterPushToken: (apns: String?, fcm: String?)?
-    private var lastRegisteredAPNSToken: String?
-    private var lastRegisteredFCMToken: String?
-
     lazy var trackingEventQueue = TrackingEventQueue(fileUrl: trackingStorageURL, apiService: apiService)
+    lazy var registerPushWorker = RegisterPushWorker(apiService: apiService)
     
     init(organizationUnid: String, userID: String, apiService: APIService, trackingStorageURL: URL) {
         self.organizationUnid = organizationUnid
@@ -28,6 +25,8 @@ actor UserSession {
         self.apiService = apiService
         self.trackingStorageURL = trackingStorageURL
     }
+    
+    //MARK: Main/Attributes
     
     /// Keep all user attributes for next sending. I don't make sure server supports to merging existing user attributes and the new attributues
     /// First setAttributes/user session will be send immediately
@@ -43,22 +42,14 @@ actor UserSession {
         }
     }
     
-    func setPushToken(apns: String?, fcm: String?) {
-        guard isValid else { return }
-        Task {
-            pendingRegisterPushToken = (apns, fcm)
-            await startToRegisterPushToken()
-        }
-    }
-    
     func invalidate() {
         guard isValid else { return }
         isValid = false
-        
-        Logger.rlog("Invalidate user session: \(userID)")
-        
+                        
         Task {
-            await startToDeregisterPushToken()
+            await trackingEventQueue.setReady(false)
+            await registerPushWorker.setReady(false)
+            Logger.rlog("Invalidate user session: \(userID)")
         }
     }
     
@@ -141,8 +132,11 @@ actor UserSession {
         }while retry
         
         if submitError == nil {
-            await trackingEventQueue.setReady()
+            await trackingEventQueue.setReady(true)
             await trackingEventQueue.sendEventsIfNeeded()
+            
+            await registerPushWorker.setReady(true)
+            await registerPushWorker.startToRegisterPushToken()
         }
         
         //Mark startToUpdateUser is not running
@@ -162,105 +156,30 @@ actor UserSession {
         DispatchQueue.global().asyncAfter(wallDeadline: .now() + Double(duration)/1_000_000_000, execute: newWorkItem)
     }
     
-    /// Stop sending retrying process if server retuns status code #403.
-    /// Retry when network connection issue, server returns status code #400 ...
-    private func startToRegisterPushToken() async {
-        var submitError: Error? = nil
+    //MARK: Register Push
+    
+    //Set push token
+    func setPushToken(_ pushToken: PushToken) async {
+        guard isValid else { return }
         
-        repeat {
-            submitError = nil
-            do {
-                let registeringPushToken = self.pendingRegisterPushToken
-                if let token = registeringPushToken?.apns {
-                    let apns = RegisterAPNSModel(organizationUnid: organizationUnid, userID: userID, deviceToken: token)
-                    try await apiService.registerAPNS({ [weak self] in
-                        if await self?.isValid == true, let r1 = registeringPushToken, let r2 = await self?.pendingRegisterPushToken, r1 == r2 {
-                            return apns
-                        }
-                        throw CancellationError()
-                    })
-                    lastRegisteredAPNSToken = token
-                    
-                }else if let token = registeringPushToken?.fcm {
-                    let fcm = RegisterFCMModel(organizationUnid: organizationUnid, userID: userID, fcmToken: token)
-                    try await apiService.registerFCM({ [weak self] in
-                        if await self?.isValid == true, let r1 = registeringPushToken, let r2 = await self?.pendingRegisterPushToken, r1 == r2 {
-                            return fcm
-                        }
-                        throw CancellationError()
-                    })
-                    lastRegisteredFCMToken = token
-                }
-                
-                if let r1 = registeringPushToken, let r2 = pendingRegisterPushToken, r1 == r2 {
-                    pendingRegisterPushToken = nil
-                }
-                
-                submitError = nil
-                
-            }catch let error {
-                if error.apiError?.httpStatus == 403 {
-                    Logger.rlog("RegisterPushToken: ⛔️⛔️⛔️ INVALID appId OR apiKey! ⛔️⛔️⛔️")
-                    submitError = nil
-                    
-                }else if error is EncodingError {
-                    Logger.rlog("RegisterPushToken: ⛔️⛔️⛔️ failed + stopped ⛔️: \(error)")
-                    submitError = nil
-                    
-                }else{
-                    Logger.log("RegisterPushToken: failed ⛔️ + retrying 🔁: \(error)")
-                    try? await Task.sleep(nanoseconds: 5_000_0000_000)
-                    submitError = error
-                }
-            }
-            
-        }while submitError != nil
-        
-        if !isValid {
-            await startToDeregisterPushToken()
-        }
+        await registerPushWorker.set(
+            RegisterPushModel(
+                organizationUnid: organizationUnid,
+                userUnid: userID,
+                bundleID: await SystemInfo.appBundleId,
+                pushToken: pushToken,
+                data: await SystemInfo.getTrackingDeviceInfo()
+            )
+        )
+        await registerPushWorker.startToRegisterPushToken()
     }
     
-    private func startToDeregisterPushToken() async {
-        var submitError: Error? = nil
-        
-        repeat {
-            submitError = nil
-            do {
-                if let token = lastRegisteredAPNSToken {
-                    let apns = DeregisterAPNSModel(organizationUnid: organizationUnid, userID: userID, deviceToken: token)
-                    try await apiService.deregisterAPNS({apns})
-                    lastRegisteredAPNSToken = nil
-                    
-                }
-                
-                if let token = lastRegisteredFCMToken {
-                    let fcm = DeregisterFCMModel(organizationUnid: organizationUnid, userID: userID, fcmToken: token)
-                    try await apiService.deregisterFCM({fcm})
-                    lastRegisteredFCMToken = nil
-                }
-                
-            }catch let error {
-                if error.apiError?.httpStatus == 403 {
-                    Logger.rlog("DeregisterPushToken: ⛔️⛔️⛔️ INVALID appId OR apiKey! ⛔️⛔️⛔️")
-                    submitError = nil
-                    
-                }else if error is EncodingError {
-                    Logger.rlog("DeregisterPushToken: ⛔️⛔️⛔️ failed + stopped ⛔️: \(error)")
-                    submitError = nil
-                    
-                }else{
-                    Logger.log("DeregisterPushToken: failed ⛔️ + retrying 🔁: \(error)")
-                    try? await Task.sleep(nanoseconds: 5_000_0000_000)
-                    submitError = error
-                }
-            }
-            
-        }while submitError != nil
-    }
+    //MARK: Track Events
     
     /// Track event for user.
     func trackEvents(_ events: [UntrackedEvent]) async {
+        guard isValid else { return }
+        
         await trackingEventQueue.push(
             events.map{
                 TrackEventModel(

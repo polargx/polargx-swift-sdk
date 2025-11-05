@@ -3,50 +3,33 @@ import Foundation
 extension APIService {
     
     @discardableResult
-    func registerAPNS(_ apns: () async throws -> RegisterAPNSModel) async throws -> EmptyModel? {
+    func registerPushToken(_ body: () async throws -> RegisterPushModel) async throws -> EmptyModel? {
         return try await request(
             method: .POST,
-            path: "/api/v1/users/device-tokens/register",
+            path: "/api/v1/users/device-tokens",
             headers: [:],
             queries: [:],
-            body: apns,
+            body: body,
             result: EmptyModel.self
         )
     }
     
     @discardableResult
-    func deregisterAPNS(_ apns: () async throws -> DeregisterAPNSModel) async throws -> EmptyModel? {
+    func deregisterPushToken(_ registerPush: RegisterPushModel) async throws -> EmptyModel? {
         return try await request(
-            method: .POST,
-            path: "/api/v1/users/device-tokens/deregister",
+            method: .DELETE,
+            path: "/api/v1/users/device-tokens",
             headers: [:],
-            queries: [:],
-            body: apns,
+            queries: [
+                "organizationUnid": registerPush.organizationUnid,
+                "userUnid": registerPush.userUnid,
+                "token": registerPush.token,
+                "platform": registerPush.platform,
+                "bundleID": registerPush.bundleID,
+            ],
+            body: {nil},
             result: EmptyModel.self
         )
     }
     
-    @discardableResult
-    func registerFCM(_ fcm: () async throws -> RegisterFCMModel) async throws -> EmptyModel? {
-        return try await request(
-            method: .POST,
-            path: "/api/v1/users/fcm-tokens/register",
-            headers: [:],
-            queries: [:],
-            body: fcm,
-            result: EmptyModel.self
-        )
-    }
-    
-    @discardableResult
-    func deregisterFCM(_ fcm: () async throws -> DeregisterFCMModel) async throws -> EmptyModel? {
-        return try await request(
-            method: .POST,
-            path: "/api/v1/users/fcm-tokens/deregister",
-            headers: [:],
-            queries: [:],
-            body: fcm,
-            result: EmptyModel.self
-        )
-    }
 }

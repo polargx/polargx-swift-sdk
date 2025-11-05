@@ -23,6 +23,7 @@ class APIService {
         case GET = "GET"
         case POST = "POST"
         case PUT = "PUT"
+        case DELETE = "DELETE"
     }
     
     func request<RO: Decodable>(

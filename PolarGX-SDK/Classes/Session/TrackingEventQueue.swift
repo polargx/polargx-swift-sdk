@@ -28,9 +28,9 @@ actor TrackingEventQueue {
     /// Set isReady flag
     /// If isReady sets  to True, Events will be saved to disk, The queue is ready to send data to backend
     /// If isReady sets to False, Events is not saved to the disk.
-    func setReady() {
+    func setReady(_ newReady: Bool) {
         let wasReady = isReady;
-        self.isReady = true
+        self.isReady = newReady
         
         if !wasReady {
             save()

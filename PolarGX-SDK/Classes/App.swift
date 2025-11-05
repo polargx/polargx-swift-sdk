@@ -16,8 +16,10 @@ class InternalPolarApp: PolarApp {
     
     private var currentUserSession: UserSession?
     private var otherUserSessions = [UserSession]()
+    private var deregisterPushQueue: DeregisterPushQueue?
+    
     private var pendingEvents = [UntrackedEvent]()
-    private var currentPushToken: (apns: String?, fcm: String?) = (nil, nil)
+    private var currentPushToken: PushToken?
     
     private var isHandlingOpenUrl = false
     
@@ -49,6 +51,12 @@ class InternalPolarApp: PolarApp {
         
         NotificationCenter.default.addObserver(self, selector: #selector(matchingWebLinkClick), name: UIApplication.willEnterForegroundNotification, object: nil)
         
+        deregisterPushQueue = DeregisterPushQueue(
+            organizationUnid: appId,
+            fileUrl: appDirectory.file(name: "pending_users_deregister_push.json"),
+            apiService: apiService
+        )
+        
         /// Loading pending events from last app sessions and send to backend in low prority thread
         let pendingEventFiles = try? FileStorage.listFiles(in: appDirectory).filter({ $0.hasPrefix("events_") })
         Task { await startResolvingPendingEvents(pendingEventFiles: pendingEventFiles) }
@@ -67,12 +75,15 @@ class InternalPolarApp: PolarApp {
                     otherUserSessions.append(userSession)
                     Task{
                         await userSession.invalidate()
+                        
+                        await deregisterPushQueue?.push(userSession.userID)
+                        await deregisterPushQueue?.startDeregisteringPushIfNeeded()
                     }
                 }
             }
             
             var events: [UntrackedEvent] = []
-            var pushToken: (apns: String?, fcm: String?)? = nil
+            var pushToken: PushToken? = nil
             if currentUserSession == nil, let userID = userID {
                 let fileUrl = appDirectory.file(name: "events_\(Date().timeIntervalSince1970)_\(UUID().uuidString).json")
                 Logger.log("TrackingEvents stored in `\(fileUrl.absoluteString)`")
@@ -89,7 +100,7 @@ class InternalPolarApp: PolarApp {
             Task {
                 await currentUserSession?.trackEvents(events)
                 if let pushToken = pushToken {
-                    await currentUserSession?.setPushToken(apns: pushToken.apns, fcm: pushToken.fcm)
+                    await currentUserSession?.setPushToken(pushToken)
                 }
                 
                 await currentUserSession?.setAttributes(attributes ?? [:])
@@ -97,14 +108,17 @@ class InternalPolarApp: PolarApp {
         }
     }
     
-    private func setPushToken(apns: String?, fcm: String?) {
+    private func setPushToken(_ pushToken: PushToken) {
         Task { @MainActor in
-            currentPushToken = (apns: apns, fcm: fcm)
+            currentPushToken = pushToken
+            
             if let userSession = currentUserSession {
                 Task {
-                    await userSession.setPushToken(apns: apns, fcm: fcm)
+                    await userSession.setPushToken(pushToken)
                 }
             }
+            
+            await deregisterPushQueue?.setPushToken(pushToken)
         }
     }
     
@@ -162,7 +176,7 @@ class InternalPolarApp: PolarApp {
                 continue
             }
             
-            await eventQueue.setReady()
+            await eventQueue.setReady(true)
             await eventQueue.sendEventsIfNeeded()
             
             if await eventQueue.events.isEmpty {
@@ -250,9 +264,13 @@ class InternalPolarApp: PolarApp {
         setUser(userID: userID, attributes: attributes)
     }
     
-    override func setPushToken(deviceToken: Data?, fcmToken: String?) {
-        let apnsToken = deviceToken?.reduce("", {$0 + String(format: "%02X", $1)})
-        setPushToken(apns: apnsToken, fcm: fcmToken)
+    @objc public override func setAPNS(deviceToken: Data) {
+        let apnsToken = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
+        setPushToken(.apns(apnsToken))
+    }
+    
+    @objc public override func setGCM(fcmToken: String) {
+        setPushToken(.gcm(fcmToken))
     }
     
     @objc public override func trackEvent(name: String, attributes: [String: Any]) {
@@ -323,7 +341,8 @@ public class PolarApp: NSObject {
     
     @objc public var currentUserID: String? { nil }
     @objc public func updateUser(userID: String?, attributes: [String: Any]?) {}
-    @objc public func setPushToken(deviceToken: Data?, fcmToken: String?) {}
+    @objc public func setAPNS(deviceToken: Data) {}
+    @objc public func setGCM(fcmToken: String) {}
     @objc public func trackEvent(name: String, attributes: [String: Any]) { }
     
     @discardableResult
