@@ -132,11 +132,11 @@ actor UserSession {
         }while retry
         
         if submitError == nil {
-            await trackingEventQueue.setReady(true)
-            await trackingEventQueue.sendEventsIfNeeded()
-            
             await registerPushWorker.setReady(true)
             await registerPushWorker.startToRegisterPushToken()
+
+            await trackingEventQueue.setReady(true)
+            await trackingEventQueue.sendEventsIfNeeded()
         }
         
         //Mark startToUpdateUser is not running
