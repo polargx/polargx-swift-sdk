@@ -167,6 +167,7 @@ actor UserSession {
                 organizationUnid: organizationUnid,
                 userUnid: userID,
                 bundleID: await SystemInfo.appBundleId,
+                sandbox: await SystemInfo.isAPSSandBox,
                 pushToken: pushToken,
                 data: await SystemInfo.getTrackingDeviceInfo()
             )

@@ -21,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("\n[DEMO] detect clicked: \(link), data: \(data), error: \(error)\n")
         }
         
+        UIApplication.shared.registerForRemoteNotifications()
+        
 //        PolarApp.shared.updateUser(userID: "e1a3cb25-839e-4deb-95b0-2fb8ebd79401", attributes: [PolarEventKey.Name: "dl1", PolarEventKey.Email: "dl1@gmail.com"])
 //        
         for i in 1...1 {
@@ -41,8 +43,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         PolarApp.shared.setGCM(fcmToken: "fcm_token_test")
         
-        for i in 1...1 {
-            DispatchQueue.main.asyncAfter(deadline: .now() + TimeInterval(i)/10, execute: {
+        for i in 1...100 {
+            DispatchQueue.main.asyncAfter(deadline: .now() + TimeInterval(i)/100000, execute: {
                 PolarApp.shared.trackEvent(name: "DL event", attributes: [
                     "datap1": [
                         "datasub1": i,
@@ -76,6 +78,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the user discards a scene session.
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+    }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        PolarApp.shared.setAPNS(deviceToken: deviceToken)
     }
 
 

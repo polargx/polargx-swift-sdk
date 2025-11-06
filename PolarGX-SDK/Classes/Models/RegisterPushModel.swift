@@ -11,13 +11,15 @@ struct RegisterPushModel: Codable {
     let userUnid: String
     let bundleID: String
     let platform: String
+    let sandbox: Bool
     let token: String
     let data: DictionaryModel?
     
-    init(organizationUnid: String, userUnid: String, bundleID: String, pushToken: PushToken, data: [String: Any]) {
+    init(organizationUnid: String, userUnid: String, bundleID: String, sandbox: Bool, pushToken: PushToken, data: [String: Any]) {
         self.organizationUnid = organizationUnid
         self.userUnid = userUnid
         self.bundleID = bundleID
+        self.sandbox = sandbox
         switch pushToken {
         case .apns(let token):
             self.platform = "APNS"

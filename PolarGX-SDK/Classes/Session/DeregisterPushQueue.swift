@@ -76,6 +76,7 @@ actor DeregisterPushQueue {
             appBundleId = await SystemInfo.appBundleId
         }
         let bundleId = appBundleId ?? ""
+        let sandbox = await SystemInfo.isAPSSandBox
         
         while let userUnid = willPop() {
             do {
@@ -83,6 +84,7 @@ actor DeregisterPushQueue {
                     organizationUnid: organizationUnid,
                     userUnid: userUnid,
                     bundleID: bundleId,
+                    sandbox: sandbox,
                     pushToken: pushToken,
                     data: [:]
                 )
