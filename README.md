@@ -11,10 +11,11 @@ A complete guide for integrating **PolarGX SDK** into your **Swift** or **Object
    * CocoaPods
    * Swift Package Manager (SPM)
 3. [Configure Associated Domains](#3-configure-associated-domains)
-4. [Configure URL Scheme](#3-configure-url-scheme)
-5. [Push Notifications](#41-push-notifications)
-6. [Using PolarGX SDK in Objective‑C](#42-using-the-sdk-in-objective-c)
-7. [Using PolarGX SDK in Swift](#43-using-the-sdk-in-swift)
+4. [Configure URL Scheme](#4-configure-url-scheme)
+5. [Using PolarGX SDK](#5-using-polargx-sdk)
+   * [Push Notifications](#51-push-notifications)
+   * [Using the SDK in Objective‑C](#52-using-the-sdk-in-objective-c)
+   * [Using the SDK in Swift](#53-using-the-sdk-in-swift)
 
 ---
 
@@ -105,7 +106,7 @@ Add to your target:
   applinks:{subdomain}-alternate.app.link
   ```
 
-### 3. Configure URL Scheme:
+## 4. Configure URL Scheme:
 
 * In Xcode, open target settings. In **Info** tab, scroll to **URL Types** section.
 * In **URL Types**, add a URL Type with **URL Schemes** set to the *Scheme URL* in **(1)**.
@@ -113,15 +114,15 @@ Add to your target:
 
 ---
 
-# 4. Using PolarGX SDK
+## 5. Using PolarGX SDK
 
 ---
 
-## 4.1. Push Notifications
+### 5.1. Push Notifications
 
 PolarGX SDK supports push notifications via **APNS** (Apple Push Notification Service) and **GCM/FCM** (Google Cloud Messaging / Firebase Cloud Messaging). The SDK automatically registers and manages push tokens for your users.
 
-### **4.1.1. Setup Push Notifications on app.polargx.com**
+#### **5.1.1. Setup Push Notifications on app.polargx.com**
 
 1. Log in to [https://app.polargx.com](https://app.polargx.com)
 2. Navigate to **CONFIGURATIONS > Push Services** in the left sidebar
@@ -152,7 +153,7 @@ PolarGX SDK supports push notifications via **APNS** (Apple Push Notification Se
 
 **Note**: You can create multiple push services for different environments (e.g., one for Production and one for Development). Each service should have a unique Service Name and appropriate configuration.
 
-### **4.1.2. Setup APNS on developer.apple.com**
+#### **5.1.2. Setup APNS on developer.apple.com**
 
 Follow these detailed steps to obtain the required information from Apple Developer Portal. You'll need an active **Apple Developer Program membership**.
 
@@ -205,7 +206,7 @@ Follow these detailed steps to obtain the required information from Apple Develo
    * **Upload your APNS authentication key file**: Upload the `.p8` file you downloaded (from Step 4)
 5. Click **Create** or **Save** to complete the setup
 
-### **4.1.3. Setup GCM/FCM on Firebase/Google Cloud**
+### **5.1.3. Setup GCM/FCM on Firebase/Google Cloud**
 
 Follow these detailed steps to obtain your Service Account JSON credentials. The token must be string encoded (JSON stringified) before passing to the API.
 
@@ -270,7 +271,7 @@ To use FCM tokens in your iOS app, you need to:
 4. Add the `GoogleService-Info.plist` file to your Xcode project
 5. Install Firebase SDK (see implementation section below)
 
-### **4.1.4. APNS Implementation in Your App**
+### **5.1.4. APNS Implementation in Your App**
 
 #### **Configure Push Notifications Capability**
 
@@ -333,7 +334,7 @@ In **AppDelegate.m**:
 }
 ```
 
-### **4.1.5. GCM/FCM Implementation in Your App**
+### **5.1.5. GCM/FCM Implementation in Your App**
 
 If you're using Firebase Cloud Messaging, you can register the FCM token with PolarGX SDK.
 
@@ -440,7 +441,7 @@ After receiving the FCM token from Firebase:
 }
 ```
 
-### **4.1.6. How Push Tokens Work**
+### **5.1.6. How Push Tokens Work**
 
 * The SDK automatically registers push tokens with the PolarGX backend when:
   * A user is set via `updateUser(userID:attributes:)`
@@ -452,7 +453,7 @@ After receiving the FCM token from Firebase:
 
 ---
 
-## 4.2. Using the SDK in Objective-C
+## 5.2. Using the SDK in Objective-C
 
 The PolarGX SDK is written in Swift, but it works fully in Objective‑C projects.**
 PolarGX Swift SDK can also be used in Objective-C projects.
@@ -550,9 +551,9 @@ In **SceneDelegate.m**:
 
 ### **Step 7 — Setup Push Notifications**
 
-For push notification setup in Objective-C, see [Push Notifications](#41-push-notifications) section above.
+For push notification setup in Objective-C, see [Push Notifications](#51-push-notifications) section above.
 
-## 4.3. Using the SDK in Swift
+## 5.3. Using the SDK in Swift
 
 * Get *App Id* and *API Key* from [https://app.polargx.com](https://app.polargx.com)
 
