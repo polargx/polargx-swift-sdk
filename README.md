@@ -13,9 +13,9 @@ A complete guide for integrating **PolarGX SDK** into your **Swift** or **Object
 3. [Configure Associated Domains](#3-configure-associated-domains)
 4. [Configure URL Scheme](#4-configure-url-scheme)
 5. [Using PolarGX SDK](#5-using-polargx-sdk)
-   * [Push Notifications](#51-push-notifications)
-   * [Using the SDK in Objective‑C](#52-using-the-sdk-in-objective-c)
-   * [Using the SDK in Swift](#53-using-the-sdk-in-swift)
+   * [Using the SDK in Objective‑C](#51-using-the-sdk-in-objective-c)
+   * [Using the SDK in Swift](#52-using-the-sdk-in-swift)
+6. [Push Notifications](#6-push-notifications)
 
 ---
 
@@ -118,11 +118,179 @@ Add to your target:
 
 ---
 
-### 5.1. Push Notifications
+## 5.1. Using the SDK in Objective-C
+
+The PolarGX SDK is written in Swift, but it works fully in Objective‑C projects.**
+PolarGX Swift SDK can also be used in Objective-C projects.
+
+### **Importing PolarGX into Objective-C**
+
+Because PolarGX is written in Swift, you must enable Swift compatibility in your Objective-C project.
+
+### **Step 1 — Ensure `Use Swift` is enabled**
+
+Xcode will automatically ask to create a **Bridging Header** when you add Swift code. If it does not, create one manually:
+
+1. Go to **File > New > File > Header File** → name it: `YourApp-Bridging-Header.h`.
+2. In **Build Settings** of your target, search for:
+
+   * **Objective-C Bridging Header** → set path:
+
+     ```
+     YourApp/YourApp-Bridging-Header.h
+     ```
+
+### **Step 2 — Import PolarGX into Objective-C**
+
+Inside the bridging header:
+
+```objc
+// Import Swift support
+@import PolarGX;
+```
+
+### **Step 3 — Initialize PolarGX in Objective-C**
+
+In **AppDelegate.m**:
+
+```objc
+@import PolarGX;
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [PolarApp initializeWithAppId:@"YOUR_APP_ID"
+                           apiKey:@"YOUR_API_KEY"
+                onLinkClickHandler:^(NSURL * _Nonnull url, NSDictionary<NSString *,id> * _Nullable attributes, NSError * _Nullable error) {
+        NSLog(@"[POLAR] link=%@ data=%@ error=%@", url, attributes, error);
+    }];
+
+    return YES;
+}
+```
+
+### **Step 4 — Handle Universal Links**
+
+```objc
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler {
+    return [[PolarApp shared] continueUserActivity:userActivity];
+}
+```
+
+### **Step 5 — Handle URL Scheme**
+
+```objc
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+    return [[PolarApp shared] openUrl:url];
+}
+```
+
+### **Step 6 — For projects using SceneDelegate (iOS 13+)**
+
+In **SceneDelegate.m**:
+
+```objc
+@import PolarGX;
+
+- (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session options:(UISceneConnectionOptions *)connectionOptions {
+    NSUserActivity *activity = connectionOptions.userActivities.allObjects.firstObject;
+    if (activity) {
+        [[PolarApp shared] continueUserActivity:activity];
+    }
+
+    NSURL *url = connectionOptions.URLContexts.allObjects.firstObject.URL;
+    if (url) {
+        [[PolarApp shared] openUrl:url];
+    }
+}
+
+- (void)scene:(UIScene *)scene continueUserActivity:(NSUserActivity *)userActivity {
+    [[PolarApp shared] continueUserActivity:userActivity];
+}
+
+- (void)scene:(UIScene *)scene openURLContexts:(NSSet<UIOpenURLContext *> *)URLContexts {
+    NSURL *url = URLContexts.allObjects.firstObject.URL;
+    if (url) {
+        [[PolarApp shared] openUrl:url];
+    }
+}
+```
+
+### **Step 7 — Setup Push Notifications**
+
+For push notification setup in Objective-C, see [Push Notifications](#6-push-notifications) section above.
+
+## 5.2. Using the SDK in Swift
+
+* Get *App Id* and *API Key* from [https://app.polargx.com](https://app.polargx.com)
+
+#### In `AppDelegate.swift`
+
+```
+// Add: Import PolarGX
+import PolarGX
+
+func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    // Your existing code
+
+    // Add: Initialize Polar app
+    PolarApp.initialize(appId: YOUR_APP_ID, apiKey: YOUR_API_KEY) { link, data, error in
+        print("\n[POLAR] detect link clicked: \(link), data: \(data), error: \(error)\n")
+        // Handle link clicked. This callback will be called in the main queue.
+    }
+
+    return true
+}
+
+func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+    // Add: Polar app handles the user activity
+    return PolarApp.shared.continueUserActivity(userActivity)
+}
+
+func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+    // Add: Polar app handles the opening url
+    return PolarApp.shared.openUrl(url)
+}
+```
+
+#### In `SceneDelegate.swift`
+
+```
+// Add: Import PolarGX
+import PolarGX
+
+func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+    // Your existing code
+
+    // Add: Polar app handles the user activity
+    if let userActivity = connectionOptions.userActivities.first {
+        _ = PolarApp.shared.continueUserActivity(userActivity)
+    }
+
+    // Add: Polar app handles the opening url
+    if let url = connectionOptions.urlContexts.first?.url {
+        _ = PolarApp.shared.openUrl(url)
+    }
+}
+
+func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
+    // Add: Polar app handles the user activity
+    _ = PolarApp.shared.continueUserActivity(userActivity)
+}
+
+func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+    // Add: Polar app handles the opening url
+    if let url = URLContexts.first?.url {
+        _ = PolarApp.shared.openUrl(url)
+    }
+}
+```
+
+---
+
+## 6. Push Notifications
 
 PolarGX SDK supports push notifications via **APNS** (Apple Push Notification Service) and **GCM/FCM** (Google Cloud Messaging / Firebase Cloud Messaging). The SDK automatically registers and manages push tokens for your users.
 
-#### **5.1.1. Setup Push Notifications on app.polargx.com**
+### **6.1. Setup Push Notifications on app.polargx.com**
 
 1. Log in to [https://app.polargx.com](https://app.polargx.com)
 2. Navigate to **CONFIGURATIONS > Push Services** in the left sidebar
@@ -153,7 +321,7 @@ PolarGX SDK supports push notifications via **APNS** (Apple Push Notification Se
 
 **Note**: You can create multiple push services for different environments (e.g., one for Production and one for Development). Each service should have a unique Service Name and appropriate configuration.
 
-#### **5.1.2. Setup APNS on developer.apple.com**
+### **6.2. Setup APNS on developer.apple.com**
 
 Follow these detailed steps to obtain the required information from Apple Developer Portal. You'll need an active **Apple Developer Program membership**.
 
@@ -206,7 +374,7 @@ Follow these detailed steps to obtain the required information from Apple Develo
    * **Upload your APNS authentication key file**: Upload the `.p8` file you downloaded (from Step 4)
 5. Click **Create** or **Save** to complete the setup
 
-### **5.1.3. Setup GCM/FCM on Firebase/Google Cloud**
+### **6.3. Setup GCM/FCM on Firebase/Google Cloud**
 
 Follow these detailed steps to obtain your Service Account JSON credentials. The token must be string encoded (JSON stringified) before passing to the API.
 
@@ -271,7 +439,7 @@ To use FCM tokens in your iOS app, you need to:
 4. Add the `GoogleService-Info.plist` file to your Xcode project
 5. Install Firebase SDK (see implementation section below)
 
-### **5.1.4. APNS Implementation in Your App**
+### **6.4. APNS Implementation in Your App**
 
 #### **Configure Push Notifications Capability**
 
@@ -334,7 +502,7 @@ In **AppDelegate.m**:
 }
 ```
 
-### **5.1.5. GCM/FCM Implementation in Your App**
+### **6.5. GCM/FCM Implementation in Your App**
 
 If you're using Firebase Cloud Messaging, you can register the FCM token with PolarGX SDK.
 
@@ -441,7 +609,7 @@ After receiving the FCM token from Firebase:
 }
 ```
 
-### **5.1.6. How Push Tokens Work**
+### **6.6. How Push Tokens Work**
 
 * The SDK automatically registers push tokens with the PolarGX backend when:
   * A user is set via `updateUser(userID:attributes:)`
@@ -450,171 +618,3 @@ After receiving the FCM token from Firebase:
   * A user logs out (when `updateUser(userID: nil, attributes: nil)` is called)
   * A different user is set
 * Push tokens are stored and retried automatically if registration fails
-
----
-
-## 5.2. Using the SDK in Objective-C
-
-The PolarGX SDK is written in Swift, but it works fully in Objective‑C projects.**
-PolarGX Swift SDK can also be used in Objective-C projects.
-
-### **Importing PolarGX into Objective-C**
-
-Because PolarGX is written in Swift, you must enable Swift compatibility in your Objective-C project.
-
-### **Step 1 — Ensure `Use Swift` is enabled**
-
-Xcode will automatically ask to create a **Bridging Header** when you add Swift code. If it does not, create one manually:
-
-1. Go to **File > New > File > Header File** → name it: `YourApp-Bridging-Header.h`.
-2. In **Build Settings** of your target, search for:
-
-   * **Objective-C Bridging Header** → set path:
-
-     ```
-     YourApp/YourApp-Bridging-Header.h
-     ```
-
-### **Step 2 — Import PolarGX into Objective-C**
-
-Inside the bridging header:
-
-```objc
-// Import Swift support
-@import PolarGX;
-```
-
-### **Step 3 — Initialize PolarGX in Objective-C**
-
-In **AppDelegate.m**:
-
-```objc
-@import PolarGX;
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [PolarApp initializeWithAppId:@"YOUR_APP_ID"
-                           apiKey:@"YOUR_API_KEY"
-                onLinkClickHandler:^(NSURL * _Nonnull url, NSDictionary<NSString *,id> * _Nullable attributes, NSError * _Nullable error) {
-        NSLog(@"[POLAR] link=%@ data=%@ error=%@", url, attributes, error);
-    }];
-
-    return YES;
-}
-```
-
-### **Step 4 — Handle Universal Links**
-
-```objc
-- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler {
-    return [[PolarApp shared] continueUserActivity:userActivity];
-}
-```
-
-### **Step 5 — Handle URL Scheme**
-
-```objc
-- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
-    return [[PolarApp shared] openUrl:url];
-}
-```
-
-### **Step 6 — For projects using SceneDelegate (iOS 13+)**
-
-In **SceneDelegate.m**:
-
-```objc
-@import PolarGX;
-
-- (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session options:(UISceneConnectionOptions *)connectionOptions {
-    NSUserActivity *activity = connectionOptions.userActivities.allObjects.firstObject;
-    if (activity) {
-        [[PolarApp shared] continueUserActivity:activity];
-    }
-
-    NSURL *url = connectionOptions.URLContexts.allObjects.firstObject.URL;
-    if (url) {
-        [[PolarApp shared] openUrl:url];
-    }
-}
-
-- (void)scene:(UIScene *)scene continueUserActivity:(NSUserActivity *)userActivity {
-    [[PolarApp shared] continueUserActivity:userActivity];
-}
-
-- (void)scene:(UIScene *)scene openURLContexts:(NSSet<UIOpenURLContext *> *)URLContexts {
-    NSURL *url = URLContexts.allObjects.firstObject.URL;
-    if (url) {
-        [[PolarApp shared] openUrl:url];
-    }
-}
-```
-
-### **Step 7 — Setup Push Notifications**
-
-For push notification setup in Objective-C, see [Push Notifications](#51-push-notifications) section above.
-
-## 5.3. Using the SDK in Swift
-
-* Get *App Id* and *API Key* from [https://app.polargx.com](https://app.polargx.com)
-
-#### In `AppDelegate.swift`
-
-```
-// Add: Import PolarGX
-import PolarGX
-
-func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    // Your existing code
-
-    // Add: Initialize Polar app
-    PolarApp.initialize(appId: YOUR_APP_ID, apiKey: YOUR_API_KEY) { link, data, error in
-        print("\n[POLAR] detect link clicked: \(link), data: \(data), error: \(error)\n")
-        // Handle link clicked. This callback will be called in the main queue.
-    }
-
-    return true
-}
-
-func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-    // Add: Polar app handles the user activity
-    return PolarApp.shared.continueUserActivity(userActivity)
-}
-
-func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-    // Add: Polar app handles the opening url
-    return PolarApp.shared.openUrl(url)
-}
-```
-
-#### In `SceneDelegate.swift`
-
-```
-// Add: Import PolarGX
-import PolarGX
-
-func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-    // Your existing code
-
-    // Add: Polar app handles the user activity
-    if let userActivity = connectionOptions.userActivities.first {
-        _ = PolarApp.shared.continueUserActivity(userActivity)
-    }
-
-    // Add: Polar app handles the opening url
-    if let url = connectionOptions.urlContexts.first?.url {
-        _ = PolarApp.shared.openUrl(url)
-    }
-}
-
-func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
-    // Add: Polar app handles the user activity
-    _ = PolarApp.shared.continueUserActivity(userActivity)
-}
-
-func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-    // Add: Polar app handles the opening url
-    if let url = URLContexts.first?.url {
-        _ = PolarApp.shared.openUrl(url)
-    }
-}
-```
