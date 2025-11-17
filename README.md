@@ -116,8 +116,6 @@ Add to your target:
 
 ## 5. Using PolarGX SDK
 
----
-
 ## 5.1. Using the SDK in Objective-C
 
 The PolarGX SDK is written in Swift, but it works fully in Objective‑C projects.**
