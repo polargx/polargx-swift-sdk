@@ -1,7 +1,7 @@
 import Foundation
 
 struct Formatter {
-    static let BackendDateTimeMsFormatter = dateFormatter(format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", in: .UTC)
+    static let BackendDateTimeMsFormatter = dateFormatter(format: PolarConstants.BackendDateTimeMsFormat, in: .UTC)
     
     static func dateFormatter(format: String, in timeZone: TimeZone) -> DateFormatter {
         let dateFormatter = DateFormatter();

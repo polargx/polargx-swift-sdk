@@ -8,7 +8,9 @@ actor UserSession {
     let userID: String
     let apiService: APIService
     let trackingStorageURL: URL
-    
+    let sessionStartedAt: Date
+    let trackingEventQueue: TrackingEventQueue
+
     private var isValid = true
     
     private var attributes = [String: Any]()
@@ -16,7 +18,7 @@ actor UserSession {
     private var attributesIsSending = false
     private var scheduledRetryUpdatingUserWorkItem: DispatchWorkItem?
     
-    lazy var trackingEventQueue = TrackingEventQueue(fileUrl: trackingStorageURL, apiService: apiService)
+    
     lazy var registerPushWorker = RegisterPushWorker(apiService: apiService)
     
     init(organizationUnid: String, userID: String, apiService: APIService, trackingStorageURL: URL) {
@@ -24,6 +26,21 @@ actor UserSession {
         self.userID = userID
         self.apiService = apiService
         self.trackingStorageURL = trackingStorageURL
+        self.sessionStartedAt = Date()
+        self.attributes = Self.correctAttributes([
+            "lastSessionTime": sessionStartedAt
+        ])
+        self.trackingEventQueue = TrackingEventQueue(fileUrl: trackingStorageURL, apiService: apiService)
+        
+        Task {
+            await self.trackingEventQueue.push([TrackEventModel(
+                organizationUnid: organizationUnid,
+                userID: userID,
+                eventName: "user_session_starts",
+                eventTime: sessionStartedAt,
+                data: [:]
+            )])
+        }
     }
     
     //MARK: Main/Attributes
@@ -34,7 +51,7 @@ actor UserSession {
         guard isValid else { return }
         
         let immediateSend = self.attributesVersion == 0
-        self.attributes = self.attributes.merging(attributes, uniquingKeysWith: { $1 })
+        self.attributes = self.attributes.merging(Self.correctAttributes(attributes), uniquingKeysWith: { $1 })
         self.attributesVersion += 1
         
         Task {
@@ -188,10 +205,24 @@ actor UserSession {
                     userID: userID,
                     eventName: $0.eventName,
                     eventTime: $0.date,
-                    data: $0.attributes
+                    data: Self.correctAttributes($0.attributes)
                 )
             }
         )
         await trackingEventQueue.sendEventsIfNeeded()
+    }
+}
+
+//MARK: - Utils
+private extension UserSession {
+    static func correctAttributes(_ input: [String: Any]) -> [String: Any] {
+        return input.mapValues({
+            if let date = $0 as? Date {
+                //Date -> String (BackendDateTimeMsFormat)
+                return Formatter.BackendDateTimeMsFormatter.string(from: date)
+            }
+            
+            return $0
+        })
     }
 }
