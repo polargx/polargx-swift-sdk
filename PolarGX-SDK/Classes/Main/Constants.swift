@@ -16,9 +16,11 @@ internal enum InternalEvent: String {
     case appInactive = "app_inactive"
     case appTerminate = "app_ternimate"
     
-    case userSessionStarts = "user_session_starts"
+    case userSessionStart = "user_session_start"
     
-    case linkClicks = "link_clicks"
+    case linkClick = "link_click"
+    
+    case pushOpen = "push_open"
 }
 
 public struct PolarEventKey {

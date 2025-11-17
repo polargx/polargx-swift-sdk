@@ -251,7 +251,7 @@ class InternalPolarApp: PolarApp {
             }
             
             trackEvent(
-                name: InternalEvent.linkClicks.rawValue,
+                name: InternalEvent.linkClick.rawValue,
                 attributes: ([
                     "link": openningURL,
                     "clickUnid": clickUnid
@@ -354,6 +354,7 @@ public class PolarApp: NSObject {
     
     @objc public var currentUserID: String? { nil }
     @objc public func updateUser(userID: String?, attributes: [String: Any]?) {}
+    @objc public lazy var pushClient = PushClient(app: self)
     @objc public func setAPNS(deviceToken: Data) {}
     @objc public func setGCM(fcmToken: String) {}
     @objc public func trackEvent(name: String, attributes: [String: Any]) { }

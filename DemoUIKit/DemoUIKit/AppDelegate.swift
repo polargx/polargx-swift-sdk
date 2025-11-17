@@ -7,6 +7,7 @@
 
 import UIKit
 import PolarGX
+import UserNotifications
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PolarApp.initialize(appId: "40b59333-4350-4fc8-a59b-fdcab6bc0274", apiKey: "deb_HkP4KkjQ0i1z3t8BodVfPokPm5x3Qsm5JvrfUcKc") { link, data, error in
             print("\n[DEMO] detect clicked: \(link), data: \(data), error: \(error)\n")
         }
+        
+        UNUserNotificationCenter.current().delegate = PolarQuickIntegration.userNotificationCenterDelegateImpl;
         
         UIApplication.shared.registerForRemoteNotifications()
         
