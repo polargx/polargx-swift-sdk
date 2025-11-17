@@ -7,14 +7,14 @@ A complete guide for integrating **PolarGX SDK** into your **Swift** or **Object
 ## 📘 Table of Contents
 
 1. [Create and Setup Polar App](#1-create-and-setup-polar-app)
-2. [Installing PolarGX SDK](#2-adding-polargx-sdk)
+2. [Installing PolarGX SDK](#2-installing-polargx-sdk)
    * CocoaPods
    * Swift Package Manager (SPM)
 3. [Configure Associated Domains](#3-configure-associated-domains)
 4. [Configure URL Scheme](#3-configure-url-scheme)
 5. [Push Notifications](#41-push-notifications)
-6. [Using PolarGX SDK in Swift](#43-using-the-sdk-in-swift)
-7. [Using PolarGX SDK in Objective‑C](#42-using-the-sdk-in-objective-c)
+6. [Using PolarGX SDK in Objective‑C](#42-using-the-sdk-in-objective-c)
+7. [Using PolarGX SDK in Swift](#43-using-the-sdk-in-swift)
 
 ---
 
