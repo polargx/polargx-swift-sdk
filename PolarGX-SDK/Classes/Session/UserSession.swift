@@ -36,7 +36,7 @@ actor UserSession {
             await self.trackingEventQueue.push([TrackEventModel(
                 organizationUnid: organizationUnid,
                 userID: userID,
-                eventName: "user_session_starts",
+                eventName: InternalEvent.userSessionStarts.rawValue,
                 eventTime: sessionStartedAt,
                 data: [:]
             )])

@@ -150,11 +150,11 @@ class InternalPolarApp: PolarApp {
         let track = { [weak self] (notification: Notification) in
             let date = Date()
             let eventName: String? = switch notification.name {
-            case UIApplication.willEnterForegroundNotification: "app_open"
-            case UIApplication.didEnterBackgroundNotification: "app_close"
-            case UIApplication.didBecomeActiveNotification: "app_active"
-            case UIApplication.willResignActiveNotification: "app_inactive"
-            case UIApplication.willTerminateNotification: "app_ternimate"
+            case UIApplication.willEnterForegroundNotification: InternalEvent.appOpen.rawValue
+            case UIApplication.didEnterBackgroundNotification: InternalEvent.appClose.rawValue
+            case UIApplication.didBecomeActiveNotification: InternalEvent.appActive.rawValue
+            case UIApplication.willResignActiveNotification: InternalEvent.appInactive.rawValue
+            case UIApplication.willTerminateNotification: InternalEvent.appTerminate.rawValue
             default: nil
             }
             
@@ -249,6 +249,15 @@ class InternalPolarApp: PolarApp {
             if let clickId = clickId {
                 _ = try await apiService.updateLinkClick(clickUnid: clickId, sdkUsed: true)
             }
+            
+            trackEvent(
+                name: InternalEvent.linkClicks.rawValue,
+                attributes: ([
+                    "link": openningURL,
+                    "clickUnid": clickUnid
+                ] as [String: Any?])
+                .compactMapValues({ $0 })
+            )
             
         }catch let error {
             let clickHandler = onLinkClickHandler

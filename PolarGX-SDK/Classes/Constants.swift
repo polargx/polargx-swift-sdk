@@ -9,6 +9,18 @@ internal struct PolarConstants {
     internal static var BackendDateTimeMsFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
 }
 
+internal enum InternalEvent: String {
+    case appOpen = "app_open"
+    case appClose = "app_close"
+    case appActive = "app_active"
+    case appInactive = "app_inactive"
+    case appTerminate = "app_ternimate"
+    
+    case userSessionStarts = "user_session_starts"
+    
+    case linkClicks = "link_clicks"
+}
+
 public struct PolarEventKey {
     public static let Email: String = "email"
     public static let Name: String = "name"
