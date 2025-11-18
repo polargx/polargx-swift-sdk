@@ -8,8 +8,8 @@ A complete guide for integrating **PolarGX SDK** into your **Swift** or **Object
 
 1. [Create and Setup Polar App](#1-create-and-setup-polar-app)
 2. [Installing PolarGX SDK](#2-installing-polargx-sdk)
-   * CocoaPods
-   * Swift Package Manager (SPM)
+   * [CocoaPods](#21-install-via-cocoapods)
+   * [Swift Package Manager (SPM)](#22-install-via-swift-package-manager-spm)
 3. [Configure Associated Domains](#3-configure-associated-domains)
 4. [Configure URL Scheme](#4-configure-url-scheme)
 5. [Using PolarGX SDK](#5-using-polargx-sdk)
