@@ -13,6 +13,9 @@
    <FileRef
       location = "container:../Package.swift">
    </FileRef>
+   <FileRef
+      location = "container:../README.md">
+   </FileRef>
    <Group
       location = "container:../Tools"
       name = "Tools">

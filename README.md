@@ -19,31 +19,26 @@ A complete guide for integrating **PolarGX SDK** into your **Swift** or **Object
 
 ---
 
-## 1. Create and setup Polar app:
+## 1. Create and setup Polar project:
 
-### 1. Create and setup Polar app:
+### 1. Create and setup Polar project:
 
-* Register PolarGX account at [https://app.polargx.com](https://app.polargx.com), after signup `unnamed` app has been created automatically.
-* Setting your app in *App Settings > App Information*
-* Create an API Key in *App Settings > API Keys* with *Mobile apps / frontend* purpose
-* Configure your domain in *Link Attribution > Configuration > Link domain section* with:
-
-  * Default link domain.
-  * Alternate link domain.
-* Configure your iOS Redirects in *Link Attribution > Configuration > Required Redirects section > iOS Redirects* with:
-
+* Register your PolarGX account at [https://app.polargx.com](https://app.polargx.com).
+* Create your project.
+* Setting your project in [Project Settings](https://app.polargx.com/app/settings)
+* Manage your API Keys in [API Keys Configuration](https://app.polargx.com/configuration/api-keys-configuration)
+* Configure your link domain in [Link Configuration](https://app.polargx.com/configuration/link-configuration) > Required Redirects section > iOS Redirects with:
   * App Store Search / AppStore Id or Custom URL: Help your link redirects to AppStore or your custom url if your app hasn't been installed.
   * Universal Links: Help your link opens app immediately if your app was installed.
-
     * Open [https://developer.apple.com](https://developer.apple.com). Locate your app identifier in `Certificates, Identifiers & Profiles > Identifiers`
     * Use *App ID Prefix* for *Apple App Prefix*
     * Use *Bundle ID* for *Bundle Identifiers*
-  * Scheme URL (deprecated way): Help your link opens app if your app was installed and can't be opened by *Universal Links*.
+  * Scheme URI (deprecated way): Help your link opens app if your app was installed and can't be opened by *Universal Links*.
     Example: `yourapp_schemeurl://`
 
 ### 2. Installing PolarGX SDK
 
-PolarGX can be integrated using **CocoaPods**, **Swift Package Manager**, or **manual integration**.
+PolarGX can be integrated using **CocoaPods**, **Swift Package Manager**.
 
 ---
 
@@ -75,35 +70,15 @@ PolarGX Swift SDK is available via **Swift Package Manager (SPM)**.
 4. Set **Dependency Rule** to **Up to Next Major Version** (Recommended).
 5. Click **Add Package**.
 
-##### Add in `Package.swift`
-
-```swift
-dependencies: [
-    .package(url: "https://github.com/polargx/polargx-swift-sdk.git", from: "1.0.0")
-]
-```
-
-Add to your target:
-
-```swift
-.target(
-    name: "YourApp",
-    dependencies: [
-        .product(name: "PolarGX", package: "polargx-swift-sdk")
-    ]
-)
-```
-
 ---
 
 ## 3. Configure Associated Domains:
 
 * In Xcode, open target settings. In **Signing & Capabilities** tab, enable **Associated Domains** capability.
-* In **Associated Domains**, add your app domains in **(1)** into Domains section with the following format:
+* In **Associated Domains**, add your link domain in **(1)** into Domains section with the following format:
 
   ```
-  applinks:{subdomain}.app.link
-  applinks:{subdomain}-alternate.app.link
+  applinks:{subdomain}.gxlnk.com
   ```
 
 ## 4. Configure URL Scheme:
@@ -119,7 +94,6 @@ Add to your target:
 ## 5.1. Using the SDK in Objective-C
 
 The PolarGX SDK is written in Swift, but it works fully in Objective‑C projects.**
-PolarGX Swift SDK can also be used in Objective-C projects.
 
 ### **Importing PolarGX into Objective-C**
 
@@ -454,8 +428,16 @@ import PolarGX
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // ... your existing code ...
     
-    // Register for remote notifications
-    UIApplication.shared.registerForRemoteNotifications()
+    // Enable notification for your app, then register for remote notifications
+    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { _, _ in
+        DispatchQueue.main.async{
+            UIApplication.shared.registerForRemoteNotifications()
+        }
+    }
+    
+    // For quick integration, you can use our default implementation for Push Notification
+    // If you want to use your own UNUserNotificationCenterDelegate implementation, please follow implementation in PolarQuickItegration.swift
+    UNUserNotificationCenter.current().delegate = PolarQuickIntegration.userNotificationCenterDelegateImpl;
     
     return true
 }
@@ -482,8 +464,18 @@ In **AppDelegate.m**:
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // ... your existing code ...
     
-    // Register for remote notifications
-    [[UIApplication sharedApplication] registerForRemoteNotifications];
+    // Enable notification for your app, then register for remote notifications
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    [center requestAuthorizationWithOptions:(UNAuthorizationOptionAlert | UNAuthorizationOptionBadge | UNAuthorizationOptionSound)
+                          completionHandler:^(BOOL granted, NSError * _Nullable error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[UIApplication sharedApplication] registerForRemoteNotifications];
+        });
+    }];
+
+    // For quick integration, you can use our default implementation for Push Notification
+    // If you want to use your own UNUserNotificationCenterDelegate implementation, please follow implementation in PolarQuickIntegration.swift
+    [UNUserNotificationCenter currentNotificationCenter].delegate = [PolarQuickIntegration userNotificationCenterDelegateImpl];
     
     return YES;
 }
@@ -524,6 +516,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
         // Set Firebase Messaging delegate
         Messaging.messaging().delegate = self
         
+        // Enable notification for your app, then register for remote notifications
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { _, _ in
+            DispatchQueue.main.async{
+                UIApplication.shared.registerForRemoteNotifications()
+            }
+        }
+        
+        // For quick integration, you can use our default implementation for Push Notification
+        // If you want to use your own UNUserNotificationCenterDelegate implementation, please follow implementation in PolarQuickItegration.swift
+        UNUserNotificationCenter.current().delegate = PolarQuickIntegration.userNotificationCenterDelegateImpl;
+        
         // ... your existing PolarGX initialization code ...
         
         return true
@@ -551,6 +554,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
     
     // Set Firebase Messaging delegate
     [FIRMessaging messaging].delegate = self;
+    
+    // Enable notification for your app, then register for remote notifications
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    [center requestAuthorizationWithOptions:(UNAuthorizationOptionAlert | UNAuthorizationOptionBadge | UNAuthorizationOptionSound)
+                          completionHandler:^(BOOL granted, NSError * _Nullable error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[UIApplication sharedApplication] registerForRemoteNotifications];
+        });
+    }];
+
+    // For quick integration, you can use our default implementation for Push Notification
+    // If you want to use your own UNUserNotificationCenterDelegate implementation, please follow implementation in PolarQuickIntegration.swift
+    [UNUserNotificationCenter currentNotificationCenter].delegate = [PolarQuickIntegration userNotificationCenterDelegateImpl];
     
     // ... your existing PolarGX initialization code ...
     
