@@ -1,5 +1,6 @@
 import Foundation
 import UIKit
+import UserNotifications
 
 @MainActor
 public struct SystemInfo {
@@ -40,13 +41,23 @@ public struct SystemInfo {
         return bundle.bundleIdentifier ?? ""
     }
     
-    static func getTrackingDeviceInfo() -> [String: Any] {
+    static func notificationEnabled() async -> Bool {
+        let settings = await UNUserNotificationCenter.current().notificationSettings()
+        guard settings.authorizationStatus == .authorized else {
+            return false
+        }
+        
+        return settings.alertSetting == .enabled || settings.lockScreenSetting == .enabled || settings.notificationCenterSetting == .enabled
+    }
+    
+    static func getTrackingDeviceInfo() async -> [String: Any] {
         return [
             "OSName": osName,
             "OSVersion": osVersion,
             "model": deviceModel,
             "SDKVersion": sdkVersion,
-            "appVersion": appVersion
+            "appVersion": appVersion,
+            "notificationEnabled": await notificationEnabled()
         ]
     }
     
