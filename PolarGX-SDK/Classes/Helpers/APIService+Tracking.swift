@@ -15,7 +15,7 @@ extension APIService {
             path: "/api/v1/users/profile",
             headers: [:],
             queries: [:],
-            body: user,
+            body: { try await user().toJsonDictionary() },
             result: EmptyModel.self
         )
     }
@@ -28,7 +28,7 @@ extension APIService {
             path: "/api/v1/events",
             headers: [:],
             queries: [:],
-            body: {event},
+            body: { event.toJsonDictionary() },
             logResult: false,
             result: EmptyModel.self
         )

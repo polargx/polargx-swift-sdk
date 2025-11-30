@@ -18,4 +18,15 @@ struct TrackEventModel: Codable {
         self.eventTime = Formatter.BackendDateTimeMsFormatter.string(from: eventTime)
         self.data = DictionaryModel(content: data)
     }
+    
+    func toJsonDictionary() -> [String: Any] {
+        return [
+            "organizationUnid": organizationUnid,
+            "userID": userID,
+            "clobberMatchingAttributes": clobberMatchingAttributes,
+            "eventName": eventName,
+            "eventTime": eventTime,
+            "data": data.content
+        ]
+    }
 }

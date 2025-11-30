@@ -30,4 +30,16 @@ struct RegisterPushModel: Codable {
         }
         self.data = DictionaryModel(content: data)
     }
+    
+    func toJsonDictionary() -> [String: Any] {
+        return [
+            "organizationUnid": organizationUnid,
+            "userUnid": userUnid,
+            "bundleID": bundleID,
+            "platform": platform,
+            "sandbox": sandbox,
+            "token": token,
+            "data": data?.content ?? [:]
+        ]
+    }
 }

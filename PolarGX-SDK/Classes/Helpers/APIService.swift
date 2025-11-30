@@ -31,7 +31,7 @@ class APIService {
         path: String,
         headers: [String: String],
         queries: [String: String],
-        body: () async throws -> Encodable?,
+        body: () async throws -> Any?,
         logResult: Bool = true,
         result: RO.Type
     ) async throws -> RO? {
@@ -57,7 +57,7 @@ class APIService {
         url: URL,
         headers: [String: String],
         queries: [String: String],
-        body: () async throws -> Encodable?,
+        body: () async throws -> Any?,
         logResult: Bool,
         result: RO.Type,
     ) async throws -> RO? {
@@ -81,7 +81,13 @@ class APIService {
             
             var urlRequest = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 20)
             urlRequest.httpMethod = method.rawValue
-            urlRequest.httpBody = try await body().flatMap({ try encoder.encode($0) })
+            urlRequest.httpBody = try await body().flatMap({
+                if let body = $0 as? Encodable {
+                    return try encoder.encode(body)
+                }else{
+                    return try JSONSerialization.data(withJSONObject: $0)
+                }
+            })
 
             var headers = defaultHeaders.merging(headers, uniquingKeysWith: { $1 })
             headers["Content-Type"] = "application/json"

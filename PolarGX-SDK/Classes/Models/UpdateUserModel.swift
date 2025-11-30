@@ -12,4 +12,13 @@ struct UpdateUserModel: Codable {
         self.userID = userID
         self.data = DictionaryModel(content: data)
     }
+    
+    func toJsonDictionary() -> [String: Any] {
+        return [
+            "organizationUnid": organizationUnid,
+            "userID": userID,
+            "clobberMatchingAttributes": clobberMatchingAttributes,
+            "data": data.content
+        ]
+    }
 }
