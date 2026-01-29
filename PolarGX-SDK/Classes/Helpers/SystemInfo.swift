@@ -57,6 +57,8 @@ public struct SystemInfo {
             "model": deviceModel,
             "SDKVersion": sdkVersion,
             "appVersion": appVersion,
+            "pushSandbox": isAPSSandBox,
+            "appBundleId": appBundleId,
             "notificationEnabled": await notificationEnabled()
         ]
     }
