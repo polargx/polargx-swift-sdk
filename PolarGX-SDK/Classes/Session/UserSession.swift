@@ -179,6 +179,8 @@ actor UserSession {
     func setPushToken(_ pushToken: PushToken) async {
         guard isValid else { return }
         
+        var deviceInfo = await SystemInfo.getTrackingDeviceInfo()
+        
         await registerPushWorker.set(
             RegisterPushModel(
                 organizationUnid: organizationUnid,
@@ -186,10 +188,19 @@ actor UserSession {
                 bundleID: await SystemInfo.appBundleId,
                 sandbox: await SystemInfo.isAPSSandBox,
                 pushToken: pushToken,
-                data: await SystemInfo.getTrackingDeviceInfo()
+                data: deviceInfo
             )
         )
         await registerPushWorker.startToRegisterPushToken()
+        
+        deviceInfo["lastUpdated"] = Formatter.BackendDateTimeMsFormatter.string(from: Date())
+        switch pushToken {
+        case .apns(let token): deviceInfo["ApnsToken"] = token
+        case .gcm(let token): deviceInfo["GcmToken"] = token
+        }
+        setAttributes([
+            "pushDevice": deviceInfo
+        ])
     }
     
     //MARK: Track Events
