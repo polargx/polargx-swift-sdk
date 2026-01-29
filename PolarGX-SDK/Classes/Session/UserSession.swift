@@ -18,6 +18,9 @@ actor UserSession {
     private var attributesIsSending = false
     private var scheduledRetryUpdatingUserWorkItem: DispatchWorkItem?
     
+    var lastNotificationEnabled: Bool? {
+        attributes["pushDevice"].flatMap({ $0 as? [String: Any] })?["notificationEnabled"] as? Bool
+    }
     
     lazy var registerPushWorker = RegisterPushWorker(apiService: apiService)
     

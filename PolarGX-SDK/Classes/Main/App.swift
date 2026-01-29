@@ -161,12 +161,26 @@ class InternalPolarApp: PolarApp {
             if let eventName = eventName {
                 self?.trackEvent(name: eventName, date: date, attributes: [:])
             }
+            
+            if notification.name == UIApplication.didBecomeActiveNotification {
+                Task { await self?.checkAndHandleNotificationEnabledChanges() }
+            }
         }
         nc.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: queue, using: track)
         nc.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: queue, using: track)
         nc.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: queue, using: track)
         nc.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: queue, using: track)
         nc.addObserver(forName: UIApplication.willTerminateNotification, object: nil, queue: queue, using: track)
+    }
+    
+    //iOS only: User can allow Notification Permission after push token is registered
+    private func checkAndHandleNotificationEnabledChanges() async {
+        let current = await SystemInfo.notificationEnabled()
+        if let session = currentUserSession, await session.lastNotificationEnabled != current {
+            if let pushToken = currentPushToken {
+                await currentUserSession?.setPushToken(pushToken)
+            }
+        }
     }
     
     private func startResolvingPendingEvents(pendingEventFiles: [String]?) async {
