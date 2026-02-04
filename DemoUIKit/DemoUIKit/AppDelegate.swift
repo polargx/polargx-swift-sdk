@@ -9,6 +9,8 @@ import UIKit
 import PolarGX
 import UserNotifications
 
+//TODO: issue: the pushDevice is not sending at the time request notification and push token
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -16,6 +18,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        regularInitialization()
+        
+        return true
+    }
+    
+    func regularInitialization() {
+        PolarApp.isLoggingEnabled = true;
+        PolarApp.initialize(appId: "1d5c7883-00ef-4b83-88b7-3ca6a7031f9b", apiKey: "dev_dZIqMUTVE945yyZFoUto48pRXOZHDqm940abQ4nd") { link, data, error in
+            print("\n[DEMO] detect clicked: \(link), data: \(data), error: \(error)\n")
+        }
+        
+        PolarApp.shared.updateUser(userID: "test-user-1", attributes: [
+            PolarEventKey.Name: "DL",
+            PolarEventKey.Email: "dl1@infinitech.dev"
+        ])
+        
+        
+        let center = UNUserNotificationCenter.current()
+        center.delegate = PolarQuickIntegration.userNotificationCenterDelegateImpl
+        
+        center.requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
+            if let error = error {
+                print("Error requesting notification permissions: \(error.localizedDescription)")
+                return
+            }
+            
+            if granted {
+                print("Notification permissions granted")
+                // Register for remote notifications on the main thread
+                DispatchQueue.main.async {
+                    UIApplication.shared.registerForRemoteNotifications()
+                }
+            } else {
+                print("Notification permissions denied")
+            }
+        }
+    }
+    
+    func testInitialization() {
         
         PolarApp.isLoggingEnabled = true;
         PolarApp.initialize(appId: "40b59333-4350-4fc8-a59b-fdcab6bc0274", apiKey: "deb_HkP4KkjQ0i1z3t8BodVfPokPm5x3Qsm5JvrfUcKc") { link, data, error in
@@ -68,8 +110,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DispatchQueue.main.asyncAfter(deadline: .now() + 30, execute: {
             PolarApp.shared.updateUser(userID: nil, attributes: nil)
         })
-        
-        return true
     }
 
     // MARK: UISceneSession Lifecycle

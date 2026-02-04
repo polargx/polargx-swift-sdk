@@ -6,8 +6,7 @@
 	<string>development</string>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>applinks:app.makelabs.ai</string>
-		<string>applinks:app-alternate.makelabs.ai</string>
+		<string>applinks:sdktest.biglittlecookies.com</string>
 	</array>
 </dict>
 </plist>
