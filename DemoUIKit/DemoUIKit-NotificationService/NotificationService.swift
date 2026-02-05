@@ -10,8 +10,10 @@ import PolarGX_NotificationServiceExtension
 
 class NotificationService: PolarNotificationService {
     
-    override var appGroupIdentifier: String? {
-        "group.com.bohemian.polar.mobilesdktest"
+    override init() {
+        super.init()
+        
+        PolarSettings.appGroupIdentifier = "group.com.bohemian.polar.mobilesdktest"
     }
 
 }

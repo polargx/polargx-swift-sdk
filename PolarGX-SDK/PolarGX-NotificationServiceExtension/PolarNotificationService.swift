@@ -5,25 +5,28 @@ import UserNotifications
 /// Tracks push notification delivery and enables rich media attachments
 @objc
 open class PolarNotificationService: UNNotificationServiceExtension {
-    open var appGroupIdentifier: String? { nil }
-    
     var contentHandler: ((UNNotificationContent) -> Void)?
     var bestAttemptContent: UNMutableNotificationContent?
     var resultDescription: String = ""
     
+    private var appGroupStorage: AppGroupStorage?
     private var apiService: APIService?
     private var task: Task<(), Never>?;
     
+    
     open override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
+        self.contentHandler = contentHandler
+        bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
+
         guard
             let organizationUnid = AppGroupStorage.shared.organizationUnid,
             let environment = AppGroupStorage.shared.environment,
             let apiKey = AppGroupStorage.shared.apiKey else {
-            return contentHandler(request.content)
+            AppGroupStorage.shared.lastNotificationServiceResult = "No: organizationUnid=\(AppGroupStorage.shared.organizationUnid ?? "(nil)") |  organizationUnid=\(AppGroupStorage.shared.environment ?? "(nil)") |  apiKey=\(AppGroupStorage.shared.apiKey ?? "(nil)")"
+            AppGroupStorage.shared.save()
+            return completeNotificationService()
         }
         
-        self.contentHandler = contentHandler
-        bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
         let pushExtractor = PushExtractor(notification: request.content)
         
         Configuration.selectEnvironment(by: environment)

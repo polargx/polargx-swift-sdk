@@ -286,6 +286,7 @@
 		6033B60E2F345EDA003B6B1D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "DemoUIKit-NotificationService/DemoUIKit-NotificationService.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = SP8T4ER53V;
@@ -293,7 +294,7 @@
 				INFOPLIST_FILE = "DemoUIKit-NotificationService/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "DemoUIKit-NotificationService";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -315,6 +316,7 @@
 		6033B60F2F345EDA003B6B1D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "DemoUIKit-NotificationService/DemoUIKit-NotificationService.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = SP8T4ER53V;
@@ -322,7 +324,7 @@
 				INFOPLIST_FILE = "DemoUIKit-NotificationService/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "DemoUIKit-NotificationService";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

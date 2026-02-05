@@ -15,6 +15,8 @@ public class PushClient: NSObject {
         let push = PushExtractor(notification: response.notification.request.content)
         guard push.isPolarPush else { return }
         
+        Logger.log("PushClient didReceive: \((try? JSONSerialization.data(withJSONObject: push.payload)).flatMap({ String(data: $0, encoding: .utf8) }) ?? "(not-decoded)")")
+        
         if let pushUnid = push.pushUnid {
             Task {
                 do {

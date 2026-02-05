@@ -14,7 +14,39 @@ import UserNotifications
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    func verifyExtensionInstalled() {
+        print("\n=== 🔍 Extension Installation Check ===")
 
+        guard let appBundlePath = Bundle.main.bundlePath as String? else {
+            print("❌ Cannot get app bundle path")
+            return
+        }
+
+        let plugInsPath = (appBundlePath as NSString).appendingPathComponent("PlugIns")
+        let fileManager = FileManager.default
+
+        if fileManager.fileExists(atPath: plugInsPath) {
+            do {
+                let contents = try fileManager.contentsOfDirectory(atPath: plugInsPath)
+
+                if contents.contains("DemoUIKit-NotificationService.appex") {
+                    print("✅ Notification Service Extension IS INSTALLED")
+                    print("   Extension will be triggered for notifications with 'mutable-content': 1")
+                    print("   Notifications should show title with [edited] suffix")
+                } else {
+                    print("❌ Extension NOT FOUND in PlugIns!")
+                    print("   Found: \(contents)")
+                }
+            } catch {
+                print("❌ Error reading PlugIns: \(error)")
+            }
+        } else {
+            print("❌ PlugIns folder does NOT exist - NO EXTENSIONS INSTALLED")
+            print("   You need to rebuild and reinstall the app")
+        }
+
+        print("=== End Extension Check ===\n")
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -27,6 +59,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func regularInitialization() {
         PolarSettings.appGroupIdentifier = "group.com.bohemian.polar.mobilesdktest"
         PolarSettings.isLoggingEnabled = true;
+
+        // VERIFY: Check if notification service extension is installed
+        verifyExtensionInstalled()
 
         PolarApp.initialize(appId: "1d5c7883-00ef-4b83-88b7-3ca6a7031f9b", apiKey: "dev_dZIqMUTVE945yyZFoUto48pRXOZHDqm940abQ4nd") { link, data, error in
             print("\n[DEMO] detect clicked: \(link), data: \(data), error: \(error)\n")
