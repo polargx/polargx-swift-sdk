@@ -11,6 +11,9 @@ class InternalPolarApp: PolarApp {
     private lazy var apiService = APIService(configuration: Configuration.Env)
     private lazy var fingerprintGenerator = FingerprintGenerator()
     
+    private lazy var _pushClient = PushClient(apiService: apiService, organizationUnid: appId)
+    override var pushClient: PushClient { _pushClient }
+    
     /// The storage location to save user data and events (belong to SDK)
     lazy var appDirectory = FileStorageURL.sdkDirectory.appendingSubDirectory(appId)
     
@@ -26,14 +29,16 @@ class InternalPolarApp: PolarApp {
     /// App: created by `appId` and `apiKey`.
     init(appId: String, apiKey: String, onLinkClickHandler: @escaping OnLinkClickHandler) {
         var apiKey = apiKey;
+        var environmentName = "prod"
         if apiKey.hasPrefix("dev_") {
             apiKey.removeFirst(4)
-            Configuration.Env = DevEnvConfigutation(isDebugging: false)
+            environmentName = "dev"
             
         }else if apiKey.hasPrefix("deb_") {
             apiKey.removeFirst(4)
-            Configuration.Env = DevEnvConfigutation(isDebugging: true)
+            environmentName = "deb"
         }
+        Configuration.selectEnvironment(by: environmentName)
         
         self.appId = appId
         self.apiKey = apiKey
@@ -43,8 +48,14 @@ class InternalPolarApp: PolarApp {
         
         Logger.initialTime = .init()
         
-        self.pendingEvents.reserveCapacity(Self.pendingEventsCapacity)
+        self.pendingEvents.reserveCapacity(PolarSettings.pendingEventsCapacity)
         self.startInitializingApp()
+        
+        //Save to app group
+        AppGroupStorage.shared.organizationUnid = appId
+        AppGroupStorage.shared.apiKey = apiKey
+        AppGroupStorage.shared.environment = environmentName
+        AppGroupStorage.shared.save()
     }
     
     private func startInitializingApp() {
@@ -72,6 +83,10 @@ class InternalPolarApp: PolarApp {
     /// - Create current user session if needed
     /// - Backup user session into the otherUserSessions to keep running for sending events
     private func setUser(userID: String?, attributes: [String: Any]?) {
+        // Save userID to App Groups for extension access
+        AppGroupStorage.shared.userUnid = userID
+        AppGroupStorage.shared.save()
+
         Task { @MainActor in
             if let userSession = currentUserSession {
                 if userSession.userID != userID {
@@ -94,7 +109,7 @@ class InternalPolarApp: PolarApp {
                 
                 events = pendingEvents;
                 pendingEvents = []
-                pendingEvents.reserveCapacity(Self.pendingEventsCapacity)
+                pendingEvents.reserveCapacity(PolarSettings.pendingEventsCapacity)
                 
                 pushToken = currentPushToken
                 
@@ -136,7 +151,7 @@ class InternalPolarApp: PolarApp {
                 }
                 
             }else{
-                if pendingEvents.count == Self.pendingEventsCapacity {
+                if pendingEvents.count == PolarSettings.pendingEventsCapacity {
                     pendingEvents.removeFirst()
                 }
                 pendingEvents.append((name, date, attributes))
@@ -164,6 +179,10 @@ class InternalPolarApp: PolarApp {
             
             if notification.name == UIApplication.didBecomeActiveNotification {
                 Task { await self?.checkAndHandleNotificationEnabledChanges() }
+            }
+            
+            if notification.name == UIApplication.willEnterForegroundNotification {
+                Logger.log("lastNotificationServiceResult: \(AppGroupStorage.shared.lastNotificationServiceResult ?? "(nil)")")
             }
         }
         nc.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: queue, using: track)
@@ -350,9 +369,6 @@ class InternalPolarApp: PolarApp {
 //MARK: - App
 @objc
 public class PolarApp: NSObject {
-    @objc public static var isLoggingEnabled = true
-    @objc public static var pendingEventsCapacity = 100
-
     private static var _shared: PolarApp?
     @objc public static var shared: PolarApp {
         _shared ?? {
@@ -368,7 +384,7 @@ public class PolarApp: NSObject {
     
     @objc public var currentUserID: String? { nil }
     @objc public func updateUser(userID: String?, attributes: [String: Any]?) {}
-    @objc public lazy var pushClient = PushClient(app: self)
+    @objc public var pushClient: PushClient { fatalError() }
     @objc public func setAPNS(deviceToken: Data) {}
     @objc public func setGCM(fcmToken: String) {}
     @objc public func trackEvent(name: String, attributes: [String: Any]) { }

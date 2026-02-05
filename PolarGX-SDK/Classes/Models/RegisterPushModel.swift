@@ -22,7 +22,11 @@ struct RegisterPushModel: Codable {
         self.sandbox = sandbox
         switch pushToken {
         case .apns(let token):
-            self.platform = "APNS"
+            if sandbox {
+                self.platform = "APNS_SANDBOX"
+            }else{
+                self.platform = "APNS"
+            }
             self.token = token
         case .gcm(let token):
             self.platform = "GCM"

@@ -1,0 +1,3 @@
+module PolarGX {
+    header "/Users/duyenlv/PROJECTS/BHM/POLAR/SRC/polargx-swift-sdk/.build/arm64-apple-macosx/debug/PolarGX.build/include/PolarGX-Swift.h"
+}

@@ -12,15 +12,27 @@ let package = Package(
         .library(
             name: "PolarGX",
             targets: ["PolarGX"]),
+        .library(
+            name: "PolarGXNotificationService",
+            targets: ["PolarGXNotificationService"]),
     ],
     dependencies: [],
     targets: [
+        // Main SDK (includes shared Core)
         .target(
             name: "PolarGX",
             dependencies: [],
             path: "PolarGX-SDK",
-            exclude: ["PolarGX.xcodeproj"],
-            sources: ["Classes"]
+            exclude: ["PolarGX.xcodeproj", "PolarGX-NotificationServiceExtension"],
+            sources: ["Classes", "Core"]
+        ),
+        // NotificationServiceExtension SDK (includes shared Core)
+        .target(
+            name: "PolarGXNotificationService",
+            dependencies: [],
+            path: "PolarGX-SDK",
+            exclude: ["PolarGX.xcodeproj", "Classes"],
+            sources: ["PolarGX-NotificationServiceExtension", "Core"]
         )
     ],
     swiftLanguageVersions: [.v5]

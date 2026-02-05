@@ -7,11 +7,46 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6033B60C2F345EDA003B6B1D /* DemoUIKit-NotificationService.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6033B6052F345EDA003B6B1D /* DemoUIKit-NotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6033B6132F345FA8003B6B1D /* PolarGX_NotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6033B6122F345FA8003B6B1D /* PolarGX_NotificationServiceExtension.framework */; };
+		6033B6142F345FA8003B6B1D /* PolarGX_NotificationServiceExtension.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6033B6122F345FA8003B6B1D /* PolarGX_NotificationServiceExtension.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		609A84DB2D6F1F14006415E1 /* PolarGX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 609A84D72D6F1E30006415E1 /* PolarGX.framework */; };
 		609A84DC2D6F1F14006415E1 /* PolarGX.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 609A84D72D6F1E30006415E1 /* PolarGX.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		6033B60A2F345EDA003B6B1D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 609EDD2D2D3DF3BF00EFDAFE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6033B6042F345EDA003B6B1D;
+			remoteInfo = "DemoUIKit-NotificationService";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
+		6033B60D2F345EDA003B6B1D /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				6033B60C2F345EDA003B6B1D /* DemoUIKit-NotificationService.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6033B6152F345FA8003B6B1D /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				6033B6142F345FA8003B6B1D /* PolarGX_NotificationServiceExtension.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		609A84DD2D6F1F14006415E1 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -26,12 +61,21 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6033B6052F345EDA003B6B1D /* DemoUIKit-NotificationService.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "DemoUIKit-NotificationService.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6033B6122F345FA8003B6B1D /* PolarGX_NotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = PolarGX_NotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		609A84D72D6F1E30006415E1 /* PolarGX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = PolarGX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		609EDD352D3DF3BF00EFDAFE /* DemoUIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoUIKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		609EDDE42D3F98BD00EFDAFE /* LinkAttributionSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = LinkAttributionSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		6033B6112F345EDA003B6B1D /* Exceptions for "DemoUIKit-NotificationService" folder in "DemoUIKit-NotificationService" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 6033B6042F345EDA003B6B1D /* DemoUIKit-NotificationService */;
+		};
 		609EDD472D3DF3C000EFDAFE /* Exceptions for "DemoUIKit" folder in "DemoUIKit" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -42,6 +86,14 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		6033B6062F345EDA003B6B1D /* DemoUIKit-NotificationService */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				6033B6112F345EDA003B6B1D /* Exceptions for "DemoUIKit-NotificationService" folder in "DemoUIKit-NotificationService" target */,
+			);
+			path = "DemoUIKit-NotificationService";
+			sourceTree = "<group>";
+		};
 		609EDD372D3DF3BF00EFDAFE /* DemoUIKit */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -53,6 +105,14 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		6033B6022F345EDA003B6B1D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6033B6132F345FA8003B6B1D /* PolarGX_NotificationServiceExtension.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		609EDD322D3DF3BF00EFDAFE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -68,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				609EDD372D3DF3BF00EFDAFE /* DemoUIKit */,
+				6033B6062F345EDA003B6B1D /* DemoUIKit-NotificationService */,
 				609EDDE32D3F98BD00EFDAFE /* Frameworks */,
 				609EDD362D3DF3BF00EFDAFE /* Products */,
 			);
@@ -77,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				609EDD352D3DF3BF00EFDAFE /* DemoUIKit.app */,
+				6033B6052F345EDA003B6B1D /* DemoUIKit-NotificationService.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -84,6 +146,7 @@
 		609EDDE32D3F98BD00EFDAFE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6033B6122F345FA8003B6B1D /* PolarGX_NotificationServiceExtension.framework */,
 				609A84D72D6F1E30006415E1 /* PolarGX.framework */,
 				609EDDE42D3F98BD00EFDAFE /* LinkAttributionSDK.framework */,
 			);
@@ -93,6 +156,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		6033B6042F345EDA003B6B1D /* DemoUIKit-NotificationService */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6033B6102F345EDA003B6B1D /* Build configuration list for PBXNativeTarget "DemoUIKit-NotificationService" */;
+			buildPhases = (
+				6033B6012F345EDA003B6B1D /* Sources */,
+				6033B6022F345EDA003B6B1D /* Frameworks */,
+				6033B6032F345EDA003B6B1D /* Resources */,
+				6033B6152F345FA8003B6B1D /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				6033B6062F345EDA003B6B1D /* DemoUIKit-NotificationService */,
+			);
+			name = "DemoUIKit-NotificationService";
+			packageProductDependencies = (
+			);
+			productName = "DemoUIKit-NotificationService";
+			productReference = 6033B6052F345EDA003B6B1D /* DemoUIKit-NotificationService.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		609EDD342D3DF3BF00EFDAFE /* DemoUIKit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 609EDD482D3DF3C000EFDAFE /* Build configuration list for PBXNativeTarget "DemoUIKit" */;
@@ -101,10 +187,12 @@
 				609EDD322D3DF3BF00EFDAFE /* Frameworks */,
 				609EDD332D3DF3BF00EFDAFE /* Resources */,
 				609A84DD2D6F1F14006415E1 /* Embed Frameworks */,
+				6033B60D2F345EDA003B6B1D /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				6033B60B2F345EDA003B6B1D /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				609EDD372D3DF3BF00EFDAFE /* DemoUIKit */,
@@ -121,9 +209,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1600;
+				LastSwiftUpdateCheck = 2600;
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
+					6033B6042F345EDA003B6B1D = {
+						CreatedOnToolsVersion = 26.0.1;
+					};
 					609EDD342D3DF3BF00EFDAFE = {
 						CreatedOnToolsVersion = 16.0;
 					};
@@ -144,11 +235,19 @@
 			projectRoot = "";
 			targets = (
 				609EDD342D3DF3BF00EFDAFE /* DemoUIKit */,
+				6033B6042F345EDA003B6B1D /* DemoUIKit-NotificationService */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		6033B6032F345EDA003B6B1D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		609EDD332D3DF3BF00EFDAFE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -159,6 +258,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		6033B6012F345EDA003B6B1D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		609EDD312D3DF3BF00EFDAFE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -168,7 +274,73 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		6033B60B2F345EDA003B6B1D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6033B6042F345EDA003B6B1D /* DemoUIKit-NotificationService */;
+			targetProxy = 6033B60A2F345EDA003B6B1D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		6033B60E2F345EDA003B6B1D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SP8T4ER53V;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "DemoUIKit-NotificationService/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "DemoUIKit-NotificationService";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bohemian.polar.mobilesdktest.DemoUIKit-NotificationService";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6033B60F2F345EDA003B6B1D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SP8T4ER53V;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "DemoUIKit-NotificationService/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "DemoUIKit-NotificationService";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bohemian.polar.mobilesdktest.DemoUIKit-NotificationService";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		609EDD492D3DF3C000EFDAFE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -353,6 +525,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		6033B6102F345EDA003B6B1D /* Build configuration list for PBXNativeTarget "DemoUIKit-NotificationService" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6033B60E2F345EDA003B6B1D /* Debug */,
+				6033B60F2F345EDA003B6B1D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		609EDD302D3DF3BF00EFDAFE /* Build configuration list for PBXProject "DemoUIKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
