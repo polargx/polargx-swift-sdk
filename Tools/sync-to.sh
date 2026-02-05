@@ -17,8 +17,8 @@ echo "Current Dir: $(pwd)"
 # Copy PolarGX-SDK files
 rm -rf "${DEST_DIR}/polargx-swift-sdk.lib" && mkdir -p "${DEST_DIR}/polargx-swift-sdk.lib" &&
 cp -R ./PolarGX-SDK "${DEST_DIR}/polargx-swift-sdk.lib/" &&
-cp ./PolarGX.podspec "${DEST_DIR}/polargx-swift-sdk.lib/" &&
+cp ./*.podspec "${DEST_DIR}/polargx-swift-sdk.lib/" &&
 cp ./README.md "${DEST_DIR}/polargx-swift-sdk.lib/" &&
 
-cd "${DEST_DIR}" && echo "cd: $(pwd) to pod install..." &&
-pod update PolarGX
+#cd "${DEST_DIR}" && echo "cd: $(pwd) to pod install..." &&
+#pod update PolarGX
