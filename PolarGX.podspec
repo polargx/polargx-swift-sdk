@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
       s.name                = "PolarGX"
       s.module_name         = "PolarGX"
-      s.version             = "3.2.0"
+      s.version             = "3.3.0"
       s.summary             = "PolarGX"
 
       s.description         = <<-DESC
