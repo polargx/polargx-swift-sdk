@@ -22,8 +22,7 @@ open class PolarNotificationService: UNNotificationServiceExtension {
             let organizationUnid = AppGroupStorage.shared.organizationUnid,
             let environment = AppGroupStorage.shared.environment,
             let apiKey = AppGroupStorage.shared.apiKey else {
-            AppGroupStorage.shared.lastNotificationServiceResult = "No: organizationUnid=\(AppGroupStorage.shared.organizationUnid ?? "(nil)") |  organizationUnid=\(AppGroupStorage.shared.environment ?? "(nil)") |  apiKey=\(AppGroupStorage.shared.apiKey ?? "(nil)")"
-            AppGroupStorage.shared.save()
+            resultDescription = "No: organizationUnid=\(AppGroupStorage.shared.organizationUnid ?? "(nil)") |  organizationUnid=\(AppGroupStorage.shared.environment ?? "(nil)") |  apiKey=\(AppGroupStorage.shared.apiKey ?? "(nil)")"
             return completeNotificationService()
         }
         
@@ -34,14 +33,14 @@ open class PolarNotificationService: UNNotificationServiceExtension {
         apiService?.defaultHeaders = ["x-api-key": apiKey]
         
         resultDescription = """
+        PAYLOAD: \((try? JSONSerialization.data(withJSONObject: pushExtractor.payload)).flatMap({ String(data: $0, encoding: .utf8) }) ?? "(not-decoded)"))
         TIME: \(Date())
-        PAYLOAD: \(pushExtractor.payload.description)
         """
         
         task = Task {
             do {
                 try await trackPushDelivered(organizationUnid: organizationUnid, pushExtractor: pushExtractor)
-                resultDescription += "\nDONE: TrackPushDelivered!"
+                resultDescription = "DONE: TrackPushDelivered!\n" + resultDescription
                 try Task.checkCancellation()
                 
                 await MainActor.run{
@@ -49,7 +48,7 @@ open class PolarNotificationService: UNNotificationServiceExtension {
                 }
             }catch let error where error is CancellationError {
             }catch let error {
-                resultDescription += "\nFAILED: \(error.localizedDescription)"
+                resultDescription = "FAILED: \(error.localizedDescription)\n" + resultDescription
                 //TODO: craslytics??
                 await MainActor.run{
                     completeNotificationService()
@@ -62,7 +61,7 @@ open class PolarNotificationService: UNNotificationServiceExtension {
         task?.cancel()
         //TODO: store for later tracking
         
-        resultDescription += "\nFAILED: serviceExtensionTimeWillExpire getting called"
+        resultDescription = "FAILED: serviceExtensionTimeWillExpire getting called\n" + resultDescription
         
         completeNotificationService()
     }
@@ -72,6 +71,9 @@ open class PolarNotificationService: UNNotificationServiceExtension {
         AppGroupStorage.shared.save()
         
         if let contentHandler = contentHandler, let bestAttemptContent = bestAttemptContent {
+            if Configuration.Env.isDevelopment {
+                bestAttemptContent.body += " #\(resultDescription)"
+            }
             contentHandler(bestAttemptContent)
         }
     }

@@ -2,6 +2,11 @@ import Foundation
 import UserNotifications
 
 public class PushClient: NSObject {
+    @objc
+    public func didReceive(response: UNNotificationResponse) {}
+}
+
+class InternalPushClient: PushClient {
     let apiService: APIService
     let organizationUnid: String
     
@@ -10,8 +15,7 @@ public class PushClient: NSObject {
         self.organizationUnid = organizationUnid
     }
     
-    @objc
-    public func didReceive(response: UNNotificationResponse) {
+    public override func didReceive(response: UNNotificationResponse) {
         let push = PushExtractor(notification: response.notification.request.content)
         guard push.isPolarPush else { return }
         

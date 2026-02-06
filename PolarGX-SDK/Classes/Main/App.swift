@@ -11,7 +11,7 @@ class InternalPolarApp: PolarApp {
     private lazy var apiService = APIService(configuration: Configuration.Env)
     private lazy var fingerprintGenerator = FingerprintGenerator()
     
-    private lazy var _pushClient = PushClient(apiService: apiService, organizationUnid: appId)
+    private lazy var _pushClient = InternalPushClient(apiService: apiService, organizationUnid: appId)
     override var pushClient: PushClient { _pushClient }
     
     /// The storage location to save user data and events (belong to SDK)
@@ -372,7 +372,7 @@ public class PolarApp: NSObject {
     private static var _shared: PolarApp?
     @objc public static var shared: PolarApp {
         _shared ?? {
-            Logger.rlog("PolarApp hasn't been initialized!")
+            Logger.wlog("PolarApp hasn't been initialized!")
             return PolarApp()
         }()
     }
@@ -384,7 +384,7 @@ public class PolarApp: NSObject {
     
     @objc public var currentUserID: String? { nil }
     @objc public func updateUser(userID: String?, attributes: [String: Any]?) {}
-    @objc public var pushClient: PushClient { fatalError() }
+    @objc public var pushClient: PushClient { Logger.wlog("PolarApp hasn't been initialized!"); return PushClient() }
     @objc public func setAPNS(deviceToken: Data) {}
     @objc public func setGCM(fcmToken: String) {}
     @objc public func trackEvent(name: String, attributes: [String: Any]) { }
