@@ -31,11 +31,13 @@ In **AppDelegate.m**:
 @import PolarGX;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [PolarApp initializeWithAppId:@"YOUR_APP_ID"
-                           apiKey:@"YOUR_API_KEY"
-                onLinkClickHandler:^(NSURL * _Nonnull url, NSDictionary<NSString *,id> * _Nullable attributes, NSError * _Nullable error) {
-        NSLog(@"[POLAR] link=%@ data=%@ error=%@", url, attributes, error);
-    }];
+    // Configure app group (required for push notifications)
+    PolarSettings.appGroupIdentifier = @"group.{your-bundle-id}";
+
+    // Initialize PolarGX
+    [PolarGX initializeWithOrganizationUnid:@"your-org-unid"
+                                     apiKey:@"your-api-key"
+                                environment:EnvironmentProduction];
 
     return YES;
 }

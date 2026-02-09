@@ -11,11 +11,15 @@ import PolarGX
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Your existing code
 
+    // Add: Configure app group (required for push notifications)
+    PolarSettings.appGroupIdentifier = "group.{your-bundle-id}"
+
     // Add: Initialize Polar app
-    PolarApp.initialize(appId: YOUR_APP_ID, apiKey: YOUR_API_KEY) { link, data, error in
-        print("\n[POLAR] detect link clicked: \(link), data: \(data), error: \(error)\n")
-        // Handle link clicked. This callback will be called in the main queue.
-    }
+    PolarGX.initialize(
+        organizationUnid: "your-org-unid",
+        apiKey: "your-api-key",
+        environment: .production
+    )
 
     return true
 }
