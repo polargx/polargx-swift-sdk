@@ -1,5 +1,9 @@
 import Foundation
 
+#if canImport(PolarGXCore)
+@_exported import PolarGXCore
+#endif
+
 struct FileStorageURL{
     public let url: URL;
     

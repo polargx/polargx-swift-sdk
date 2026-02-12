@@ -2,6 +2,10 @@ import Foundation
 import UIKit
 import UserNotifications
 
+#if canImport(PolarGXCore)
+@_exported import PolarGXCore
+#endif
+
 @MainActor
 public struct SystemInfo {
     static var osName: String {

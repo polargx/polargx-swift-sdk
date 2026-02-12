@@ -2,6 +2,10 @@ import Foundation
 import UIKit
 import WebKit
 
+#if canImport(PolarGXCore)
+@_exported import PolarGXCore
+#endif
+
 class FingerprintGenerator {
     private lazy var webView = WKWebView(frame: UIScreen.main.bounds)
     

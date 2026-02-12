@@ -1,5 +1,9 @@
 import Foundation
 
+#if canImport(PolarGXCore)
+@_exported import PolarGXCore
+#endif
+
 struct UpdateUserModel: Codable {
     let clobberMatchingAttributes: Bool
     let organizationUnid: String

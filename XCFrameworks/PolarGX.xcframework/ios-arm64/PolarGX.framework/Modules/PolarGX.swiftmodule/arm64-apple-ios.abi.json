@@ -1,0 +1,2603 @@
+{
+  "ABIRoot": {
+    "kind": "Root",
+    "name": "PolarGX",
+    "printedName": "PolarGX",
+    "children": [
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "UIKit",
+        "printedName": "UIKit",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "WebKit",
+        "printedName": "WebKit",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "UIKit",
+        "printedName": "UIKit",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "UserNotifications",
+        "printedName": "UserNotifications",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "SystemInfo",
+        "printedName": "SystemInfo",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "isAPSSandBox",
+            "printedName": "isAPSSandBox",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:7PolarGX10SystemInfoV12isAPSSandBoxSbvpZ",
+            "mangledName": "$s7PolarGX10SystemInfoV12isAPSSandBoxSbvpZ",
+            "moduleName": "PolarGX",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "Custom",
+              "AccessControl"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:7PolarGX10SystemInfoV12isAPSSandBoxSbvgZ",
+                "mangledName": "$s7PolarGX10SystemInfoV12isAPSSandBoxSbvgZ",
+                "moduleName": "PolarGX",
+                "static": true,
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          }
+        ],
+        "declKind": "Struct",
+        "usr": "s:7PolarGX10SystemInfoV",
+        "mangledName": "$s7PolarGX10SystemInfoV",
+        "moduleName": "PolarGX",
+        "declAttributes": [
+          "AccessControl",
+          "Custom"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Sendable",
+            "printedName": "Sendable",
+            "usr": "s:s8SendableP",
+            "mangledName": "$ss8SendableP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "UIKit",
+        "printedName": "UIKit",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "PolarApp",
+        "printedName": "PolarApp",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "shared",
+            "printedName": "shared",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "PolarApp",
+                "printedName": "PolarGX.PolarApp",
+                "usr": "c:@M@PolarGX@objc(cs)PolarApp"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@PolarGX@objc(cs)PolarApp(cpy)shared",
+            "mangledName": "$s7PolarGX0A3AppC6sharedACvpZ",
+            "moduleName": "PolarGX",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "PolarApp",
+                    "printedName": "PolarGX.PolarApp",
+                    "usr": "c:@M@PolarGX@objc(cs)PolarApp"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@PolarGX@objc(cs)PolarApp(cm)shared",
+                "mangledName": "$s7PolarGX0A3AppC6sharedACvgZ",
+                "moduleName": "PolarGX",
+                "static": true,
+                "declAttributes": [
+                  "Final",
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "initialize",
+            "printedName": "initialize(appId:apiKey:onLinkClickHandler:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Foundation.URL, [Swift.String : Any]?, (any Swift.Error)?) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Tuple",
+                    "printedName": "(Foundation.URL, [Swift.String : Any]?, (any Swift.Error)?)",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "URL",
+                        "printedName": "Foundation.URL",
+                        "usr": "s:10Foundation3URLV"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "[Swift.String : Any]?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Dictionary",
+                            "printedName": "[Swift.String : Any]",
+                            "children": [
+                              {
+                                "kind": "TypeNominal",
+                                "name": "String",
+                                "printedName": "Swift.String",
+                                "usr": "s:SS"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "ProtocolComposition",
+                                "printedName": "Any"
+                              }
+                            ],
+                            "usr": "s:SD"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "(any Swift.Error)?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Error",
+                            "printedName": "any Swift.Error",
+                            "usr": "s:s5ErrorP"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@PolarGX@objc(cs)PolarApp(cm)initializeWithAppId:apiKey:onLinkClickHandler:",
+            "mangledName": "$s7PolarGX0A3AppC10initialize5appId6apiKey18onLinkClickHandlerySS_SSy10Foundation3URLV_SDySSypGSgs5Error_pSgtctFZ",
+            "moduleName": "PolarGX",
+            "static": true,
+            "objc_name": "initializeWithAppId:apiKey:onLinkClickHandler:",
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Var",
+            "name": "currentUserID",
+            "printedName": "currentUserID",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@PolarGX@objc(cs)PolarApp(py)currentUserID",
+            "mangledName": "$s7PolarGX0A3AppC13currentUserIDSSSgvp",
+            "moduleName": "PolarGX",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@PolarGX@objc(cs)PolarApp(im)currentUserID",
+                "mangledName": "$s7PolarGX0A3AppC13currentUserIDSSSgvg",
+                "moduleName": "PolarGX",
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "updateUser",
+            "printedName": "updateUser(userID:attributes:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "[Swift.String : Any]?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Dictionary",
+                    "printedName": "[Swift.String : Any]",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ProtocolComposition",
+                        "printedName": "Any"
+                      }
+                    ],
+                    "usr": "s:SD"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@PolarGX@objc(cs)PolarApp(im)updateUserWithUserID:attributes:",
+            "mangledName": "$s7PolarGX0A3AppC10updateUser6userID10attributesySSSg_SDySSypGSgtF",
+            "moduleName": "PolarGX",
+            "objc_name": "updateUserWithUserID:attributes:",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Var",
+            "name": "pushClient",
+            "printedName": "pushClient",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "PushClient",
+                "printedName": "PolarGX.PushClient",
+                "usr": "c:@M@PolarGX@objc(cs)PushClient"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@PolarGX@objc(cs)PolarApp(py)pushClient",
+            "mangledName": "$s7PolarGX0A3AppC10pushClientAA04PushE0Cvp",
+            "moduleName": "PolarGX",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "PushClient",
+                    "printedName": "PolarGX.PushClient",
+                    "usr": "c:@M@PolarGX@objc(cs)PushClient"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@PolarGX@objc(cs)PolarApp(im)pushClient",
+                "mangledName": "$s7PolarGX0A3AppC10pushClientAA04PushE0Cvg",
+                "moduleName": "PolarGX",
+                "declAttributes": [
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "setAPNS",
+            "printedName": "setAPNS(deviceToken:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@PolarGX@objc(cs)PolarApp(im)setAPNSWithDeviceToken:",
+            "mangledName": "$s7PolarGX0A3AppC7setAPNS11deviceTokeny10Foundation4DataV_tF",
+            "moduleName": "PolarGX",
+            "objc_name": "setAPNSWithDeviceToken:",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "setGCM",
+            "printedName": "setGCM(fcmToken:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@PolarGX@objc(cs)PolarApp(im)setGCMWithFcmToken:",
+            "mangledName": "$s7PolarGX0A3AppC6setGCM8fcmTokenySS_tF",
+            "moduleName": "PolarGX",
+            "objc_name": "setGCMWithFcmToken:",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "trackEvent",
+            "printedName": "trackEvent(name:attributes:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Dictionary",
+                "printedName": "[Swift.String : Any]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ProtocolComposition",
+                    "printedName": "Any"
+                  }
+                ],
+                "usr": "s:SD"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@PolarGX@objc(cs)PolarApp(im)trackEventWithName:attributes:",
+            "mangledName": "$s7PolarGX0A3AppC10trackEvent4name10attributesySS_SDySSypGtF",
+            "moduleName": "PolarGX",
+            "objc_name": "trackEventWithName:attributes:",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "continueUserActivity",
+            "printedName": "continueUserActivity(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "NSUserActivity",
+                "printedName": "Foundation.NSUserActivity",
+                "usr": "c:objc(cs)NSUserActivity"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@PolarGX@objc(cs)PolarApp(im)continueUserActivity:",
+            "mangledName": "$s7PolarGX0A3AppC20continueUserActivityySbSo06NSUserF0CF",
+            "moduleName": "PolarGX",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC",
+              "DiscardableResult"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "openUrl",
+            "printedName": "openUrl(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "URL",
+                "printedName": "Foundation.URL",
+                "usr": "s:10Foundation3URLV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@PolarGX@objc(cs)PolarApp(im)openUrl:",
+            "mangledName": "$s7PolarGX0A3AppC7openUrlySb10Foundation3URLVF",
+            "moduleName": "PolarGX",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC",
+              "DiscardableResult"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "PolarApp",
+                "printedName": "PolarGX.PolarApp",
+                "usr": "c:@M@PolarGX@objc(cs)PolarApp"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@PolarGX@objc(cs)PolarApp(im)init",
+            "mangledName": "$s7PolarGX0A3AppCACycfc",
+            "moduleName": "PolarGX",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@PolarGX@objc(cs)PolarApp",
+        "mangledName": "$s7PolarGX0A3AppC",
+        "moduleName": "PolarGX",
+        "declAttributes": [
+          "AccessControl",
+          "ObjC",
+          "RawDocComment"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "UserNotifications",
+        "printedName": "UserNotifications",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "PushClient",
+        "printedName": "PushClient",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "didReceive",
+            "printedName": "didReceive(response:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "UNNotificationResponse",
+                "printedName": "UserNotifications.UNNotificationResponse",
+                "usr": "c:objc(cs)UNNotificationResponse"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@PolarGX@objc(cs)PushClient(im)didReceiveWithResponse:",
+            "mangledName": "$s7PolarGX10PushClientC10didReceive8responseySo22UNNotificationResponseC_tF",
+            "moduleName": "PolarGX",
+            "objc_name": "didReceiveWithResponse:",
+            "declAttributes": [
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "PushClient",
+                "printedName": "PolarGX.PushClient",
+                "usr": "c:@M@PolarGX@objc(cs)PushClient"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@PolarGX@objc(cs)PushClient(im)init",
+            "mangledName": "$s7PolarGX10PushClientCACycfc",
+            "moduleName": "PolarGX",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@PolarGX@objc(cs)PushClient",
+        "mangledName": "$s7PolarGX10PushClientC",
+        "moduleName": "PolarGX",
+        "declAttributes": [
+          "AccessControl",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "UserNotifications",
+        "printedName": "UserNotifications",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "PolarQuickIntegration",
+        "printedName": "PolarQuickIntegration",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "userNotificationCenterDelegateImpl",
+            "printedName": "userNotificationCenterDelegateImpl",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "UserNotificationCenterDelegateQuickImpl",
+                "printedName": "PolarGX.PolarQuickIntegration.UserNotificationCenterDelegateQuickImpl",
+                "usr": "s:7PolarGX0A16QuickIntegrationC030UserNotificationCenterDelegateC4ImplC"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:7PolarGX0A16QuickIntegrationC34userNotificationCenterDelegateImplAC04UserfghcI0CvpZ",
+            "mangledName": "$s7PolarGX0A16QuickIntegrationC34userNotificationCenterDelegateImplAC04UserfghcI0CvpZ",
+            "moduleName": "PolarGX",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UserNotificationCenterDelegateQuickImpl",
+                    "printedName": "PolarGX.PolarQuickIntegration.UserNotificationCenterDelegateQuickImpl",
+                    "usr": "s:7PolarGX0A16QuickIntegrationC030UserNotificationCenterDelegateC4ImplC"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:7PolarGX0A16QuickIntegrationC34userNotificationCenterDelegateImplAC04UserfghcI0CvgZ",
+                "mangledName": "$s7PolarGX0A16QuickIntegrationC34userNotificationCenterDelegateImplAC04UserfghcI0CvgZ",
+                "moduleName": "PolarGX",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "TypeDecl",
+            "name": "UserNotificationCenterDelegateQuickImpl",
+            "printedName": "UserNotificationCenterDelegateQuickImpl",
+            "children": [
+              {
+                "kind": "Function",
+                "name": "userNotificationCenter",
+                "printedName": "userNotificationCenter(_:willPresent:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UNNotificationPresentationOptions",
+                    "printedName": "UserNotifications.UNNotificationPresentationOptions",
+                    "usr": "c:@E@UNNotificationPresentationOptions"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UNUserNotificationCenter",
+                    "printedName": "UserNotifications.UNUserNotificationCenter",
+                    "usr": "c:objc(cs)UNUserNotificationCenter"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UNNotification",
+                    "printedName": "UserNotifications.UNNotification",
+                    "usr": "c:objc(cs)UNNotification"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:7PolarGX0A16QuickIntegrationC030UserNotificationCenterDelegateC4ImplC04userfG0_11willPresentSo33UNNotificationPresentationOptionsVSo06UNUserfG0C_So0M0CtYaF",
+                "mangledName": "$s7PolarGX0A16QuickIntegrationC030UserNotificationCenterDelegateC4ImplC04userfG0_11willPresentSo33UNNotificationPresentationOptionsVSo06UNUserfG0C_So0M0CtYaF",
+                "moduleName": "PolarGX",
+                "objc_name": "userNotificationCenter:willPresentNotification:withCompletionHandler:",
+                "declAttributes": [
+                  "Final",
+                  "ObjC",
+                  "AccessControl"
+                ],
+                "funcSelfKind": "NonMutating"
+              },
+              {
+                "kind": "Function",
+                "name": "userNotificationCenter",
+                "printedName": "userNotificationCenter(_:didReceive:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UNUserNotificationCenter",
+                    "printedName": "UserNotifications.UNUserNotificationCenter",
+                    "usr": "c:objc(cs)UNUserNotificationCenter"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UNNotificationResponse",
+                    "printedName": "UserNotifications.UNNotificationResponse",
+                    "usr": "c:objc(cs)UNNotificationResponse"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:7PolarGX0A16QuickIntegrationC030UserNotificationCenterDelegateC4ImplC04userfG0_10didReceiveySo06UNUserfG0C_So22UNNotificationResponseCtYaF",
+                "mangledName": "$s7PolarGX0A16QuickIntegrationC030UserNotificationCenterDelegateC4ImplC04userfG0_10didReceiveySo06UNUserfG0C_So22UNNotificationResponseCtYaF",
+                "moduleName": "PolarGX",
+                "objc_name": "userNotificationCenter:didReceiveNotificationResponse:withCompletionHandler:",
+                "declAttributes": [
+                  "Final",
+                  "ObjC",
+                  "AccessControl"
+                ],
+                "funcSelfKind": "NonMutating"
+              },
+              {
+                "kind": "Constructor",
+                "name": "init",
+                "printedName": "init()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UserNotificationCenterDelegateQuickImpl",
+                    "printedName": "PolarGX.PolarQuickIntegration.UserNotificationCenterDelegateQuickImpl",
+                    "usr": "s:7PolarGX0A16QuickIntegrationC030UserNotificationCenterDelegateC4ImplC"
+                  }
+                ],
+                "declKind": "Constructor",
+                "usr": "s:7PolarGX0A16QuickIntegrationC030UserNotificationCenterDelegateC4ImplCAEycfc",
+                "mangledName": "$s7PolarGX0A16QuickIntegrationC030UserNotificationCenterDelegateC4ImplCAEycfc",
+                "moduleName": "PolarGX",
+                "overriding": true,
+                "implicit": true,
+                "objc_name": "init",
+                "declAttributes": [
+                  "Dynamic",
+                  "ObjC",
+                  "Override"
+                ],
+                "init_kind": "Designated"
+              }
+            ],
+            "declKind": "Class",
+            "usr": "s:7PolarGX0A16QuickIntegrationC030UserNotificationCenterDelegateC4ImplC",
+            "mangledName": "$s7PolarGX0A16QuickIntegrationC030UserNotificationCenterDelegateC4ImplC",
+            "moduleName": "PolarGX",
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC"
+            ],
+            "superclassUsr": "c:objc(cs)NSObject",
+            "inheritsConvenienceInitializers": true,
+            "superclassNames": [
+              "ObjectiveC.NSObject"
+            ],
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Equatable",
+                "printedName": "Equatable",
+                "usr": "s:SQ",
+                "mangledName": "$sSQ"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Hashable",
+                "printedName": "Hashable",
+                "usr": "s:SH",
+                "mangledName": "$sSH"
+              },
+              {
+                "kind": "Conformance",
+                "name": "CVarArg",
+                "printedName": "CVarArg",
+                "usr": "s:s7CVarArgP",
+                "mangledName": "$ss7CVarArgP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "_KeyValueCodingAndObservingPublishing",
+                "printedName": "_KeyValueCodingAndObservingPublishing",
+                "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+                "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "_KeyValueCodingAndObserving",
+                "printedName": "_KeyValueCodingAndObserving",
+                "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+                "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "CustomStringConvertible",
+                "printedName": "CustomStringConvertible",
+                "usr": "s:s23CustomStringConvertibleP",
+                "mangledName": "$ss23CustomStringConvertibleP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "CustomDebugStringConvertible",
+                "printedName": "CustomDebugStringConvertible",
+                "usr": "s:s28CustomDebugStringConvertibleP",
+                "mangledName": "$ss28CustomDebugStringConvertibleP"
+              }
+            ]
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "PolarQuickIntegration",
+                "printedName": "PolarGX.PolarQuickIntegration",
+                "usr": "c:@M@PolarGX@objc(cs)PolarQuickIntegration"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@PolarGX@objc(cs)PolarQuickIntegration(im)init",
+            "mangledName": "$s7PolarGX0A16QuickIntegrationCACycfc",
+            "moduleName": "PolarGX",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@PolarGX@objc(cs)PolarQuickIntegration",
+        "mangledName": "$s7PolarGX0A16QuickIntegrationC",
+        "moduleName": "PolarGX",
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "UserNotifications",
+        "printedName": "UserNotifications",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "PolarEventKey",
+        "printedName": "PolarEventKey",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "Email",
+            "printedName": "Email",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:7PolarGX0A8EventKeyV5EmailSSvpZ",
+            "mangledName": "$s7PolarGX0A8EventKeyV5EmailSSvpZ",
+            "moduleName": "PolarGX",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:7PolarGX0A8EventKeyV5EmailSSvgZ",
+                "mangledName": "$s7PolarGX0A8EventKeyV5EmailSSvgZ",
+                "moduleName": "PolarGX",
+                "static": true,
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "Name",
+            "printedName": "Name",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:7PolarGX0A8EventKeyV4NameSSvpZ",
+            "mangledName": "$s7PolarGX0A8EventKeyV4NameSSvpZ",
+            "moduleName": "PolarGX",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:7PolarGX0A8EventKeyV4NameSSvgZ",
+                "mangledName": "$s7PolarGX0A8EventKeyV4NameSSvgZ",
+                "moduleName": "PolarGX",
+                "static": true,
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "FirstName",
+            "printedName": "FirstName",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:7PolarGX0A8EventKeyV9FirstNameSSvpZ",
+            "mangledName": "$s7PolarGX0A8EventKeyV9FirstNameSSvpZ",
+            "moduleName": "PolarGX",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:7PolarGX0A8EventKeyV9FirstNameSSvgZ",
+                "mangledName": "$s7PolarGX0A8EventKeyV9FirstNameSSvgZ",
+                "moduleName": "PolarGX",
+                "static": true,
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "LastName",
+            "printedName": "LastName",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:7PolarGX0A8EventKeyV8LastNameSSvpZ",
+            "mangledName": "$s7PolarGX0A8EventKeyV8LastNameSSvpZ",
+            "moduleName": "PolarGX",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:7PolarGX0A8EventKeyV8LastNameSSvgZ",
+                "mangledName": "$s7PolarGX0A8EventKeyV8LastNameSSvgZ",
+                "moduleName": "PolarGX",
+                "static": true,
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "phone",
+            "printedName": "phone",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:7PolarGX0A8EventKeyV5phoneSSvpZ",
+            "mangledName": "$s7PolarGX0A8EventKeyV5phoneSSvpZ",
+            "moduleName": "PolarGX",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:7PolarGX0A8EventKeyV5phoneSSvgZ",
+                "mangledName": "$s7PolarGX0A8EventKeyV5phoneSSvgZ",
+                "moduleName": "PolarGX",
+                "static": true,
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          }
+        ],
+        "declKind": "Struct",
+        "usr": "s:7PolarGX0A8EventKeyV",
+        "mangledName": "$s7PolarGX0A8EventKeyV",
+        "moduleName": "PolarGX",
+        "declAttributes": [
+          "AccessControl"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "PolarSettings",
+        "printedName": "PolarSettings",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "isLoggingEnabled",
+            "printedName": "isLoggingEnabled",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@PolarGX@objc(cs)PolarSettings(cpy)isLoggingEnabled",
+            "mangledName": "$s7PolarGX0A8SettingsC16isLoggingEnabledSbvpZ",
+            "moduleName": "PolarGX",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "HasStorage",
+              "AccessControl",
+              "ObjC"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@PolarGX@objc(cs)PolarSettings(cm)isLoggingEnabled",
+                "mangledName": "$s7PolarGX0A8SettingsC16isLoggingEnabledSbvgZ",
+                "moduleName": "PolarGX",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final",
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@PolarGX@objc(cs)PolarSettings(cm)setIsLoggingEnabled:",
+                "mangledName": "$s7PolarGX0A8SettingsC16isLoggingEnabledSbvsZ",
+                "moduleName": "PolarGX",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final",
+                  "ObjC"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:7PolarGX0A8SettingsC16isLoggingEnabledSbvMZ",
+                "mangledName": "$s7PolarGX0A8SettingsC16isLoggingEnabledSbvMZ",
+                "moduleName": "PolarGX",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "pendingEventsCapacity",
+            "printedName": "pendingEventsCapacity",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@PolarGX@objc(cs)PolarSettings(cpy)pendingEventsCapacity",
+            "mangledName": "$s7PolarGX0A8SettingsC21pendingEventsCapacitySivpZ",
+            "moduleName": "PolarGX",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "HasStorage",
+              "AccessControl",
+              "ObjC"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@PolarGX@objc(cs)PolarSettings(cm)pendingEventsCapacity",
+                "mangledName": "$s7PolarGX0A8SettingsC21pendingEventsCapacitySivgZ",
+                "moduleName": "PolarGX",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final",
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@PolarGX@objc(cs)PolarSettings(cm)setPendingEventsCapacity:",
+                "mangledName": "$s7PolarGX0A8SettingsC21pendingEventsCapacitySivsZ",
+                "moduleName": "PolarGX",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final",
+                  "ObjC"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:7PolarGX0A8SettingsC21pendingEventsCapacitySivMZ",
+                "mangledName": "$s7PolarGX0A8SettingsC21pendingEventsCapacitySivMZ",
+                "moduleName": "PolarGX",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "appGroupIdentifier",
+            "printedName": "appGroupIdentifier",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@PolarGX@objc(cs)PolarSettings(cpy)appGroupIdentifier",
+            "mangledName": "$s7PolarGX0A8SettingsC18appGroupIdentifierSSSgvpZ",
+            "moduleName": "PolarGX",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "HasStorage",
+              "AccessControl",
+              "ObjC"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@PolarGX@objc(cs)PolarSettings(cm)appGroupIdentifier",
+                "mangledName": "$s7PolarGX0A8SettingsC18appGroupIdentifierSSSgvgZ",
+                "moduleName": "PolarGX",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final",
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@PolarGX@objc(cs)PolarSettings(cm)setAppGroupIdentifier:",
+                "mangledName": "$s7PolarGX0A8SettingsC18appGroupIdentifierSSSgvsZ",
+                "moduleName": "PolarGX",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final",
+                  "ObjC"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:7PolarGX0A8SettingsC18appGroupIdentifierSSSgvMZ",
+                "mangledName": "$s7PolarGX0A8SettingsC18appGroupIdentifierSSSgvMZ",
+                "moduleName": "PolarGX",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "PolarSettings",
+                "printedName": "PolarGX.PolarSettings",
+                "usr": "c:@M@PolarGX@objc(cs)PolarSettings"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@PolarGX@objc(cs)PolarSettings(im)init",
+            "mangledName": "$s7PolarGX0A8SettingsCACycfc",
+            "moduleName": "PolarGX",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@PolarGX@objc(cs)PolarSettings",
+        "mangledName": "$s7PolarGX0A8SettingsC",
+        "moduleName": "PolarGX",
+        "declAttributes": [
+          "AccessControl",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      }
+    ],
+    "json_format_version": 8
+  },
+  "ConstValues": [
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Helpers\/APIService.swift",
+      "kind": "Dictionary",
+      "offset": 135,
+      "length": 3,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Helpers\/APIService.swift",
+      "kind": "StringLiteral",
+      "offset": 686,
+      "length": 5,
+      "value": "\"GET\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Helpers\/APIService.swift",
+      "kind": "StringLiteral",
+      "offset": 712,
+      "length": 6,
+      "value": "\"POST\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Helpers\/APIService.swift",
+      "kind": "StringLiteral",
+      "offset": 738,
+      "length": 5,
+      "value": "\"PUT\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Helpers\/APIService.swift",
+      "kind": "StringLiteral",
+      "offset": 766,
+      "length": 8,
+      "value": "\"DELETE\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Helpers\/APIService.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1004,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Classes\/Helpers\/APIService+Tracking.swift",
+      "kind": "IntegerLiteral",
+      "offset": 130,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Classes\/Helpers\/FileStorage.swift",
+      "kind": "BooleanLiteral",
+      "offset": 593,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Classes\/Helpers\/FileStorage.swift",
+      "kind": "StringLiteral",
+      "offset": 1023,
+      "length": 13,
+      "value": "\"-aRDrdAOPcD\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Classes\/Helpers\/Formatter.swift",
+      "kind": "StringLiteral",
+      "offset": 1405,
+      "length": 13,
+      "value": "\"en_US_POSIX\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Classes\/Helpers\/Formatter.swift",
+      "kind": "StringLiteral",
+      "offset": 1496,
+      "length": 5,
+      "value": "\"UTC\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Classes\/Helpers\/SystemInfo.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2068,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Classes\/Helpers\/SystemInfo.swift",
+      "kind": "StringLiteral",
+      "offset": 2136,
+      "length": 14,
+      "value": "\"Entitlements\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Classes\/Helpers\/SystemInfo.swift",
+      "kind": "StringLiteral",
+      "offset": 2213,
+      "length": 17,
+      "value": "\"aps-environment\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Classes\/Helpers\/SystemInfo.swift",
+      "kind": "StringLiteral",
+      "offset": 2285,
+      "length": 13,
+      "value": "\"development\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Classes\/Main\/App.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1124,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Classes\/Main\/App.swift",
+      "kind": "StringLiteral",
+      "offset": 15238,
+      "length": 35,
+      "value": "\"PolarApp hasn't been initialized!\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Classes\/Main\/App.swift",
+      "kind": "StringLiteral",
+      "offset": 15864,
+      "length": 35,
+      "value": "\"PolarApp hasn't been initialized!\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Classes\/Session\/DeregisterPushQueue.swift",
+      "kind": "BooleanLiteral",
+      "offset": 392,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Classes\/Session\/DeregisterPushQueue.swift",
+      "kind": "Array",
+      "offset": 1075,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Classes\/Session\/RegisterPushWorker.swift",
+      "kind": "BooleanLiteral",
+      "offset": 242,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Classes\/Session\/RegisterPushWorker.swift",
+      "kind": "BooleanLiteral",
+      "offset": 281,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Classes\/Session\/TrackingEventQueue.swift",
+      "kind": "BooleanLiteral",
+      "offset": 311,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Classes\/Session\/TrackingEventQueue.swift",
+      "kind": "BooleanLiteral",
+      "offset": 350,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Classes\/Session\/TrackingEventQueue.swift",
+      "kind": "Array",
+      "offset": 852,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Classes\/Session\/UserSession.swift",
+      "kind": "BooleanLiteral",
+      "offset": 524,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Classes\/Session\/UserSession.swift",
+      "kind": "IntegerLiteral",
+      "offset": 623,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Classes\/Session\/UserSession.swift",
+      "kind": "BooleanLiteral",
+      "offset": 663,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Classes\/Session\/UserSession.swift",
+      "kind": "StringLiteral",
+      "offset": 1350,
+      "length": 17,
+      "value": "\"lastSessionTime\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Classes\/Session\/UserSession.swift",
+      "kind": "Dictionary",
+      "offset": 1811,
+      "length": 3,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Helpers\/AppGroupStorage.swift",
+      "kind": "StringLiteral",
+      "offset": 178,
+      "length": 30,
+      "value": "\"polargx.sdk.organizationUnid\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Helpers\/AppGroupStorage.swift",
+      "kind": "StringLiteral",
+      "offset": 237,
+      "length": 20,
+      "value": "\"polargx.sdk.apiKey\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Helpers\/AppGroupStorage.swift",
+      "kind": "StringLiteral",
+      "offset": 288,
+      "length": 22,
+      "value": "\"polargx.sdk.userUnid\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Helpers\/AppGroupStorage.swift",
+      "kind": "StringLiteral",
+      "offset": 344,
+      "length": 25,
+      "value": "\"polargx.sdk.environment\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Helpers\/AppGroupStorage.swift",
+      "kind": "StringLiteral",
+      "offset": 421,
+      "length": 43,
+      "value": "\"polargx.sdk.lastNotificationServiceResult\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Helpers\/Errors.swift",
+      "kind": "StringLiteral",
+      "offset": 45,
+      "length": 38,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Helpers\/Errors.swift",
+      "kind": "StringLiteral",
+      "offset": 68,
+      "length": 14,
+      "value": "\"SDKErrorDomain\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Helpers\/ThLocker.swift",
+      "kind": "BooleanLiteral",
+      "offset": 63,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Helpers\/ThLocker.swift",
+      "kind": "Array",
+      "offset": 137,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Models\/PushEventModel.swift",
+      "kind": "StringLiteral",
+      "offset": 63,
+      "length": 8,
+      "value": "\"opened\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Models\/PushEventModel.swift",
+      "kind": "StringLiteral",
+      "offset": 93,
+      "length": 11,
+      "value": "\"delivered\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Configuration.swift",
+      "kind": "StringLiteral",
+      "offset": 1296,
+      "length": 7,
+      "value": "\"Polar\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Constants.swift",
+      "kind": "StringLiteral",
+      "offset": 97,
+      "length": 19,
+      "value": "\"com.polargx.link.\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Constants.swift",
+      "kind": "StringLiteral",
+      "offset": 512,
+      "length": 30,
+      "value": "\"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Constants.swift",
+      "kind": "StringLiteral",
+      "offset": 603,
+      "length": 10,
+      "value": "\"app_open\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Constants.swift",
+      "kind": "StringLiteral",
+      "offset": 634,
+      "length": 11,
+      "value": "\"app_close\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Constants.swift",
+      "kind": "StringLiteral",
+      "offset": 667,
+      "length": 12,
+      "value": "\"app_active\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Constants.swift",
+      "kind": "StringLiteral",
+      "offset": 703,
+      "length": 14,
+      "value": "\"app_inactive\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Constants.swift",
+      "kind": "StringLiteral",
+      "offset": 742,
+      "length": 15,
+      "value": "\"app_ternimate\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Constants.swift",
+      "kind": "StringLiteral",
+      "offset": 787,
+      "length": 20,
+      "value": "\"user_session_start\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Constants.swift",
+      "kind": "StringLiteral",
+      "offset": 830,
+      "length": 12,
+      "value": "\"link_click\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Constants.swift",
+      "kind": "StringLiteral",
+      "offset": 864,
+      "length": 11,
+      "value": "\"push_open\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Constants.swift",
+      "kind": "StringLiteral",
+      "offset": 901,
+      "length": 16,
+      "value": "\"push_delivered\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Constants.swift",
+      "kind": "StringLiteral",
+      "offset": 989,
+      "length": 7,
+      "value": "\"email\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Constants.swift",
+      "kind": "StringLiteral",
+      "offset": 1034,
+      "length": 6,
+      "value": "\"name\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Constants.swift",
+      "kind": "StringLiteral",
+      "offset": 1083,
+      "length": 11,
+      "value": "\"firstname\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Constants.swift",
+      "kind": "StringLiteral",
+      "offset": 1136,
+      "length": 10,
+      "value": "\"lastname\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Constants.swift",
+      "kind": "StringLiteral",
+      "offset": 1185,
+      "length": 7,
+      "value": "\"phone\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/PolarSettings.swift",
+      "kind": "BooleanLiteral",
+      "offset": 105,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/PolarSettings.swift",
+      "kind": "IntegerLiteral",
+      "offset": 162,
+      "length": 3,
+      "value": "100"
+    }
+  ]
+}

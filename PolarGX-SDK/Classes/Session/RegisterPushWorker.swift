@@ -1,5 +1,9 @@
 import Foundation
 
+#if canImport(PolarGXCore)
+@_exported import PolarGXCore
+#endif
+
 actor RegisterPushWorker {
     private let apiService: APIService
     private var pendingRegisterPushToken: RegisterPushModel?

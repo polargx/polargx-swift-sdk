@@ -1,6 +1,10 @@
 
 import Foundation
 
+#if canImport(PolarGXCore)
+@_exported import PolarGXCore
+#endif
+
 enum PushToken {
     case apns(String)
     case gcm(String)

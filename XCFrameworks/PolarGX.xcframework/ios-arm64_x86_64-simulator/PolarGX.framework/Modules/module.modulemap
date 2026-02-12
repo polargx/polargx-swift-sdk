@@ -1,0 +1,4 @@
+framework module PolarGX {
+  header "PolarGX-Swift.h"
+  requires objc
+}

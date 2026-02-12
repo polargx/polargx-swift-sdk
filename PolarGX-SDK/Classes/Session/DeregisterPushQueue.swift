@@ -1,5 +1,9 @@
 import Foundation
 
+#if canImport(PolarGXCore)
+@_exported import PolarGXCore
+#endif
+
 /// Pupurse: fetch events from disk and manage events
 actor DeregisterPushQueue {
     private let fileUrl: URL

@@ -1,5 +1,9 @@
 import Foundation
 
+#if canImport(PolarGXCore)
+@_exported import PolarGXCore
+#endif
+
 extension APIService {
     @discardableResult
     func getClientInfo() async throws -> ClientInfoModel? {

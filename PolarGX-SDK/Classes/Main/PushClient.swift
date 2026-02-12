@@ -1,6 +1,10 @@
 import Foundation
 import UserNotifications
 
+#if canImport(PolarGXCore)
+@_exported import PolarGXCore
+#endif
+
 public class PushClient: NSObject {
     @objc
     public func didReceive(response: UNNotificationResponse) {}

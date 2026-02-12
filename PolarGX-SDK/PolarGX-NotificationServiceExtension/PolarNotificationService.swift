@@ -1,6 +1,10 @@
 import Foundation
 import UserNotifications
 
+#if canImport(PolarGXCore)
+@_exported import PolarGXCore
+#endif
+
 /// PolarGX NotificationServiceExtension SDK
 /// Tracks push notification delivery and enables rich media attachments
 @objc

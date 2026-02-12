@@ -1,6 +1,10 @@
 import Foundation
 import UIKit
 
+#if canImport(PolarGXCore)
+@_exported import PolarGXCore
+#endif
+
 typealias UntrackedEvent = (eventName: String, date: Date, attributes: [String: Any])
 
 class InternalPolarApp: PolarApp {

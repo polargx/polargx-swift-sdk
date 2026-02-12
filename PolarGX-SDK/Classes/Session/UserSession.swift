@@ -1,5 +1,9 @@
 import Foundation
 
+#if canImport(PolarGXCore)
+@_exported import PolarGXCore
+#endif
+
 /// Purpose: create user if needed by calling UpdateUser api.
 /// Manage events since userId to be set and send to backend.
 /// One UserSession instance will be created for only one user (userID)

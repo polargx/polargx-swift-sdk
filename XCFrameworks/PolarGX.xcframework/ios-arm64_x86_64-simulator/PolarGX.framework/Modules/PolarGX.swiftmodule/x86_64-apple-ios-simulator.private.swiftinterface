@@ -1,0 +1,73 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.19.9 clang-1700.3.19.1)
+// swift-module-flags: -target x86_64-apple-ios15.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name PolarGX
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+import Foundation
+import Swift
+import UIKit
+import UserNotifications
+import WebKit
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+@_Concurrency.MainActor public struct SystemInfo {
+  @_Concurrency.MainActor public static let isAPSSandBox: Swift.Bool
+}
+@_inheritsConvenienceInitializers @objc public class PolarApp : ObjectiveC.NSObject {
+  @objc public static var shared: PolarGX.PolarApp {
+    @objc get
+  }
+  public typealias OnLinkClickHandler = (_ link: Foundation.URL, _ data: [Swift.String : Any]?, _ error: (any Swift.Error)?) -> Swift.Void
+  @objc public static func initialize(appId: Swift.String, apiKey: Swift.String, onLinkClickHandler: @escaping PolarGX.PolarApp.OnLinkClickHandler)
+  #if compiler(>=5.3) && $NonescapableTypes
+  @objc public var currentUserID: Swift.String? {
+    @objc get
+  }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  @objc public func updateUser(userID: Swift.String?, attributes: [Swift.String : Any]?)
+  #endif
+  @objc public var pushClient: PolarGX.PushClient {
+    @objc get
+  }
+  @objc public func setAPNS(deviceToken: Foundation.Data)
+  @objc public func setGCM(fcmToken: Swift.String)
+  @objc public func trackEvent(name: Swift.String, attributes: [Swift.String : Any])
+  @discardableResult
+  @objc public func continueUserActivity(_ activity: Foundation.NSUserActivity) -> Swift.Bool
+  @discardableResult
+  @objc public func openUrl(_ url: Foundation.URL) -> Swift.Bool
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers public class PushClient : ObjectiveC.NSObject {
+  @objc public func didReceive(response: UserNotifications.UNNotificationResponse)
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers public class PolarQuickIntegration : ObjectiveC.NSObject {
+  public static let userNotificationCenterDelegateImpl: PolarGX.PolarQuickIntegration.UserNotificationCenterDelegateQuickImpl
+  @objc @_inheritsConvenienceInitializers final public class UserNotificationCenterDelegateQuickImpl : ObjectiveC.NSObject, UserNotifications.UNUserNotificationCenterDelegate {
+    @objc final public func userNotificationCenter(_ center: UserNotifications.UNUserNotificationCenter, willPresent notification: UserNotifications.UNNotification) async -> UserNotifications.UNNotificationPresentationOptions
+    @objc final public func userNotificationCenter(_ center: UserNotifications.UNUserNotificationCenter, didReceive response: UserNotifications.UNNotificationResponse) async
+    @objc override dynamic public init()
+    @objc deinit
+  }
+  @objc override dynamic public init()
+  @objc deinit
+}
+public struct PolarEventKey {
+  public static let Email: Swift.String
+  public static let Name: Swift.String
+  public static let FirstName: Swift.String
+  public static let LastName: Swift.String
+  public static let phone: Swift.String
+}
+@objc @_inheritsConvenienceInitializers public class PolarSettings : ObjectiveC.NSObject {
+  @objc public static var isLoggingEnabled: Swift.Bool
+  @objc public static var pendingEventsCapacity: Swift.Int
+  @objc public static var appGroupIdentifier: Swift.String?
+  @objc override dynamic public init()
+  @objc deinit
+}
+extension PolarGX.SystemInfo : Swift.Sendable {}

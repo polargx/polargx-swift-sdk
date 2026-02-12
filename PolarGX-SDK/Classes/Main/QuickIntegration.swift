@@ -2,6 +2,9 @@
 import Foundation
 import UserNotifications
 
+#if canImport(PolarGXCore)
+@_exported import PolarGXCore
+#endif
 
 /// following types will be used for quick integration, you can use them or create custom types your own
 

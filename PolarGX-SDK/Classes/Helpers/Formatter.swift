@@ -1,5 +1,9 @@
 import Foundation
 
+#if canImport(PolarGXCore)
+@_exported import PolarGXCore
+#endif
+
 struct Formatter {
     static let BackendDateTimeMsFormatter = dateFormatter(format: PolarConstants.BackendDateTimeMsFormat, in: .UTC)
     

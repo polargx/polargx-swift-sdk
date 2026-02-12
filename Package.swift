@@ -18,21 +18,15 @@ let package = Package(
     ],
     dependencies: [],
     targets: [
-        // Main SDK (includes shared Core)
-        .target(
+        // Main SDK - XCFramework
+        .binaryTarget(
             name: "PolarGX",
-            dependencies: [],
-            path: "PolarGX-SDK",
-            exclude: ["PolarGX.xcodeproj", "PolarGX-NotificationServiceExtension"],
-            sources: ["Classes", "Core"]
+            path: "XCFrameworks/PolarGX.xcframework"
         ),
-        // NotificationServiceExtension SDK (includes shared Core)
-        .target(
+        // NotificationServiceExtension SDK - XCFramework
+        .binaryTarget(
             name: "PolarGX_NotificationServiceExtension",
-            dependencies: [],
-            path: "PolarGX-SDK",
-            exclude: ["PolarGX.xcodeproj", "Classes"],
-            sources: ["PolarGX-NotificationServiceExtension", "Core"]
+            path: "XCFrameworks/PolarGX_NotificationServiceExtension.xcframework"
         )
     ],
     swiftLanguageVersions: [.v5]

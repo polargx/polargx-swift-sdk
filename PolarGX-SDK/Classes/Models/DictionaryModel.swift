@@ -1,5 +1,9 @@
 import Foundation
 
+#if canImport(PolarGXCore)
+@_exported import PolarGXCore
+#endif
+
 struct DictionaryModel: Codable {
     let content: [String: Any]
     
@@ -124,4 +128,3 @@ struct DictionaryModel: Codable {
         }
     }
 }
-
