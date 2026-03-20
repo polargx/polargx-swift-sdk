@@ -10,7 +10,7 @@ typealias UntrackedEvent = (eventName: String, date: Date, attributes: [String: 
 class InternalPolarApp: PolarApp {
     private let appId: String
     private let apiKey: String
-    private let onLinkClickHandler: OnLinkClickHandler
+    internal weak var delegate: PolarAppDelegate?
         
     private lazy var apiService = APIService(configuration: Configuration.Env)
     private lazy var fingerprintGenerator = FingerprintGenerator()
@@ -31,7 +31,7 @@ class InternalPolarApp: PolarApp {
     private var isHandlingOpenUrl = false
     
     /// App: created by `appId` and `apiKey`.
-    init(appId: String, apiKey: String, onLinkClickHandler: @escaping OnLinkClickHandler) {
+    init(appId: String, apiKey: String, delegate: PolarAppDelegate?) {
         var apiKey = apiKey;
         var environmentName = "prod"
         if apiKey.hasPrefix("dev_") {
@@ -46,7 +46,7 @@ class InternalPolarApp: PolarApp {
         
         self.appId = appId
         self.apiKey = apiKey
-        self.onLinkClickHandler = onLinkClickHandler
+        self.delegate = delegate
         
         super.init()
         
@@ -279,8 +279,11 @@ class InternalPolarApp: PolarApp {
                )?.unid
             }
             
-            DispatchQueue.main.sync {
-                self.onLinkClickHandler(openningURL, linkData?.data?.content ?? [:], nil)
+            DispatchQueue.main.sync { [weak self] in
+                if let sSelf = self {
+                    sSelf.delegate?.polarApp(sSelf, didClickLink: openningURL, data: linkData?.data?.content ?? [:], error: nil)
+                }
+                //self.onLinkClickHandler(openningURL, linkData?.data?.content ?? [:], nil)
             }
             
             if let clickId = clickId {
@@ -297,9 +300,10 @@ class InternalPolarApp: PolarApp {
             )
             
         }catch let error {
-            let clickHandler = onLinkClickHandler
-            DispatchQueue.main.async {
-                clickHandler(openningURL, nil, error)
+            await MainActor.run { [weak self] in
+                if let sSelf = self {
+                    sSelf.delegate?.polarApp(sSelf, didClickLink: openningURL, data: nil, error: error)
+                }
             }
         }
     }
@@ -381,9 +385,8 @@ public class PolarApp: NSObject {
         }()
     }
     
-    public typealias OnLinkClickHandler = (_ link: URL, _ data: [String: Any]?, _ error: Error?) -> Void
-    @objc public static func initialize(appId: String, apiKey: String, onLinkClickHandler: @escaping OnLinkClickHandler)  {
-        _shared = InternalPolarApp(appId: appId, apiKey: apiKey, onLinkClickHandler: onLinkClickHandler)
+    @objc public static func initialize(appId: String, apiKey: String, delegate: PolarAppDelegate?)  {
+        _shared = InternalPolarApp(appId: appId, apiKey: apiKey, delegate: delegate)
     }
     
     @objc public var currentUserID: String? { nil }

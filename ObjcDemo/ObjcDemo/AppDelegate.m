@@ -6,6 +6,7 @@
 //
 
 #import "AppDelegate.h"
+#import <UserNotifications/UserNotifications.h>
 @import PolarGX;
 
 @interface AppDelegate ()
@@ -18,11 +19,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    PolarApp.isLoggingEnabled = true;
-    [PolarApp initializeWithAppId:@"ad71f83f-4bc3-447a-94c8-d78c3ec8cce2" apiKey:@"dev_XRMKcQBoHk6U9IZgsgjL56nDxCLzNYYak9pxweI3" onLinkClickHandler:^(NSURL * _Nonnull url, NSDictionary<NSString *,id> * _Nullable attributes, NSError * _Nullable error) {
-        NSLog(@"[DEMO] detect clicked: %@, data: %@, error: %@\n", url, attributes, error);
-
-    }];
+    PolarSettings.isLoggingEnabled = true;
+    [PolarApp initializeWithAppId:@"ad71f83f-4bc3-447a-94c8-d78c3ec8cce2" apiKey:@"dev_XRMKcQBoHk6U9IZgsgjL56nDxCLzNYYak9pxweI3" delegate:self];
     
     return YES;
 }
@@ -52,5 +50,15 @@
     // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
 }
 
+
+#pragma mark - PolarAppDelegate
+
+- (void)polarApp:(PolarApp *)app didClickLink:(NSURL *)link data:(NSDictionary<id,id> * _Nullable)data error:(NSError * _Nullable)error {
+    NSLog(@"\n[DEMO] didClickLink: %@, data: %@, error: %@\n", link, data, error);
+}
+
+- (void)polarApp:(PolarApp *)app didReceiveNotification:(UNNotificationResponse *)notication data:(NSDictionary<id,id> *)data {
+    NSLog(@"\n[DEMO] didReceiveNotification: %@, data: %@\n", notication, data);
+}
 
 @end

@@ -63,9 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // VERIFY: Check if notification service extension is installed
         verifyExtensionInstalled()
 
-        PolarApp.initialize(appId: "1d5c7883-00ef-4b83-88b7-3ca6a7031f9b", apiKey: "dev_dZIqMUTVE945yyZFoUto48pRXOZHDqm940abQ4nd") { link, data, error in
-            print("\n[DEMO] detect clicked: \(link), data: \(data), error: \(error)\n")
-        }
+        PolarApp.initialize(appId: "1d5c7883-00ef-4b83-88b7-3ca6a7031f9b", apiKey: "dev_dZIqMUTVE945yyZFoUto48pRXOZHDqm940abQ4nd", delegate: self)
         
         PolarApp.shared.updateUser(userID: "test-user-1", attributes: [
             PolarEventKey.Name: "DL",
@@ -97,9 +95,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func testInitialization() {
         
         PolarSettings.isLoggingEnabled = true;
-        PolarApp.initialize(appId: "40b59333-4350-4fc8-a59b-fdcab6bc0274", apiKey: "deb_HkP4KkjQ0i1z3t8BodVfPokPm5x3Qsm5JvrfUcKc") { link, data, error in
-            print("\n[DEMO] detect clicked: \(link), data: \(data), error: \(error)\n")
-        }
+        PolarApp.initialize(appId: "40b59333-4350-4fc8-a59b-fdcab6bc0274", apiKey: "deb_HkP4KkjQ0i1z3t8BodVfPokPm5x3Qsm5JvrfUcKc", delegate: self)
         
         UNUserNotificationCenter.current().delegate = PolarQuickIntegration.userNotificationCenterDelegateImpl;
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { _, _ in
@@ -175,5 +171,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         return PolarApp.shared.openUrl(url)
     }
+}
+
+extension AppDelegate: PolarAppDelegate {
+    func polarApp(_ app: PolarGX.PolarApp, didClickLink link: URL, data: [AnyHashable : Any]?, error: (any Error)?) {
+        print("\n[DEMO] didClickLink: \(link), data: \(String(describing: data)), error: \(String(describing: error))\n")
+    }
+    
+    func polarApp(_ app: PolarGX.PolarApp, didReceiveNotification notication: UNNotificationResponse, data: [AnyHashable : Any]) {
+        print("\n[DEMO] didReceiveNotification: \(notication), data: \(data)\n")
+    }
+    
+    
 }
 

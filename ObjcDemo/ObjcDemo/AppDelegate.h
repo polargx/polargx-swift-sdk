@@ -6,8 +6,9 @@
 //
 
 #import <UIKit/UIKit.h>
+@import PolarGX;
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, PolarAppDelegate>
 
 
 @end

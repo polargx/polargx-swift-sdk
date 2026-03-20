@@ -13,6 +13,7 @@ public class PushClient: NSObject {
 class InternalPushClient: PushClient {
     let apiService: APIService
     let organizationUnid: String
+    weak var currentApp: InternalPolarApp?
     
     init(apiService: APIService, organizationUnid: String) {
         self.apiService = apiService
@@ -36,6 +37,12 @@ class InternalPushClient: PushClient {
                     try await apiService.trackPushEvent({ pushEvent })
                 }catch let error {
                     Logger.elog("failed: \(error)")
+                }
+            }
+            
+            DispatchQueue.main.async { [weak currentApp] in
+                if let app = currentApp {
+                    app.delegate?.polarApp(app, didReceiveNotification: response, data: response.notification.request.content.userInfo)
                 }
             }
         }

@@ -13,12 +13,13 @@ public class PolarQuickIntegration: NSObject {
     public static let userNotificationCenterDelegateImpl = UserNotificationCenterDelegateQuickImpl()
     
     public final class UserNotificationCenterDelegateQuickImpl: NSObject, UNUserNotificationCenterDelegate {
-        public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification) async -> UNNotificationPresentationOptions {
-            return [.badge, .sound, .banner, .list]
+        public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+            completionHandler([.badge, .sound, .banner, .list])
         }
         
-        public func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
+        public func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
             PolarApp.shared.pushClient.didReceive(response: response)
+            completionHandler()
         }
     }
     

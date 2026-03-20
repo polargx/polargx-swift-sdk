@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
       s.name                = "PolarGX_NotificationServiceExtension"
-      s.version             = "3.3.0"
+      s.version             = "3.3.1"
       s.summary             = "PolarGX Notification Service Extension SDK"
 
       s.description         = <<-DESC
