@@ -6,19 +6,19 @@
 	<dict>
 		<key>Headers/PolarGX-Swift.h</key>
 		<data>
-		dVYKPEv4bN4fPU9Kh6vRYbh9SjM=
+		lCsgdjw6CNcXe2moXwuHWhLXPac=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		tC9PCa+3muUXqw5Y/qo+IcD3LDo=
+		vTeYhJ7XRcUkDxR50xzoGmWVFlM=
 		</data>
 		<key>Modules/PolarGX.swiftmodule/arm64-apple-ios.abi.json</key>
 		<data>
-		jahlmTIFAqABGowUY2lv7bVVui4=
+		wwR7fAPA5hh5guLVtZo+wHO5AZg=
 		</data>
 		<key>Modules/PolarGX.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<data>
-		BqESKG0jIyVkF4OIqCyhjRt2KLY=
+		eDUKfkksR3gylEgqrnONnSW9iPE=
 		</data>
 		<key>Modules/PolarGX.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
@@ -26,11 +26,11 @@
 		</data>
 		<key>Modules/PolarGX.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<data>
-		BqESKG0jIyVkF4OIqCyhjRt2KLY=
+		eDUKfkksR3gylEgqrnONnSW9iPE=
 		</data>
 		<key>Modules/PolarGX.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		lgqbm1PbM7darhNAUZPOybKOuIA=
+		BThSlz1FdSndtGiqFK2eJr8KUKM=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -43,21 +43,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			lD6NzXv8xsaswJhuhN1sYwnLx03cQ0fWfw/1fQ+UNxQ=
+			D7cboXk7KyFgI8+5zJOhtdTv/YjQTa2YzOOyFwHYDqA=
 			</data>
 		</dict>
 		<key>Modules/PolarGX.swiftmodule/arm64-apple-ios.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			m4auo9mW1O/AS2pq1umWQuZmxvjPPE5Z6+yJqUd1qe8=
+			sSCM5J7nssLhNyihCjscsvEJn3AggZ7sgrQVii9AmTs=
 			</data>
 		</dict>
 		<key>Modules/PolarGX.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			7H72mkjBgZg4W6QYZjgBz5E4ZYsQ9b4eA+Jeh5iDFoE=
+			AiCYFRjXeHjWiIVObN5VSqatoeV2uDu4Y2sgdq7uoak=
 			</data>
 		</dict>
 		<key>Modules/PolarGX.swiftmodule/arm64-apple-ios.swiftdoc</key>
@@ -71,14 +71,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			7H72mkjBgZg4W6QYZjgBz5E4ZYsQ9b4eA+Jeh5iDFoE=
+			AiCYFRjXeHjWiIVObN5VSqatoeV2uDu4Y2sgdq7uoak=
 			</data>
 		</dict>
 		<key>Modules/PolarGX.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			DGHDGPP9JGTEJjWy174yypdfMBUcuc8Px41MC/ER+N4=
+			O3CG6+lqF/y0+cCzJa+jkdkzCe012UOv97D3tDfUT7k=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

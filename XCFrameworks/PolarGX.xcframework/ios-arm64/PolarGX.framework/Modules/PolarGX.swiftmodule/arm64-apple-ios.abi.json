@@ -48,6 +48,62 @@
       },
       {
         "kind": "Import",
+        "name": "UserNotifications",
+        "printedName": "UserNotifications",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
         "name": "Foundation",
         "printedName": "Foundation",
         "declKind": "Import",
@@ -258,7 +314,7 @@
           {
             "kind": "Function",
             "name": "initialize",
-            "printedName": "initialize(appId:apiKey:onLinkClickHandler:)",
+            "printedName": "initialize(appId:apiKey:delegate:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -278,78 +334,26 @@
                 "usr": "s:SS"
               },
               {
-                "kind": "TypeFunc",
-                "name": "Function",
-                "printedName": "(Foundation.URL, [Swift.String : Any]?, (any Swift.Error)?) -> ()",
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "(any PolarGX.PolarAppDelegate)?",
                 "children": [
                   {
                     "kind": "TypeNominal",
-                    "name": "Void",
-                    "printedName": "()"
-                  },
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Tuple",
-                    "printedName": "(Foundation.URL, [Swift.String : Any]?, (any Swift.Error)?)",
-                    "children": [
-                      {
-                        "kind": "TypeNominal",
-                        "name": "URL",
-                        "printedName": "Foundation.URL",
-                        "usr": "s:10Foundation3URLV"
-                      },
-                      {
-                        "kind": "TypeNominal",
-                        "name": "Optional",
-                        "printedName": "[Swift.String : Any]?",
-                        "children": [
-                          {
-                            "kind": "TypeNominal",
-                            "name": "Dictionary",
-                            "printedName": "[Swift.String : Any]",
-                            "children": [
-                              {
-                                "kind": "TypeNominal",
-                                "name": "String",
-                                "printedName": "Swift.String",
-                                "usr": "s:SS"
-                              },
-                              {
-                                "kind": "TypeNominal",
-                                "name": "ProtocolComposition",
-                                "printedName": "Any"
-                              }
-                            ],
-                            "usr": "s:SD"
-                          }
-                        ],
-                        "usr": "s:Sq"
-                      },
-                      {
-                        "kind": "TypeNominal",
-                        "name": "Optional",
-                        "printedName": "(any Swift.Error)?",
-                        "children": [
-                          {
-                            "kind": "TypeNominal",
-                            "name": "Error",
-                            "printedName": "any Swift.Error",
-                            "usr": "s:s5ErrorP"
-                          }
-                        ],
-                        "usr": "s:Sq"
-                      }
-                    ]
+                    "name": "PolarAppDelegate",
+                    "printedName": "any PolarGX.PolarAppDelegate",
+                    "usr": "c:@M@PolarGX@objc(pl)PolarAppDelegate"
                   }
-                ]
+                ],
+                "usr": "s:Sq"
               }
             ],
             "declKind": "Func",
-            "usr": "c:@M@PolarGX@objc(cs)PolarApp(cm)initializeWithAppId:apiKey:onLinkClickHandler:",
-            "mangledName": "$s7PolarGX0A3AppC10initialize5appId6apiKey18onLinkClickHandlerySS_SSy10Foundation3URLV_SDySSypGSgs5Error_pSgtctFZ",
+            "usr": "c:@M@PolarGX@objc(cs)PolarApp(cm)initializeWithAppId:apiKey:delegate:",
+            "mangledName": "$s7PolarGX0A3AppC10initialize5appId6apiKey8delegateySS_SSAA0aC8Delegate_pSgtFZ",
             "moduleName": "PolarGX",
             "static": true,
-            "objc_name": "initializeWithAppId:apiKey:onLinkClickHandler:",
+            "objc_name": "initializeWithAppId:apiKey:delegate:",
             "declAttributes": [
               "Final",
               "AccessControl",
@@ -808,6 +812,185 @@
       },
       {
         "kind": "TypeDecl",
+        "name": "PolarAppDelegate",
+        "printedName": "PolarAppDelegate",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "polarApp",
+            "printedName": "polarApp(_:didClickLink:data:error:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "PolarApp",
+                "printedName": "PolarGX.PolarApp",
+                "usr": "c:@M@PolarGX@objc(cs)PolarApp"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "URL",
+                "printedName": "Foundation.URL",
+                "usr": "s:10Foundation3URLV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "[Swift.AnyHashable : Any]?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Dictionary",
+                    "printedName": "[Swift.AnyHashable : Any]",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "AnyHashable",
+                        "printedName": "Swift.AnyHashable",
+                        "usr": "s:s11AnyHashableV"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ProtocolComposition",
+                        "printedName": "Any"
+                      }
+                    ],
+                    "usr": "s:SD"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "(any Swift.Error)?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Error",
+                    "printedName": "any Swift.Error",
+                    "usr": "s:s5ErrorP"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@PolarGX@objc(pl)PolarAppDelegate(im)polarApp:didClickLink:data:error:",
+            "mangledName": "$s7PolarGX0A11AppDelegateP05polarC0_12didClickLink4data5erroryAA0aC0C_10Foundation3URLVSDys11AnyHashableVypGSgs5Error_pSgtF",
+            "moduleName": "PolarGX",
+            "genericSig": "<τ_0_0 where τ_0_0 : PolarGX.PolarAppDelegate>",
+            "sugared_genericSig": "<Self where Self : PolarGX.PolarAppDelegate>",
+            "protocolReq": true,
+            "declAttributes": [
+              "ObjC"
+            ],
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "polarApp",
+            "printedName": "polarApp(_:didReceiveNotification:data:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "PolarApp",
+                "printedName": "PolarGX.PolarApp",
+                "usr": "c:@M@PolarGX@objc(cs)PolarApp"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "UNNotificationResponse",
+                "printedName": "UserNotifications.UNNotificationResponse",
+                "usr": "c:objc(cs)UNNotificationResponse"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Dictionary",
+                "printedName": "[Swift.AnyHashable : Any]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "AnyHashable",
+                    "printedName": "Swift.AnyHashable",
+                    "usr": "s:s11AnyHashableV"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ProtocolComposition",
+                    "printedName": "Any"
+                  }
+                ],
+                "usr": "s:SD"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@PolarGX@objc(pl)PolarAppDelegate(im)polarApp:didReceiveNotification:data:",
+            "mangledName": "$s7PolarGX0A11AppDelegateP05polarC0_22didReceiveNotification4datayAA0aC0C_So22UNNotificationResponseCSDys11AnyHashableVypGtF",
+            "moduleName": "PolarGX",
+            "genericSig": "<τ_0_0 where τ_0_0 : PolarGX.PolarAppDelegate>",
+            "sugared_genericSig": "<Self where Self : PolarGX.PolarAppDelegate>",
+            "protocolReq": true,
+            "declAttributes": [
+              "ObjC"
+            ],
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Protocol",
+        "usr": "c:@M@PolarGX@objc(pl)PolarAppDelegate",
+        "mangledName": "$s7PolarGX0A11AppDelegateP",
+        "moduleName": "PolarGX",
+        "genericSig": "<τ_0_0 : AnyObject>",
+        "sugared_genericSig": "<Self : AnyObject>",
+        "declAttributes": [
+          "AccessControl",
+          "ObjC"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "Import",
+        "name": "UserNotifications",
+        "printedName": "UserNotifications",
+        "declKind": "Import",
+        "moduleName": "PolarGX"
+      },
+      {
+        "kind": "TypeDecl",
         "name": "PushClient",
         "printedName": "PushClient",
         "children": [
@@ -1023,13 +1206,12 @@
               {
                 "kind": "Function",
                 "name": "userNotificationCenter",
-                "printedName": "userNotificationCenter(_:willPresent:)",
+                "printedName": "userNotificationCenter(_:willPresent:withCompletionHandler:)",
                 "children": [
                   {
                     "kind": "TypeNominal",
-                    "name": "UNNotificationPresentationOptions",
-                    "printedName": "UserNotifications.UNNotificationPresentationOptions",
-                    "usr": "c:@E@UNNotificationPresentationOptions"
+                    "name": "Void",
+                    "printedName": "()"
                   },
                   {
                     "kind": "TypeNominal",
@@ -1042,11 +1224,29 @@
                     "name": "UNNotification",
                     "printedName": "UserNotifications.UNNotification",
                     "usr": "c:objc(cs)UNNotification"
+                  },
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(UserNotifications.UNNotificationPresentationOptions) -> ()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "UNNotificationPresentationOptions",
+                        "printedName": "UserNotifications.UNNotificationPresentationOptions",
+                        "usr": "c:@E@UNNotificationPresentationOptions"
+                      }
+                    ]
                   }
                 ],
                 "declKind": "Func",
-                "usr": "s:7PolarGX0A16QuickIntegrationC030UserNotificationCenterDelegateC4ImplC04userfG0_11willPresentSo33UNNotificationPresentationOptionsVSo06UNUserfG0C_So0M0CtYaF",
-                "mangledName": "$s7PolarGX0A16QuickIntegrationC030UserNotificationCenterDelegateC4ImplC04userfG0_11willPresentSo33UNNotificationPresentationOptionsVSo06UNUserfG0C_So0M0CtYaF",
+                "usr": "s:7PolarGX0A16QuickIntegrationC030UserNotificationCenterDelegateC4ImplC04userfG0_11willPresent21withCompletionHandlerySo06UNUserfG0C_So14UNNotificationCySo0Q19PresentationOptionsVctF",
+                "mangledName": "$s7PolarGX0A16QuickIntegrationC030UserNotificationCenterDelegateC4ImplC04userfG0_11willPresent21withCompletionHandlerySo06UNUserfG0C_So14UNNotificationCySo0Q19PresentationOptionsVctF",
                 "moduleName": "PolarGX",
                 "objc_name": "userNotificationCenter:willPresentNotification:withCompletionHandler:",
                 "declAttributes": [
@@ -1059,7 +1259,7 @@
               {
                 "kind": "Function",
                 "name": "userNotificationCenter",
-                "printedName": "userNotificationCenter(_:didReceive:)",
+                "printedName": "userNotificationCenter(_:didReceive:withCompletionHandler:)",
                 "children": [
                   {
                     "kind": "TypeNominal",
@@ -1077,11 +1277,28 @@
                     "name": "UNNotificationResponse",
                     "printedName": "UserNotifications.UNNotificationResponse",
                     "usr": "c:objc(cs)UNNotificationResponse"
+                  },
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "() -> ()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ]
                   }
                 ],
                 "declKind": "Func",
-                "usr": "s:7PolarGX0A16QuickIntegrationC030UserNotificationCenterDelegateC4ImplC04userfG0_10didReceiveySo06UNUserfG0C_So22UNNotificationResponseCtYaF",
-                "mangledName": "$s7PolarGX0A16QuickIntegrationC030UserNotificationCenterDelegateC4ImplC04userfG0_10didReceiveySo06UNUserfG0C_So22UNNotificationResponseCtYaF",
+                "usr": "s:7PolarGX0A16QuickIntegrationC030UserNotificationCenterDelegateC4ImplC04userfG0_10didReceive21withCompletionHandlerySo06UNUserfG0C_So22UNNotificationResponseCyyctF",
+                "mangledName": "$s7PolarGX0A16QuickIntegrationC030UserNotificationCenterDelegateC4ImplC04userfG0_10didReceive21withCompletionHandlerySo06UNUserfG0C_So22UNNotificationResponseCyyctF",
                 "moduleName": "PolarGX",
                 "objc_name": "userNotificationCenter:didReceiveNotificationResponse:withCompletionHandler:",
                 "declAttributes": [
@@ -1365,62 +1582,6 @@
         "kind": "Import",
         "name": "Foundation",
         "printedName": "Foundation",
-        "declKind": "Import",
-        "moduleName": "PolarGX"
-      },
-      {
-        "kind": "Import",
-        "name": "Foundation",
-        "printedName": "Foundation",
-        "declKind": "Import",
-        "moduleName": "PolarGX"
-      },
-      {
-        "kind": "Import",
-        "name": "Foundation",
-        "printedName": "Foundation",
-        "declKind": "Import",
-        "moduleName": "PolarGX"
-      },
-      {
-        "kind": "Import",
-        "name": "Foundation",
-        "printedName": "Foundation",
-        "declKind": "Import",
-        "moduleName": "PolarGX"
-      },
-      {
-        "kind": "Import",
-        "name": "Foundation",
-        "printedName": "Foundation",
-        "declKind": "Import",
-        "moduleName": "PolarGX"
-      },
-      {
-        "kind": "Import",
-        "name": "Foundation",
-        "printedName": "Foundation",
-        "declKind": "Import",
-        "moduleName": "PolarGX"
-      },
-      {
-        "kind": "Import",
-        "name": "Foundation",
-        "printedName": "Foundation",
-        "declKind": "Import",
-        "moduleName": "PolarGX"
-      },
-      {
-        "kind": "Import",
-        "name": "Foundation",
-        "printedName": "Foundation",
-        "declKind": "Import",
-        "moduleName": "PolarGX"
-      },
-      {
-        "kind": "Import",
-        "name": "UserNotifications",
-        "printedName": "UserNotifications",
         "declKind": "Import",
         "moduleName": "PolarGX"
       },
@@ -2222,6 +2383,69 @@
       "value": "true"
     },
     {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Helpers\/AppGroupStorage.swift",
+      "kind": "StringLiteral",
+      "offset": 178,
+      "length": 30,
+      "value": "\"polargx.sdk.organizationUnid\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Helpers\/AppGroupStorage.swift",
+      "kind": "StringLiteral",
+      "offset": 237,
+      "length": 20,
+      "value": "\"polargx.sdk.apiKey\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Helpers\/AppGroupStorage.swift",
+      "kind": "StringLiteral",
+      "offset": 288,
+      "length": 22,
+      "value": "\"polargx.sdk.userUnid\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Helpers\/AppGroupStorage.swift",
+      "kind": "StringLiteral",
+      "offset": 344,
+      "length": 25,
+      "value": "\"polargx.sdk.environment\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Helpers\/AppGroupStorage.swift",
+      "kind": "StringLiteral",
+      "offset": 421,
+      "length": 43,
+      "value": "\"polargx.sdk.lastNotificationServiceResult\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Helpers\/Errors.swift",
+      "kind": "StringLiteral",
+      "offset": 45,
+      "length": 38,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Helpers\/Errors.swift",
+      "kind": "StringLiteral",
+      "offset": 68,
+      "length": 14,
+      "value": "\"SDKErrorDomain\""
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Helpers\/ThLocker.swift",
+      "kind": "BooleanLiteral",
+      "offset": 63,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Helpers\/ThLocker.swift",
+      "kind": "Array",
+      "offset": 137,
+      "length": 2,
+      "value": "[]"
+    },
+    {
       "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Classes\/Helpers\/APIService+Tracking.swift",
       "kind": "IntegerLiteral",
       "offset": 130,
@@ -2285,23 +2509,23 @@
       "value": "\"development\""
     },
     {
-      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Classes\/Main\/App.swift",
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Classes\/Main\/PolarApp.swift",
       "kind": "BooleanLiteral",
-      "offset": 1124,
+      "offset": 1119,
       "length": 5,
       "value": "false"
     },
     {
-      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Classes\/Main\/App.swift",
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Classes\/Main\/PolarApp.swift",
       "kind": "StringLiteral",
-      "offset": 15238,
+      "offset": 15460,
       "length": 35,
       "value": "\"PolarApp hasn't been initialized!\""
     },
     {
-      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Classes\/Main\/App.swift",
+      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Classes\/Main\/PolarApp.swift",
       "kind": "StringLiteral",
-      "offset": 15864,
+      "offset": 15940,
       "length": 35,
       "value": "\"PolarApp hasn't been initialized!\""
     },
@@ -2387,69 +2611,6 @@
       "kind": "Dictionary",
       "offset": 1811,
       "length": 3,
-      "value": "[]"
-    },
-    {
-      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Helpers\/AppGroupStorage.swift",
-      "kind": "StringLiteral",
-      "offset": 178,
-      "length": 30,
-      "value": "\"polargx.sdk.organizationUnid\""
-    },
-    {
-      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Helpers\/AppGroupStorage.swift",
-      "kind": "StringLiteral",
-      "offset": 237,
-      "length": 20,
-      "value": "\"polargx.sdk.apiKey\""
-    },
-    {
-      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Helpers\/AppGroupStorage.swift",
-      "kind": "StringLiteral",
-      "offset": 288,
-      "length": 22,
-      "value": "\"polargx.sdk.userUnid\""
-    },
-    {
-      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Helpers\/AppGroupStorage.swift",
-      "kind": "StringLiteral",
-      "offset": 344,
-      "length": 25,
-      "value": "\"polargx.sdk.environment\""
-    },
-    {
-      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Helpers\/AppGroupStorage.swift",
-      "kind": "StringLiteral",
-      "offset": 421,
-      "length": 43,
-      "value": "\"polargx.sdk.lastNotificationServiceResult\""
-    },
-    {
-      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Helpers\/Errors.swift",
-      "kind": "StringLiteral",
-      "offset": 45,
-      "length": 38,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Helpers\/Errors.swift",
-      "kind": "StringLiteral",
-      "offset": 68,
-      "length": 14,
-      "value": "\"SDKErrorDomain\""
-    },
-    {
-      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Helpers\/ThLocker.swift",
-      "kind": "BooleanLiteral",
-      "offset": 63,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Core\/Helpers\/ThLocker.swift",
-      "kind": "Array",
-      "offset": 137,
-      "length": 2,
       "value": "[]"
     },
     {

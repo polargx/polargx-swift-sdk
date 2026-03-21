@@ -6,19 +6,19 @@
 	<dict>
 		<key>Headers/PolarGX-Swift.h</key>
 		<data>
-		SyNmRpxvTMyp2H/bsC7N0EdW3wA=
+		JevBeqo2pXVMNzc+v691tOCrNtE=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		uYD84uR668v4CiA1eD7EzDqDr5c=
+		lAFMKbS4edLs84iSAZZnoZKn1Bg=
 		</data>
 		<key>Modules/PolarGX.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		jahlmTIFAqABGowUY2lv7bVVui4=
+		wwR7fAPA5hh5guLVtZo+wHO5AZg=
 		</data>
 		<key>Modules/PolarGX.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		9i7O2ezHtbS+1aUHJLjT91GD7Z0=
+		/wfJdJnz2MEj8VGfNDFpuz8q+VE=
 		</data>
 		<key>Modules/PolarGX.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -26,19 +26,19 @@
 		</data>
 		<key>Modules/PolarGX.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		9i7O2ezHtbS+1aUHJLjT91GD7Z0=
+		/wfJdJnz2MEj8VGfNDFpuz8q+VE=
 		</data>
 		<key>Modules/PolarGX.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		IUkqHqLz5A1Pc0VglvCIgMg+laM=
+		g7SC8ViBHePvwJ1siEycJKu07ks=
 		</data>
 		<key>Modules/PolarGX.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		jahlmTIFAqABGowUY2lv7bVVui4=
+		wwR7fAPA5hh5guLVtZo+wHO5AZg=
 		</data>
 		<key>Modules/PolarGX.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		OGfIUVBYDyvDHxXcyJOGJQBUZb4=
+		QNE28m5lCMlA1IaNqhN88MdUEcg=
 		</data>
 		<key>Modules/PolarGX.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -46,11 +46,11 @@
 		</data>
 		<key>Modules/PolarGX.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		OGfIUVBYDyvDHxXcyJOGJQBUZb4=
+		QNE28m5lCMlA1IaNqhN88MdUEcg=
 		</data>
 		<key>Modules/PolarGX.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		yNNQmSTioQgjfUED5EDad4vMWgA=
+		JKO/LA25Zg+gAO5aDUVWxeHFE5Q=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -63,21 +63,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			eVspYIm/KQOfu3QyfS/J2zSNDFc4IPu1fAxQN//G6Rc=
+			ko4s237ek2sKyqFgmuk/1ohTL7e4tvMrZ+N77VDoa0A=
 			</data>
 		</dict>
 		<key>Modules/PolarGX.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			m4auo9mW1O/AS2pq1umWQuZmxvjPPE5Z6+yJqUd1qe8=
+			sSCM5J7nssLhNyihCjscsvEJn3AggZ7sgrQVii9AmTs=
 			</data>
 		</dict>
 		<key>Modules/PolarGX.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			JclKSTOnFP9p70JfoBxbW69sbMyvI5bHDemdJYS3M4w=
+			6wn7S0mKcIcBUDIBbwmy5JjDFBLBlFw6H2tHVAzUjzU=
 			</data>
 		</dict>
 		<key>Modules/PolarGX.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
@@ -91,28 +91,28 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			JclKSTOnFP9p70JfoBxbW69sbMyvI5bHDemdJYS3M4w=
+			6wn7S0mKcIcBUDIBbwmy5JjDFBLBlFw6H2tHVAzUjzU=
 			</data>
 		</dict>
 		<key>Modules/PolarGX.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			ef5YWA7MKlB6L0mGGH25ZMZWZmgDSNfcH96mPn0ZrOc=
+			08cN0hYQrrw9kkZMlQeVPsPiCCEJZGFLhIgh4r3/Ob8=
 			</data>
 		</dict>
 		<key>Modules/PolarGX.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			m4auo9mW1O/AS2pq1umWQuZmxvjPPE5Z6+yJqUd1qe8=
+			sSCM5J7nssLhNyihCjscsvEJn3AggZ7sgrQVii9AmTs=
 			</data>
 		</dict>
 		<key>Modules/PolarGX.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Xn/a8EiXDVhavxl5FSzeArNtdTigdHaoZIKFEDaPHwE=
+			VQD8y/vtn9GKE18tUBhfTXOy1wJA30XruFkiFZbfgQc=
 			</data>
 		</dict>
 		<key>Modules/PolarGX.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
@@ -126,14 +126,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Xn/a8EiXDVhavxl5FSzeArNtdTigdHaoZIKFEDaPHwE=
+			VQD8y/vtn9GKE18tUBhfTXOy1wJA30XruFkiFZbfgQc=
 			</data>
 		</dict>
 		<key>Modules/PolarGX.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			nBgqzTVY7C1WsWuiXAdYHjn/Xu1X0y5R79+AR5Nho5A=
+			p/70g5p0cYNkzJ2jOhA88+Gyl9mfuDBroCJsTa5MHvo=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

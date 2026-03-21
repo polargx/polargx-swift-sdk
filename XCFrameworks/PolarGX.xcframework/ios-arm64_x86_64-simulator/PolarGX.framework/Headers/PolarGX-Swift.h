@@ -306,15 +306,16 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if defined(__OBJC__)
 
 @class NSString;
-@class NSURL;
+@protocol PolarAppDelegate;
 @class PushClient;
 @class NSData;
 @class NSUserActivity;
+@class NSURL;
 SWIFT_CLASS("_TtC7PolarGX8PolarApp")
 @interface PolarApp : NSObject
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PolarApp * _Nonnull shared;)
 + (PolarApp * _Nonnull)shared SWIFT_WARN_UNUSED_RESULT;
-+ (void)initializeWithAppId:(NSString * _Nonnull)appId apiKey:(NSString * _Nonnull)apiKey onLinkClickHandler:(void (^ _Nonnull)(NSURL * _Nonnull, NSDictionary<NSString *, id> * _Nullable, NSError * _Nullable))onLinkClickHandler;
++ (void)initializeWithAppId:(NSString * _Nonnull)appId apiKey:(NSString * _Nonnull)apiKey delegate:(id <PolarAppDelegate> _Nullable)delegate;
 @property (nonatomic, readonly, copy) NSString * _Nullable currentUserID;
 - (void)updateUserWithUserID:(NSString * _Nullable)userID attributes:(NSDictionary<NSString *, id> * _Nullable)attributes;
 @property (nonatomic, readonly, strong) PushClient * _Nonnull pushClient;
@@ -324,6 +325,13 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PolarApp * _
 - (BOOL)continueUserActivity:(NSUserActivity * _Nonnull)activity;
 - (BOOL)openUrl:(NSURL * _Nonnull)url;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class UNNotificationResponse;
+SWIFT_PROTOCOL("_TtP7PolarGX16PolarAppDelegate_")
+@protocol PolarAppDelegate
+- (void)polarApp:(PolarApp * _Nonnull)app didClickLink:(NSURL * _Nonnull)link data:(NSDictionary * _Nullable)data error:(NSError * _Nullable)error;
+- (void)polarApp:(PolarApp * _Nonnull)app didReceiveNotification:(UNNotificationResponse * _Nonnull)notication data:(NSDictionary * _Nonnull)data;
 @end
 
 /// following types will be used for quick integration, you can use them or create custom types your own
@@ -346,7 +354,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, copy) NSString * _Nullable app
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class UNNotificationResponse;
 SWIFT_CLASS("_TtC7PolarGX10PushClient")
 @interface PushClient : NSObject
 - (void)didReceiveWithResponse:(UNNotificationResponse * _Nonnull)response;
@@ -669,15 +676,16 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if defined(__OBJC__)
 
 @class NSString;
-@class NSURL;
+@protocol PolarAppDelegate;
 @class PushClient;
 @class NSData;
 @class NSUserActivity;
+@class NSURL;
 SWIFT_CLASS("_TtC7PolarGX8PolarApp")
 @interface PolarApp : NSObject
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PolarApp * _Nonnull shared;)
 + (PolarApp * _Nonnull)shared SWIFT_WARN_UNUSED_RESULT;
-+ (void)initializeWithAppId:(NSString * _Nonnull)appId apiKey:(NSString * _Nonnull)apiKey onLinkClickHandler:(void (^ _Nonnull)(NSURL * _Nonnull, NSDictionary<NSString *, id> * _Nullable, NSError * _Nullable))onLinkClickHandler;
++ (void)initializeWithAppId:(NSString * _Nonnull)appId apiKey:(NSString * _Nonnull)apiKey delegate:(id <PolarAppDelegate> _Nullable)delegate;
 @property (nonatomic, readonly, copy) NSString * _Nullable currentUserID;
 - (void)updateUserWithUserID:(NSString * _Nullable)userID attributes:(NSDictionary<NSString *, id> * _Nullable)attributes;
 @property (nonatomic, readonly, strong) PushClient * _Nonnull pushClient;
@@ -687,6 +695,13 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) PolarApp * _
 - (BOOL)continueUserActivity:(NSUserActivity * _Nonnull)activity;
 - (BOOL)openUrl:(NSURL * _Nonnull)url;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class UNNotificationResponse;
+SWIFT_PROTOCOL("_TtP7PolarGX16PolarAppDelegate_")
+@protocol PolarAppDelegate
+- (void)polarApp:(PolarApp * _Nonnull)app didClickLink:(NSURL * _Nonnull)link data:(NSDictionary * _Nullable)data error:(NSError * _Nullable)error;
+- (void)polarApp:(PolarApp * _Nonnull)app didReceiveNotification:(UNNotificationResponse * _Nonnull)notication data:(NSDictionary * _Nonnull)data;
 @end
 
 /// following types will be used for quick integration, you can use them or create custom types your own
@@ -709,7 +724,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, copy) NSString * _Nullable app
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class UNNotificationResponse;
 SWIFT_CLASS("_TtC7PolarGX10PushClient")
 @interface PushClient : NSObject
 - (void)didReceiveWithResponse:(UNNotificationResponse * _Nonnull)response;

@@ -17,8 +17,9 @@ import _SwiftConcurrencyShims
   @objc public static var shared: PolarGX.PolarApp {
     @objc get
   }
-  public typealias OnLinkClickHandler = (_ link: Foundation.URL, _ data: [Swift.String : Any]?, _ error: (any Swift.Error)?) -> Swift.Void
-  @objc public static func initialize(appId: Swift.String, apiKey: Swift.String, onLinkClickHandler: @escaping PolarGX.PolarApp.OnLinkClickHandler)
+  #if compiler(>=5.3) && $NonescapableTypes
+  @objc public static func initialize(appId: Swift.String, apiKey: Swift.String, delegate: (any PolarGX.PolarAppDelegate)?)
+  #endif
   #if compiler(>=5.3) && $NonescapableTypes
   @objc public var currentUserID: Swift.String? {
     @objc get
@@ -40,6 +41,12 @@ import _SwiftConcurrencyShims
   @objc override dynamic public init()
   @objc deinit
 }
+@objc public protocol PolarAppDelegate {
+  #if compiler(>=5.3) && $NonescapableTypes
+  @objc func polarApp(_ app: PolarGX.PolarApp, didClickLink link: Foundation.URL, data: [Swift.AnyHashable : Any]?, error: (any Swift.Error)?)
+  #endif
+  @objc func polarApp(_ app: PolarGX.PolarApp, didReceiveNotification notication: UserNotifications.UNNotificationResponse, data: [Swift.AnyHashable : Any])
+}
 @objc @_inheritsConvenienceInitializers public class PushClient : ObjectiveC.NSObject {
   @objc public func didReceive(response: UserNotifications.UNNotificationResponse)
   @objc override dynamic public init()
@@ -48,8 +55,8 @@ import _SwiftConcurrencyShims
 @objc @_inheritsConvenienceInitializers public class PolarQuickIntegration : ObjectiveC.NSObject {
   public static let userNotificationCenterDelegateImpl: PolarGX.PolarQuickIntegration.UserNotificationCenterDelegateQuickImpl
   @objc @_inheritsConvenienceInitializers final public class UserNotificationCenterDelegateQuickImpl : ObjectiveC.NSObject, UserNotifications.UNUserNotificationCenterDelegate {
-    @objc final public func userNotificationCenter(_ center: UserNotifications.UNUserNotificationCenter, willPresent notification: UserNotifications.UNNotification) async -> UserNotifications.UNNotificationPresentationOptions
-    @objc final public func userNotificationCenter(_ center: UserNotifications.UNUserNotificationCenter, didReceive response: UserNotifications.UNNotificationResponse) async
+    @objc final public func userNotificationCenter(_ center: UserNotifications.UNUserNotificationCenter, willPresent notification: UserNotifications.UNNotification, withCompletionHandler completionHandler: @escaping (UserNotifications.UNNotificationPresentationOptions) -> Swift.Void)
+    @objc final public func userNotificationCenter(_ center: UserNotifications.UNUserNotificationCenter, didReceive response: UserNotifications.UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Swift.Void)
     @objc override dynamic public init()
     @objc deinit
   }
