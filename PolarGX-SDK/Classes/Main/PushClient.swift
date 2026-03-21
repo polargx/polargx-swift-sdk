@@ -15,9 +15,10 @@ class InternalPushClient: PushClient {
     let organizationUnid: String
     weak var currentApp: InternalPolarApp?
     
-    init(apiService: APIService, organizationUnid: String) {
+    init(apiService: APIService, organizationUnid: String, currentApp: InternalPolarApp) {
         self.apiService = apiService
         self.organizationUnid = organizationUnid
+        self.currentApp = currentApp
     }
     
     public override func didReceive(response: UNNotificationResponse) {

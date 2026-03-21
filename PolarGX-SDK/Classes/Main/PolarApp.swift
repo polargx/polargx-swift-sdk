@@ -15,7 +15,7 @@ class InternalPolarApp: PolarApp {
     private lazy var apiService = APIService(configuration: Configuration.Env)
     private lazy var fingerprintGenerator = FingerprintGenerator()
     
-    private lazy var _pushClient = InternalPushClient(apiService: apiService, organizationUnid: appId)
+    private lazy var _pushClient = InternalPushClient(apiService: apiService, organizationUnid: appId, currentApp: self)
     override var pushClient: PushClient { _pushClient }
     
     /// The storage location to save user data and events (belong to SDK)
