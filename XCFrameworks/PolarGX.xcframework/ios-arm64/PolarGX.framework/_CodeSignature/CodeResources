@@ -14,7 +14,7 @@
 		</data>
 		<key>Modules/PolarGX.swiftmodule/arm64-apple-ios.abi.json</key>
 		<data>
-		wwR7fAPA5hh5guLVtZo+wHO5AZg=
+		yrxlFjrihop1kRgfyCfNNKiImWQ=
 		</data>
 		<key>Modules/PolarGX.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<data>
@@ -30,7 +30,7 @@
 		</data>
 		<key>Modules/PolarGX.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		BThSlz1FdSndtGiqFK2eJr8KUKM=
+		jrSV8qxMNXSqjlpCfUOgLFyvm8s=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -50,7 +50,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			sSCM5J7nssLhNyihCjscsvEJn3AggZ7sgrQVii9AmTs=
+			btvQylB2v2LnhxJv9PI165iphZMDRSArdFBmLdzZR+c=
 			</data>
 		</dict>
 		<key>Modules/PolarGX.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
@@ -78,7 +78,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			O3CG6+lqF/y0+cCzJa+jkdkzCe012UOv97D3tDfUT7k=
+			Nt3DF0hGXSipbEgvex5cqv3wViS12tdbR+HeK6c0YHY=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

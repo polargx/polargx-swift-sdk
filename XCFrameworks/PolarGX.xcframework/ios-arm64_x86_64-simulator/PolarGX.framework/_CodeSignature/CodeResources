@@ -14,7 +14,7 @@
 		</data>
 		<key>Modules/PolarGX.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		wwR7fAPA5hh5guLVtZo+wHO5AZg=
+		yrxlFjrihop1kRgfyCfNNKiImWQ=
 		</data>
 		<key>Modules/PolarGX.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
@@ -30,11 +30,11 @@
 		</data>
 		<key>Modules/PolarGX.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		g7SC8ViBHePvwJ1siEycJKu07ks=
+		/5fTCVJNkMoU1wjzlt3CBVdFoSk=
 		</data>
 		<key>Modules/PolarGX.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		wwR7fAPA5hh5guLVtZo+wHO5AZg=
+		yrxlFjrihop1kRgfyCfNNKiImWQ=
 		</data>
 		<key>Modules/PolarGX.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
@@ -50,7 +50,7 @@
 		</data>
 		<key>Modules/PolarGX.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		JKO/LA25Zg+gAO5aDUVWxeHFE5Q=
+		b4Ej+DqrAs4rc/sQ/9OCIETcrVU=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -70,7 +70,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			sSCM5J7nssLhNyihCjscsvEJn3AggZ7sgrQVii9AmTs=
+			btvQylB2v2LnhxJv9PI165iphZMDRSArdFBmLdzZR+c=
 			</data>
 		</dict>
 		<key>Modules/PolarGX.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
@@ -98,14 +98,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			08cN0hYQrrw9kkZMlQeVPsPiCCEJZGFLhIgh4r3/Ob8=
+			DiDbnqBUaF028a0GVizp9h/2pBJ5dQZB3KY5YARm8eI=
 			</data>
 		</dict>
 		<key>Modules/PolarGX.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			sSCM5J7nssLhNyihCjscsvEJn3AggZ7sgrQVii9AmTs=
+			btvQylB2v2LnhxJv9PI165iphZMDRSArdFBmLdzZR+c=
 			</data>
 		</dict>
 		<key>Modules/PolarGX.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
@@ -133,7 +133,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			p/70g5p0cYNkzJ2jOhA88+Gyl9mfuDBroCJsTa5MHvo=
+			79xcwI+Oc4NozOcsbDlynZOgQRf7aFWtC9Uy3mIEQYM=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

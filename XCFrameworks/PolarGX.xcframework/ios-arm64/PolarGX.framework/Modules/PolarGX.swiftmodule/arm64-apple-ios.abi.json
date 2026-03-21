@@ -2511,21 +2511,21 @@
     {
       "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Classes\/Main\/PolarApp.swift",
       "kind": "BooleanLiteral",
-      "offset": 1119,
+      "offset": 1137,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Classes\/Main\/PolarApp.swift",
       "kind": "StringLiteral",
-      "offset": 15460,
+      "offset": 15478,
       "length": 35,
       "value": "\"PolarApp hasn't been initialized!\""
     },
     {
       "filePath": "\/Users\/duyenlv\/PROJECTS\/BHM\/POLAR\/SRC\/polargx-swift-sdk\/PolarGX-SDK\/Classes\/Main\/PolarApp.swift",
       "kind": "StringLiteral",
-      "offset": 15940,
+      "offset": 15958,
       "length": 35,
       "value": "\"PolarApp hasn't been initialized!\""
     },
