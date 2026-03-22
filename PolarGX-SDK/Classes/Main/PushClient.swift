@@ -43,7 +43,7 @@ class InternalPushClient: PushClient {
             
             DispatchQueue.main.async { [weak currentApp] in
                 if let app = currentApp {
-                    app.delegate?.polarApp(app, didReceiveNotification: response, data: response.notification.request.content.userInfo)
+                    app.delegate?.polarApp(app, didReceiveNotification: response, data: push.pushData ?? [:])
                 }
             }
         }
